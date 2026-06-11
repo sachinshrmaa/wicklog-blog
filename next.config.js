@@ -2,8 +2,10 @@
 const nextConfig = {
   basePath: '/blog',
 
-  // Uncomment and set to your blog's deployment URL for production Multi-Zone:
-  // assetPrefix: 'https://blog.wicklog.in',
+  // Set NEXT_PUBLIC_ASSET_PREFIX to your blog's Vercel deployment URL in production.
+  // e.g. https://wicklog-blog.vercel.app  OR  https://blog.wicklog.in
+  // Without this, _next/static asset requests will 404 in the multi-zone setup.
+  assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || '',
 
   images: {
     remotePatterns: [
@@ -13,7 +15,6 @@ const nextConfig = {
       },
     ],
   },
-
 };
 
 module.exports = nextConfig;
