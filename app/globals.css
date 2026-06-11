@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 270 20% 99%;
+    --foreground: 270 10% 10%;
+
+    --card: 270 30% 98%;
+    --card-foreground: 270 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 270 10% 10%;
+
+    --primary: 103 81% 19%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 103 81% 16%;
+
+    --secondary: 103 28% 95%;
+    --secondary-foreground: 103 40% 18%;
+    --secondary-hover: 103 28% 90%;
+
+    --muted: 270 30% 94%;
+    --muted-foreground: 270 10% 40%;
+
+    --accent: 103 35% 92%;
+    --accent-foreground: 103 81% 19%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 85% 97%;
+
+    --border: 270 20% 88%;
+    --input: 270 20% 88%;
+    --ring: 103 81% 19%;
+
+    --link: 103 81% 19%;
+
+    --radius: 0.75rem;
+
+    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  }
+
+  .dark {
+    --background: 270 10% 8%;
+    --foreground: 270 20% 95%;
+
+    --card: 270 15% 12%;
+    --card-foreground: 270 20% 95%;
+
+    --popover: 270 15% 14%;
+    --popover-foreground: 270 20% 95%;
+
+    --primary: 103 81% 28%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 103 81% 22%;
+
+    --secondary: 103 20% 16%;
+    --secondary-foreground: 0 0% 96%;
+    --secondary-hover: 103 20% 20%;
+
+    --muted: 270 20% 18%;
+    --muted-foreground: 270 15% 65%;
+
+    --accent: 103 30% 18%;
+    --accent-foreground: 103 81% 68%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 85% 97%;
+
+    --border: 270 20% 22%;
+    --input: 270 20% 22%;
+    --ring: 103 81% 55%;
+
+    --link: 103 81% 62%;
+
+    --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.15);
+    --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.15);
+    --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.2);
+    --shadow-md: 0 1px 3px 0px hsl(0 0% 0% / 0.2), 0 2px 4px -1px hsl(0 0% 0% / 0.2);
+    --shadow-lg: 0 1px 3px 0px hsl(0 0% 0% / 0.2), 0 4px 6px -1px hsl(0 0% 0% / 0.2);
+    --shadow-xl: 0 1px 3px 0px hsl(0 0% 0% / 0.2), 0 8px 10px -1px hsl(0 0% 0% / 0.2);
+    --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans;
+  }
+}
+
+/* rehype-pretty-code — dual theme via shiki CSS variables */
+[data-rehype-pretty-code-figure] {
+  @apply my-6 overflow-hidden rounded-lg border border-border;
+}
+
+[data-rehype-pretty-code-figure] pre {
+  @apply overflow-x-auto p-4 text-sm leading-relaxed;
+  background-color: hsl(var(--muted));
+}
+
+.dark [data-rehype-pretty-code-figure] pre {
+  background-color: #0d1117; /* github-dark canvas */
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  @apply px-1;
+}
+
+[data-rehype-pretty-code-title] {
+  @apply border-b border-border bg-muted px-4 py-2 text-xs font-medium text-muted-foreground font-mono;
+}
+
+/* Switch shiki CSS variables based on light/dark class */
+code[data-theme*=' '],
+code[data-theme*=' '] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark code[data-theme*=' '],
+.dark code[data-theme*=' '] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Inline code outside of code blocks */
+:not(pre) > code {
+  @apply rounded bg-muted px-1.5 py-0.5 text-sm font-mono text-foreground;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
