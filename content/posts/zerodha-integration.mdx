@@ -1,0 +1,197 @@
+---
+title: "Connect Zerodha Kite to Wicklog — Auto-Import Your Trades & Journal Smarter"
+description: "Stop entering trades manually. Wicklog's Zerodha Kite integration auto-imports your entire trade history so you can focus on journaling and improving."
+date: "2026-06-11"
+slug: "connect-zerodha-kite-to-wicklog"
+tags: ["integration", "zerodha", "kite", "how-to", "pro"]
+author: "Sachin Sharma"
+# coverImage: "/blog/images/kite-integration-cover.jpg"
+---
+
+If you're a serious trader using Zerodha Kite, you already know the pain — the market closes, you want to journal your trades, but first you have to manually enter every single one. Symbol, quantity, price, buy or sell. By the time you're done, the motivation to actually reflect is gone.
+
+Wicklog's Zerodha Kite integration fixes this completely. With one click, all your trades land directly in your journal — ready for you to write notes, analyse your decisions, and track your progress.
+
+---
+
+## What Is the Wicklog + Zerodha Kite Integration?
+
+Wicklog is a trading journal built for Indian traders. The Kite integration connects your Zerodha account to Wicklog using the official **Zerodha Kite Connect API** — so your trades are fetched automatically, with zero manual data entry.
+
+Once connected, you can:
+
+- **Fetch all your trades** from any date range in your Kite account
+- **Write journal entries** on top of each trade — your reasoning, emotions, mistakes, lessons
+- **Attach chart screenshots** of your setups to each trade
+- **See your trading stats** — win rate, net P&L, average risk-reward, best and worst instruments
+
+---
+
+## The Problem This Solves
+
+Most traders who want to journal give up within a week — not because journaling isn't useful, but because manual entry is exhausting.
+
+**Manual data entry is slow.** If you take 10–15 trades a day, entering each one takes 30–45 minutes. That time is better spent reviewing and reflecting.
+
+**Copy-paste errors happen.** A wrong quantity or price makes your stats meaningless. You end up trusting your journal less.
+
+**Momentum breaks.** Journaling works best right after a trade, while your thinking is fresh. If setup is tedious, you delay — and delay becomes never.
+
+**Spreadsheets don't scale.** Google Sheets can track numbers, but can't help you see patterns in your thinking, tag trades by strategy, or link chart screenshots to entries.
+
+The Kite integration removes every one of these blockers. Your trades are already there when you open Wicklog — all you have to do is write.
+
+---
+
+## Before You Start
+
+This feature is available on the **Wicklog Pro plan**. You will need:
+
+| Requirement | Details |
+| ----------- | ------- |
+| Wicklog Pro account | Upgrade from your dashboard if needed |
+| Active Zerodha Kite account | Any resident Indian Kite account |
+| Time to set up | About 2 minutes |
+
+> **On the free plan?** You can still add trades manually. Upgrade to Pro to unlock the Kite integration and all advanced stats.
+
+---
+
+## How to Connect Zerodha Kite to Wicklog
+
+### Step 1 — Open Integrations in Wicklog settings
+
+Log into your Wicklog account. Go to **Settings** in the top navigation and click the **Integrations** tab. You will see Zerodha Kite listed as an available integration.
+
+![Wicklog Settings → Integrations tab showing the Zerodha Kite connect button](/blog/images/kite-integration-settings.png)
+
+### Step 2 — Authorize the connection
+
+Click **Connect Zerodha Kite**. You'll be redirected to Zerodha's official login page. Enter your Kite credentials and complete 2FA (TOTP or SMS). Zerodha will ask you to approve Wicklog's read-only access. Click **Authorize**.
+
+![Zerodha Kite OAuth authorization screen showing read-only permissions for Wicklog](/blog/images/kite-oauth-authorize.png)
+
+### Step 3 — Fetch your trades
+
+You'll be redirected back to Wicklog automatically. Click **Fetch Trades**, choose your date range, and hit **Import**. Your trades will appear in your journal within seconds.
+
+![Wicklog journal showing successfully imported trades from Zerodha Kite](/blog/images/kite-trades-imported.png)
+
+That's it. From here, click any trade to open the journal editor and start writing.
+
+---
+
+## What Your Journal Looks Like After Import
+
+Every imported trade shows up as a card. Each card shows:
+
+- Instrument name and exchange (NSE / BSE)
+- Trade type (BUY / SELL)
+- Quantity and average price
+- Entry and exit timestamps
+- Realised P&L
+
+On top of this, you can add:
+
+- **Journal notes** — your pre-trade plan, what happened, what you'd do differently
+- **Chart screenshots** — attach your TradingView or Kite chart image directly to the trade
+- **Tags** — label trades by strategy (breakout, momentum, reversal) for later filtering
+- **Execution rating** — score the quality of your execution, separate from whether you made money
+
+Your stats dashboard processes all of this and shows you win rate, average R:R, best performing strategies, days of the week you perform best, and instruments you should probably stop trading.
+
+| Stat | What it tells you |
+| ---- | ----------------- |
+| Win rate | % of trades closed in profit |
+| Net P&L | Total realised profit / loss |
+| Avg R:R | Average risk-to-reward ratio |
+| Best instrument | Symbol you perform best on |
+| Best day | Day of the week with highest P&L |
+
+---
+
+## How Secure Is the Kite Integration?
+
+Security is something we take seriously at Wicklog. Here's exactly how it works.
+
+### Read-only access — always
+
+When you authorize Wicklog, you grant **read-only** permission. Wicklog can **only read** your trade history. It **cannot**:
+
+- Place, modify, or cancel orders
+- Access your funds or holdings for transactions
+- Transfer money in any form
+
+This is enforced at the API level by Zerodha — not just a promise we make.
+
+### Your Kite password never touches Wicklog
+
+Authorization happens entirely on Zerodha's own servers. You log in directly on Zerodha's page — Wicklog never sees your username, password, or TOTP. Wicklog only receives a **short-lived access token** issued by Zerodha after you authorize. This is the same OAuth 2.0 standard used by banks and major financial apps.
+
+### Revoke access any time
+
+You are always in control. To disconnect:
+
+1. Go to Zerodha Kite → **Apps & Permissions**
+2. Find Wicklog and click **Revoke Access**
+
+Or disconnect directly from **Wicklog → Settings → Integrations → Disconnect**.
+
+Once revoked, Wicklog loses all access to your Kite data immediately.
+
+---
+
+## How We Store Your Data
+
+We believe you deserve to know exactly what happens to your data.
+
+**What we store:** Trade details — symbol, quantity, price, timestamps, P&L — along with your journal notes, tags, and screenshots. This powers your stats dashboard and makes your journal searchable.
+
+**What we don't store:** Your Kite login credentials, password, or TOTP. The access token from Zerodha expires automatically and is not retained beyond the active session.
+
+**Where your data lives:** All data is stored on secure cloud servers with encryption at rest and in transit (HTTPS / TLS). We do not sell your data to anyone. Your journal is private — only you can see it.
+
+**You own your data:** Export your full journal and trade history at any time from **Settings → Export Data**. We will never hold your data hostage.
+
+> We don't run ads. We don't sell data. The only way Wicklog grows is if it genuinely makes you a better trader.
+
+---
+
+## Frequently Asked Questions
+
+**Does Wicklog work with Zerodha Coin (mutual funds)?**
+Not yet. The integration currently fetches equity and F&O trades from your Kite trading account. Coin support is on the roadmap.
+
+**Can I import trades from before I signed up for Wicklog?**
+Yes. You can import from any date range available in your Kite account history — even trades made years ago.
+
+**Will trades sync automatically going forward?**
+Trades are not synced in real-time. You click Fetch Trades whenever you want to import. This keeps you in control and prevents cluttered entries from partial-day trades.
+
+**What if I re-fetch a date range I already imported?**
+Existing journal entries, notes, tags, and screenshots are never overwritten. New trades are simply added.
+
+**Does this work on mobile?**
+Yes. Wicklog is fully responsive. Fetch trades and journal from your phone right after the market closes.
+
+**What about NRI accounts?**
+We currently support resident Indian Zerodha accounts. NRI support is on the roadmap.
+
+**I also trade on other brokers. Can I still use Wicklog?**
+Yes. You can add trades from other brokers manually. More broker integrations are coming — Kite is the first.
+
+---
+
+## Why Wicklog Is Built for Indian Traders
+
+Most trading journals are built for US traders — they support Robinhood and Interactive Brokers. Indian instruments like Nifty futures, Bank Nifty options, and NSE/BSE equities are an afterthought.
+
+Wicklog is built from the ground up for the Indian market. We understand how Kite works, how SEBI regulations affect trade reporting, and what Indian traders actually need to grow. The Zerodha Kite integration is just one part of that commitment.
+
+We're a small, independent team. We don't have investor pressure to monetize your data or show you ads. The only way we grow is if the product genuinely helps you become a better trader.
+
+---
+
+If you're already on Wicklog Pro, connect your Kite account right now from **Settings → Integrations**.
+
+Not on Pro yet? Start a free trial — no credit card required. Your trades are already happening. The only question is whether you're learning from them.
