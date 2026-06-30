@@ -1,0 +1,231 @@
+---
+title: "Connect Dhan to WickLog — Import Your Trades & Journal Smarter"
+description: "Skip manual trade entry. WickLog's Dhan integration imports your trade history so you can focus on journaling and improving."
+date: "2026-06-29"
+slug: "connect-dhan-to-wicklog"
+tags: ["integration", "dhan", "how-to", "pro"]
+author: "Sachin Sharma"
+# coverImage: "/blog/images/connect-dhan-cover.jpg"   ← optional, uncomment to use
+---
+
+If you trade on Dhan, you know the routine. Market closes, you want to journal your trades, but first you have to type each one in by hand — symbol, quantity, price, buy or sell. By the time you're done, the energy to actually reflect on your decisions is gone.
+
+WickLog's Dhan integration removes that step entirely. Generate one access token, paste it in, and your trades land straight in your journal — ready for you to add notes, attach charts, and study what's actually working.
+
+---
+
+## What Is the WickLog + Dhan Integration?
+
+WickLog is a trading journal built for Indian traders. The Dhan integration connects your account using the official **DhanHQ Trading API**, so your trades are imported on demand — no manual entry, no copy-paste.
+
+Once connected, you can:
+
+- **Import all your trades** for a chosen date range from your Dhan account
+- **Write journal entries** on each trade — your reasoning, your emotions, your mistakes, your lessons
+- **Attach chart screenshots** of your setups to each trade
+- **See your stats** — win rate, net P&L, profit factor, average risk-reward, best and worst instruments
+
+And here's a detail that matters for Dhan users specifically: **DhanHQ's Trading APIs are free for every Dhan user.** You don't pay anything extra to connect.
+
+---
+
+## The Problem This Solves
+
+Most traders who set out to journal quit within a week. Not because journaling doesn't work — because manual entry is exhausting.
+
+**Manual entry is slow.** Take 10–15 trades a day and entering each one eats 30–45 minutes. That time is far better spent reviewing and reflecting.
+
+**Copy-paste errors creep in.** One wrong quantity or price and your stats become meaningless. You stop trusting your own journal.
+
+**Momentum breaks.** Journaling works best right after a trade, while your thinking is fresh. If the setup is tedious, you put it off — and "later" becomes never.
+
+**Spreadsheets don't scale.** A Google Sheet can hold numbers, but it can't show you patterns in your thinking, tag trades by strategy, or pin a chart screenshot next to an entry.
+
+The Dhan integration removes every one of these blockers. Your trades are already there when you open WickLog. All that's left is to write.
+
+---
+
+## Before You Start
+
+This feature is on the **WickLog Pro plan**. Here's what you'll need:
+
+| Requirement              | Details                                       |
+| ------------------------ | --------------------------------------------- |
+| WickLog Pro account      | Upgrade from your dashboard if needed         |
+| Active Dhan account      | Any resident Indian Dhan account              |
+| Dhan API access enabled  | Free for all users — we'll walk through it    |
+| Time to set up           | About 2 minutes                               |
+
+> **On the free plan?** You can still add trades manually and journal up to 100 trades a month. Upgrade to Pro to unlock broker import and the full analytics suite.
+
+---
+
+## How to Connect Dhan to WickLog (Step-by-Step)
+
+Connecting Dhan happens in two short parts: first you generate an access token inside Dhan, then you add it to WickLog. Total time is about two minutes.
+
+### Part 1 — Generate Your Dhan Access Token
+
+#### Step 1 — Open DhanHQ Trading APIs
+
+Log in to **Dhan Web** at [web.dhan.co](https://web.dhan.co). Click your **profile icon** in the top-right corner and select **DhanHQ Trading APIs** (you may see it labelled *Access DhanHQ APIs*).
+
+![Dhan Web profile menu showing the DhanHQ Trading APIs option](/blog/images/dhan-profile-menu.png)
+
+If this is your first time, click **Request Access** and refresh the page. Access is granted within seconds and it's completely free — Dhan gives every user access to the Trading APIs at no cost.
+
+#### Step 2 — Generate and Copy Your Token
+
+By default, the page opens in **Access Token** mode. Click **Generate Token**.
+
+![DhanHQ Trading APIs page with the Generate Token button](/blog/images/dhan-generate-token.png)
+
+Copy the **access token** that appears. While you're here, scroll to **Profile Details** and copy your **Dhan Client ID** too (a number like `1100XXXXXX`) — WickLog needs both to identify your account.
+
+> **Good to know:** For security, DhanHQ access tokens are valid for **24 hours**. That means you'll generate a fresh token and reconnect once a day before importing — same daily rhythm as logging into your trading platform each morning.
+
+### Part 2 — Add Dhan to WickLog
+
+#### Step 3 — Go to Settings → Brokers
+
+Log in to WickLog. Click your **profile avatar** in the top-right and select **Settings**, then open the **Brokers** tab in the sidebar.
+
+![WickLog Settings → Brokers tab with the Dhan option](/blog/images/wicklog-brokers-dhan.png)
+
+Under **Dhan**, click **Connect Dhan**. Paste in your **Client ID** and **Access Token**, then click **Save**. Dhan will now show as **Connected**.
+
+![WickLog showing Dhan connected in the Brokers settings](/blog/images/wicklog-dhan-connected.png)
+
+#### Step 4 — Import Your Trades
+
+Head to the **Trades** page from the top navigation and click **Import from Dhan** in the top-right.
+
+![WickLog Trades page with the Import from Dhan button](/blog/images/wicklog-import-from-dhan.png)
+
+In the **Import Options** window you can:
+
+- Choose **Trade Type** (all trades, or filter by type)
+- Set a **From Date** and **To Date** for the range you want
+
+> **Important:** Like most Indian broker APIs, Dhan returns your trade book for the current trading day. Closed trades reflect what you executed today — and as you import regularly, your history builds up inside WickLog. Open positions come from your live positions and holdings.
+
+Set your range, click **Import Trades**, and your trades appear in the journal within seconds.
+
+---
+
+## What Your Journal Looks Like After Import
+
+Every imported trade shows up as a row in your Trades list, with:
+
+- Instrument name and exchange (NSE / BSE)
+- Trade type (LONG / SHORT)
+- Strategy tag
+- Status (OPEN / CLOSED)
+- Entry price and exit / LTP price
+- Quantity
+- Realised P&L with percentage
+
+On top of each trade, you can add:
+
+- **Journal notes** — your pre-trade plan, what actually happened, what you'd do differently
+- **Chart screenshots** — drop in your TradingView or Dhan chart image
+- **Strategy tags** — label trades by strategy (breakout, momentum, reversal) for later filtering
+- **Execution rating** — score how well you executed, separate from whether you made money
+
+Your **Dashboard** turns all of this into the numbers that actually move your trading forward:
+
+| Stat          | What it tells you                          |
+| ------------- | ------------------------------------------ |
+| Net P&L       | Total realised profit / loss               |
+| Win Rate      | % of trades closed in profit               |
+| Total Trades  | Count of trades in the period              |
+| Avg Win       | Average profit per winning trade           |
+| Avg Loss      | Average loss per losing trade              |
+| Best Trade    | Highest single-trade profit                |
+| Worst Trade   | Largest single-trade loss                  |
+| Profit Factor | Ratio of gross profit to gross loss        |
+| Max Drawdown  | Peak-to-trough decline                     |
+| Expectancy    | Average expected return per trade          |
+
+---
+
+## How Secure Is the Dhan Integration?
+
+Security deserves a straight answer, so here's exactly how this works — including the parts that are different from other brokers.
+
+### WickLog Only Reads Your Trades
+
+WickLog uses your Dhan connection for one thing: **reading your trade and position data** to bring it into your journal. It never places, modifies, or cancels orders, and never touches your funds. WickLog is a journal — sending orders is simply not something it does.
+
+### Treat Your Access Token Like a Password
+
+Worth being honest about: a DhanHQ access token is a powerful credential. Unlike a read-only login, the token itself can do more than read — which is exactly why Dhan expires it every **24 hours** and why you should only ever paste it into tools you trust. WickLog deliberately limits itself to reading your trades, and the daily expiry means no token stays live for long.
+
+### You're Always in Control
+
+- The token expires automatically after 24 hours.
+- You can regenerate or revoke it any time from **Dhan Web → DhanHQ Trading APIs**, which instantly invalidates the old one.
+- You can disconnect Dhan from **WickLog → Settings → Brokers → Disconnect** whenever you like.
+
+---
+
+## How We Store Your Data
+
+You deserve to know exactly what happens to your data.
+
+**What we store:** Trade details — symbol, quantity, price, timestamps, P&L — along with your journal notes, tags, and screenshots. This powers your dashboard and makes your journal searchable.
+
+**What we don't store:** Your Dhan login credentials, password, or PIN. The access token is stored encrypted and is only ever used to fetch your trades.
+
+**Where your data lives:** On secure cloud servers with encryption at rest and in transit (HTTPS / TLS). We don't sell your data to anyone. Your journal is private — only you can see it.
+
+**You own your data:** Export your full journal and trade history any time from **Settings → Export Data**. We'll never hold your data hostage.
+
+> We don't run ads. We don't sell data. The only way WickLog grows is if it genuinely makes you a better trader.
+
+---
+
+## Frequently Asked Questions
+
+**Does the Dhan connection expire?** Yes. DhanHQ access tokens are valid for 24 hours. Generate a fresh token from Dhan Web and reconnect each day before importing.
+
+**Do I have to pay for Dhan's API?** No. DhanHQ's **Trading APIs are free for every Dhan user** — and importing your own trades only uses the free Trading API. (The separate paid Data API, at ₹499/month, is for live market data and isn't needed to journal your trades.)
+
+**Will WickLog place trades on my Dhan account?** Never. WickLog only reads your trade and position data. It does not place, modify, or cancel orders.
+
+**What if I re-import a date range I already brought in?** Your existing notes, tags, and screenshots are never overwritten. New trades are simply added.
+
+**Which instruments are supported?** Your equity and F&O trades across NSE and BSE — Nifty and Bank Nifty options, futures, and equities.
+
+**Does this work on mobile?** Yes. WickLog is fully responsive. Generate your token, import, and journal from your phone right after the close.
+
+**What about NRI accounts?** We currently support resident Indian Dhan accounts. NRI support is on the roadmap.
+
+**I also trade on other brokers. Can I still use WickLog?** Absolutely. WickLog also supports **Zerodha Kite** and **Groww** via API, and you can add trades from any other broker manually. More integrations are on the way.
+
+---
+
+## Why WickLog Is Built for Indian Traders
+
+Most trading journals are built for US traders — Robinhood, Interactive Brokers. Indian instruments like Nifty futures, Bank Nifty options, and NSE/BSE equities are an afterthought.
+
+WickLog is built from the ground up for the Indian market. We understand how Dhan works, how SEBI's rules shape trade reporting, and what Indian F&O traders actually need to improve. The Dhan integration is one piece of that.
+
+We're a small, independent team with no investor pressure to monetise your data or fill your screen with ads. The only way we grow is if the product genuinely helps you trade better.
+
+---
+
+## Quick Recap: How to Connect Dhan to WickLog
+
+1. **Dhan Web → profile → DhanHQ Trading APIs** → generate your access token (and copy your Client ID)
+2. **WickLog → Settings → Brokers → Connect Dhan** → paste both → **Save**
+3. Go to **Trades → Import from Dhan**
+4. Choose your date range and click **Import Trades**
+
+That's it. Your trades are in. Now go journal them.
+
+---
+
+If you're already on WickLog Pro, connect your Dhan account right now from **Settings → Brokers**.
+
+Not on Pro yet? [Start free](https://wicklog.in/auth) — no credit card required. Your trades are already happening. The only question is whether you're learning from them.
