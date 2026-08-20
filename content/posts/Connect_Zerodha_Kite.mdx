@@ -4,7 +4,7 @@ description: "Link your Zerodha Kite account to Wicklog in 3 steps, import trade
 date: "2026-08-11"
 slug: "connect-zerodha-kite"
 tags: ["integration", "zerodha", "kite", "how-to", "pro", "demat connect", "import trades"]
-author: "Sachin Sharma"
+author: "Priyanshu Verma"
 ---
 
 
@@ -51,7 +51,11 @@ The Kite integration removes every one of these blockers. Your trades are alread
 ### Step 1: Go to Connect Demat
 
 From the Wicklog sidebar, click *Connect Demat*. You'll see three broker cards — Dhan, Zerodha Kite, and Groww — each showing a "Not Connected" status. This screen also lays out the read-only guarantee up front: Wicklog can pull your trade history, but it cannot place or modify orders.
-![How to Connect Zerodha Kite to Wicklog](/images/connect-demat-dashboard.png)
+
+![How to Connect Zerodha Kite to Wicklog](/blog/images/connect-demat-dashboard.png)
+
+![How to Connect Zerodha Kite to Wicklog](/blog/images/connect-demat-2.png)
+
 ### Step 2: Authenticate with Kite
 
 Click *Connect* on the Zerodha Kite card. This redirects you to Kite's own login screen (not a Wicklog-branded page) — that's the point. You enter your Kite user ID, password, and TOTP directly with Zerodha, using their official OAuth flow. Wicklog never sees or stores your Kite password.
@@ -59,6 +63,7 @@ Click *Connect* on the Zerodha Kite card. This redirects you to Kite's own login
 On success, Kite redirects you back to Wicklog's Trades screen, and the sidebar now shows "Import from Zerodha Kite" as an active option.
 
 One thing worth knowing: this Kite session *expires periodically*, so you'll need to reconnect every so often rather than staying linked forever. That's a deliberate tradeoff — a session that expires is a session with a much smaller window for anything to go wrong, so it works in your favor even though it means one extra click occasionally.
+
 
 ### Step 3: Import your trades
 
