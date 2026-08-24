@@ -1,0 +1,136 @@
+---
+title: "12 Trading Metrics Every Trader Should Track in 2026"
+description: "Beyond win rate and P&L — the 12 metrics serious traders track to find their real edge, with real dashboard examples."
+date: "2026-09-24"
+slug: "trading-performance-metrics-to-track"
+tags: ["Trading Metrics", "Trading Journal"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Most traders only track P&L and win rate — but those two numbers alone can't tell you if your strategy actually has an edge. Profit factor, expectancy, and max drawdown tell you *how* you're making money and how much risk you're carrying to get there. This post breaks down 12 metrics worth tracking, what each one actually means, and how to read them together instead of in isolation.
+
+## Most Traders Are Tracking the Wrong Numbers
+
+Ask most retail F&O traders how they're doing, and you'll get one of two answers: "I'm up ₹X this month" or "my win rate is around Y%." Both are real numbers, but neither one tells you whether your trading is actually working.
+
+A trader with a 70% win rate can still be losing money overall if their losses are large and their wins are small. A trader with a 40% win rate can be highly profitable if they cut losers fast and let winners run. Win rate and raw P&L are the two most visible numbers on any trading app — and also the two least useful ones on their own.
+
+The metrics below are the ones that actually separate "I had a good month" from "I have a repeatable edge." We'll walk through what each one means, using a real dashboard as the example so the numbers aren't abstract.
+
+## The Breakdown
+
+### 1. Net P&L Is the Headline — But Never Read It Alone
+
+Net P&L (profit and loss) is simply the total money made or lost after every trade in the period is closed out. It's the number everyone checks first, and for good reason — it's the scoreboard. In the example dashboard below, net P&L across 392 trades comes out to **+₹21,716.41**.
+
+[SCREENSHOT: WickLog dashboard header — Net P&L, Win Rate, Total Trades, Avg Win, Avg Loss cards]
+
+The problem with stopping here: net P&L doesn't tell you *how* that number was built. Was it one lucky trade carrying 40 losers? Was it consistent, or one wild swing month? That's what the rest of these metrics are for.
+
+### 2. Win Rate Only Means Something Next to Average Win/Loss Size
+
+Win rate is the percentage of trades that closed in profit. In the example account, that's **51.39%** — 204 wins against 188 losses out of 392 total trades.
+
+On its own, 51.39% doesn't say much. Read next to average win size (₹476.75 per winning trade) and average loss size (₹265.04 per losing trade), it tells a much clearer story: wins are running roughly 1.8x larger than losses, on a roughly coin-flip win rate. That asymmetry — not the win rate itself — is doing the heavy lifting.
+
+**Rule of thumb:** a trader can have a sub-50% win rate and still be strongly profitable, as long as average win size stays meaningfully above average loss size. This is the single most misunderstood relationship in retail trading.
+
+### 3. Best Trade / Worst Trade Show Your Tail Risk
+
+Best trade and worst trade are exactly what they sound like — the single largest win and single largest loss in the period. In the example account: best trade **₹3,090.00**, worst trade **₹671.25**.
+
+These numbers matter because they show your "tail" — how much a single outlier trade can swing your results. If your worst trade is a large multiple of your average loss, it usually means a stop-loss wasn't respected somewhere, or position sizing on that trade was off. Tracking this over time is one of the fastest ways to spot discipline slippage before it becomes a pattern.
+
+### 4. Profit Factor Tells You If the System Works at All
+
+Profit factor is gross profit divided by gross loss. A profit factor above 1.0 means the strategy is net profitable; below 1.0 means it's a net loser, however good it might feel in the moment. The example account sits at **1.95** — meaning gross profits are just under double gross losses.
+
+Profit factor is arguably the single cleanest "does this strategy actually work" number, because it strips out position sizing and account size entirely. A trader with a small account and a 2.0 profit factor has a better system than a trader with a large account and a 1.1 profit factor.
+
+### 5. Expectancy Tells You What Each Trade Is "Worth" on Average
+
+Expectancy is the average amount you can expect to make (or lose) per trade, factoring in both win rate and average win/loss size. In the example: **₹119.47 per trade**.
+
+This is the number to check before scaling up size or trade frequency. A positive expectancy strategy makes more money the more you trade it (within reason); a negative expectancy strategy loses money faster the more you trade it, no matter how it feels trade-to-trade.
+
+### 6. Max Drawdown Is Your Risk Number, Not Your Return Number
+
+Max drawdown is the largest peak-to-trough decline the equity curve experienced during the period — in this case, **₹4,320.05**. It answers a question return numbers can't: *how bad did it get before it got better?*
+
+Two traders can post identical net P&L for the year and have completely different risk profiles if one had a ₹4,000 drawdown and the other had a ₹15,000 drawdown along the way. Drawdown is what position sizing and risk-per-trade decisions should be built around — not the win rate.
+
+### 7. Avg Hold Time Reveals Your Actual Trading Style
+
+Average hold time — **0.48 days** in this example — shows whether trades are being closed same-day, held overnight, or run for multiple sessions. This matters because it's easy to *think* you're a scalper while your data shows you're actually holding trades for two days on average, or vice versa. Matching your actual hold time against your intended strategy is a quick discipline check.
+
+### 8. Gross P&L vs. Net P&L: Charges Eat More Than You Think
+
+Every trade carries STT, GST, brokerage, and exchange/SEBI charges — and over hundreds of trades, that adds up to real money that never shows up if you're only glancing at your broker's running total.
+
+| Metric | Amount |
+|---|---|
+| Gross P&L (before charges) | +₹47,430.19 |
+| Total Charges (STT, GST, brokerage, exchange, SEBI) | ₹25,713.78 |
+| **Net P&L (what actually lands in your account)** | **+₹21,716.41** |
+
+[SCREENSHOT: Net Profit & Charges panel]
+
+In this example, charges consumed roughly 54% of gross profit — a number most traders never actually calculate because it requires pulling every leg of every trade and running it against current charge slabs. This is the gap between "I made ₹47k this period" (what the broker's raw P&L might suggest) and "I actually kept ₹21.7k" — and it's the single biggest reason high-frequency, small-margin strategies can look profitable on paper and break even in reality.
+
+### 9. The Equity Curve Shows the Shape of Your Progress, Not Just the End Point
+
+An equity curve plots cumulative P&L over time. The end number matters less than the *shape* — a smooth, steadily rising curve represents a very different trading experience (and risk profile) than a flat curve followed by one sharp spike, even if both end at the same net P&L.
+
+[SCREENSHOT: Equity Curve Progression chart with Win Rate Accuracy donut]
+
+Flat stretches on the curve are also worth noting — they usually mark periods of overtrading, chop, or a strategy that stopped working temporarily. Reading the curve alongside the win/loss donut (204 wins / 188 losses here) gives a fuller picture than either view alone.
+
+### 10. Rolling Period Analysis Catches Drift Before It Becomes a Slump
+
+A single all-time win rate or P&L number can hide a strategy that used to work and stopped. Breaking results into rolling monthly or 6-month windows shows whether performance is trending up, flat, or fading — the example below shows a mostly-green run across Apr, Oct–Jan, with one red month in between.
+
+[SCREENSHOT: Periodic Rolling Analysis bar chart]
+
+This is especially useful for traders running the same setup for months — it turns "am I still good at this?" from a gut feeling into a chart you can actually look at.
+
+### 11. Time-of-Day and Symbol-Level Patterns Are Where the Real Edge Hides
+
+Aggregate stats treat every trade as equal, but most traders are noticeably better at some hours, setups, or instruments than others. Breaking [win rate down by hour of day](/win-rate-by-hour), or flagging a specific symbol that keeps showing up in the loss column, surfaces patterns that are invisible in a single overall win rate.
+
+[SCREENSHOT: Win Rate by Hour bar chart, Strategy Edge Radar, and Trading DNA panel]
+
+In the example account, hours like 10:00, 14:00, and 15:00 skew red while the rest of the session skews green — the kind of pattern that's easy to miss trade-by-trade but obvious once it's charted. Tagging setups (visible as "Strategy Edge Radar" once trades carry strategy tags) takes this a step further, ranking which specific setups are actually carrying the account versus which ones are just noise.
+
+### 12. A Mistake Pattern Detector Turns "I Think I Have a Bad Habit" Into a Fact
+
+The hardest trading mistakes to fix are the ones that repeat without you noticing — the same losing symbol, the same fast stop-outs, the same rushed exits. Surfacing these automatically from closed-trade history removes the guesswork.
+
+[SCREENSHOT: PnL Calendar and Mistake Pattern Detector panel]
+
+In this example, one symbol accounts for 16 losses totaling -₹4,249.18, and 98.94% of losses were closed within a single day — a pattern that points to a timing or discipline issue rather than bad luck. Pairing this with a daily P&L calendar (which days were green, which were "noisy" with big swings either way) makes it possible to actually pinpoint *when* the pattern shows up, not just that it exists.
+
+## Key Takeaways
+
+- Win rate and net P&L are the least useful numbers when read alone — pair win rate with average win/loss size, and P&L with drawdown.
+- Profit factor and expectancy are the two clearest signals for "does this strategy actually work."
+- Charges (STT, GST, brokerage, exchange, SEBI) can consume a large share of gross profit — always check net, not gross.
+- Max drawdown and worst trade tell you about risk carried, which return numbers alone never will.
+- The most useful insights usually come from breaking data down — by time period, hour of day, symbol, or strategy tag — rather than looking at one all-time aggregate.
+
+## FAQ
+
+**What is a good win rate for F&O trading?**
+There's no universal "good" win rate — a 40% win rate with a strong risk-reward ratio can outperform a 70% win rate with poor risk-reward. What matters is expectancy: average win size × win rate, minus average loss size × loss rate, should come out positive.
+
+**What's the difference between profit factor and expectancy?**
+Profit factor (gross profit ÷ gross loss) tells you whether a strategy is net profitable overall. Expectancy tells you the average rupee outcome per single trade. Profit factor is a strategy-level health check; expectancy is a per-trade planning number.
+
+**How much do brokerage and STT actually eat into trading profits?**
+It varies by strategy and trade frequency, but for high-frequency intraday and options strategies it can be significant — in the example above, charges consumed roughly half of gross profit. The only way to know your real number is to calculate it against your actual trade log, not estimate it.
+
+**Do I need to manually calculate all of these metrics?**
+Not if your trading journal calculates them automatically from imported broker trades. Manually computing profit factor, expectancy, and drawdown across hundreds of trades every week isn't realistic — which is exactly the gap a proper journal is built to close.
+
+## Try It
+
+Every metric in this post is pulled straight from WickLog's Analytics dashboard — import your Zerodha, Groww, or Dhan trades once, and profit factor, expectancy, drawdown, and the rest calculate themselves. [See your own numbers free →](https://www.wicklog.in)
