@@ -1,0 +1,74 @@
+title: The 1% Rule: How Much You Should Actually Risk Per Trade
+Slug: 1-percent-risk-rule-position-sizing
+tags: risk management, position sizing
+
+# The 1% Risk Rule: Why Position Sizing Matters More Than Entry
+
+Every retail trader in India has, at some point, obsessed over the entry. The perfect candle. The exact support level. The one indicator that confirms it. Meanwhile, the thing that actually decides whether they blow up their account gets almost no attention: how much they're risking per trade.
+
+This is backwards. Your entry decides whether one trade wins or loses. Your position sizing decides whether you're still trading a year from now.
+
+## The rule
+
+The 1% rule is simple: never risk more than 1% of your total trading capital on a single trade. If you're trading a ₹5,00,000 account, that's ₹5,000 max — not per lot, not per share, but total, from entry to stop-loss.
+
+It sounds conservative. It is conservative. That's the point.
+
+## Why "risking small" is the actual edge
+
+Most traders think their edge comes from a strategy — a setup, an indicator combo, a pattern they've backtested. But strategy edges in retail trading are usually thin, and even a genuinely profitable strategy will have losing streaks. The 1% rule is what lets you survive those streaks long enough for your edge to play out.
+
+Do the math on drawdowns:
+
+- Risk 1% per trade, lose 10 in a row → you're down roughly 9.6% of your account.
+- Risk 5% per trade, lose 10 in a row → you're down over 40%, and you now need a 65%+ gain just to get back to even.
+- Risk 10% per trade, lose 10 in a row → your account is functionally dead.
+
+Ten losing trades in a row isn't a black swan. It happens to real strategies, including good ones, more often than people expect — especially in F&O, where a string of choppy, whipsaw days can chew through a directional system fast. Position sizing is what determines whether that streak is a bad month or the end of your trading career.
+
+## Position size is a function of risk, not conviction
+
+Here's the trap: traders size positions based on how confident they feel, not on where their stop-loss actually is. "I really like this setup" becomes 3x the normal position size. Then the trade hits the stop, and the loss is 3x what it should have been — on a trade that was, by definition, not guaranteed to work.
+
+The correct order of operations is:
+
+1. Find your entry.
+2. Find your stop-loss (this defines your risk *per share/lot*, not your position size).
+3. Decide your risk in rupees for this trade (≤1% of capital).
+4. Back into your quantity from there.
+
+Conviction should change your win rate assumptions, maybe. It should never change how much of your account is on the line.
+
+## Where risk-reward fits in
+
+Position sizing tells you how much you can lose. Risk-reward tells you whether the trade is worth taking in the first place — and it's the other half of this conversation, because a well-sized position on a bad risk-reward setup is still a losing habit, just a slower one.
+
+The math here is unforgiving and non-negotiable: your risk-reward ratio sets the exact win rate you need just to break even.
+
+- At 1:1 R:R, you need a 50% win rate to break even.
+- At 1:2 R:R, that drops to 33.3%.
+- At 1:3 R:R, you only need to be right 25% of the time.
+
+Most discretionary traders have no idea what their actual average R:R is, let alone the win rate it demands from them. They "feel" like they're profitable and can't explain why the equity curve says otherwise. Usually it's because they're taking 1:1 or worse setups and need to win half their trades just to tread water — a bar most strategies don't clear consistently.
+
+This is exactly why we built the **[Risk-Reward Calculator](https://www.wicklog.in/tools/risk-reward-calculator)** into WickLog. Punch in your entry, stop-loss, and target, and it instantly gives you:
+
+- Your risk-reward ratio (1:X)
+- The exact break-even win rate your setup demands
+- A visual split of risk vs. reward so you can eyeball the quality of the trade before you take it
+
+It takes the guesswork out of "is this a good setup" and replaces it with a number you can actually hold yourself accountable to — before you're in the trade, not after.
+
+Pair it with our [Position Size Calculator](https://www.wicklog.in/tools/position-size-calculator) and you've got both halves of the equation covered: how much to risk, and whether the risk is worth taking.
+
+## Making it a habit, not a one-off calculation
+
+The 1% rule and a solid R:R filter only work if they're applied on every single trade, not just the ones you remember to check. That's the harder problem — not knowing the rule, but sticking to it when a setup looks "too good to size normally."
+
+This is where journaling actually earns its place in your process. If you're logging your trades — entry, stop, target, actual result — you can look back and see, in cold numbers, whether you're sizing consistently or letting conviction creep back in. WickLog pulls your trades directly from Zerodha, Groww, or Dhan, so that check isn't manual bookkeeping — it's just there, tied to your real R-multiples and expectancy over time.
+
+Perfect entries make for good stories. Consistent position sizing is what keeps you in the game long enough to have any stories at all.
+
+---
+
+*Check your next trade's risk-reward before you place it: [wicklog.in/tools/risk-reward-calculator](https://www.wicklog.in/tools/risk-reward-calculator)*
