@@ -1,7 +1,10 @@
+---
 title: The 1% Rule: How Much You Should Actually Risk Per Trade
+date: "2026-09-16"
 Slug: 1-percent-risk-rule-position-sizing
 tags: risk management, position sizing
-
+author: "Priyanshu Verma"
+---
 # The 1% Risk Rule: Why Position Sizing Matters More Than Entry
 
 Every retail trader in India has, at some point, obsessed over the entry. The perfect candle. The exact support level. The one indicator that confirms it. Meanwhile, the thing that actually decides whether they blow up their account gets almost no attention: how much they're risking per trade.
@@ -38,7 +41,7 @@ The correct order of operations is:
 4. Back into your quantity from there.
 
 Conviction should change your win rate assumptions, maybe. It should never change how much of your account is on the line.
-
+![Position Size Calculator](/wicklog-blog/public/images/Risk_Per_Trade.jpeg)
 ## Where risk-reward fits in
 
 Position sizing tells you how much you can lose. Risk-reward tells you whether the trade is worth taking in the first place — and it's the other half of this conversation, because a well-sized position on a bad risk-reward setup is still a losing habit, just a slower one.
