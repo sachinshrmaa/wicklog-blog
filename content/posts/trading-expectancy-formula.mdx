@@ -24,3 +24,89 @@ Most Indian retail traders never calculate this because it requires two things t
 ### The Expectancy Formula
 
 The formula is short, but every input matters:
+
+```
+Expectancy = (Win% × Average Win) − (Loss% × Average Loss)
+```
+
+Where:
+- **Win%** = number of winning trades ÷ total trades
+- **Average Win** = total profit from winning trades ÷ number of winning trades
+- **Loss%** = number of losing trades ÷ total trades
+- **Average Loss** = total loss from losing trades ÷ number of losing trades (as a positive number)
+
+**Worked example — a BankNifty options scalper over 50 trades:**
+
+| Metric | Value |
+|---|---|
+| Win rate | 40% (20 wins) |
+| Loss rate | 60% (30 losses) |
+| Average win | ₹2,400 |
+| Average loss | ₹900 |
+
+```
+Expectancy = (0.40 × 2,400) − (0.60 × 900)
+Expectancy = 960 − 540
+Expectancy = ₹420 per trade
+```
+
+This trader wins less than half the time but has positive expectancy of ₹420/trade. Over 100 trades, that's a theoretical ₹42,000 edge — before brokerage, STT, and slippage eat into it. [NEEDS SOURCE: average STT + brokerage drag per F&O round trip on Zerodha/Groww/Dhan for realistic net expectancy]
+
+### Why High Win Rate Can Still Mean Negative Expectancy
+
+This is the trap most swing traders in Nifty and BankNifty fall into: cutting winners early ("lock in the profit") and holding losers ("it'll come back"). This inverts your risk-reward ratio and can make a 70% win-rate system a net loser.
+
+| Scenario | Win% | Avg Win | Avg Loss | Expectancy |
+|---|---|---|---|---|
+| High win rate, poor R:R | 70% | ₹500 | ₹1,800 | (0.70×500) − (0.30×1,800) = **−₹190** |
+| Lower win rate, strong R:R | 35% | ₹2,200 | ₹600 | (0.35×2,200) − (0.65×600) = **+₹380** |
+
+The 70%-win-rate trader is losing money every trade, on average. The 35%-win-rate trader is compounding an edge. If you only track win rate, you'd back the wrong strategy.
+
+### Expectancy vs. Risk-Reward Ratio — What's the Difference
+
+Risk-reward ratio tells you the *shape* of a single trade's payoff (e.g., risking ₹500 to make ₹1,500 is a 1:3 R:R). Expectancy tells you what that shape actually produces once your real win rate is applied across dozens of trades.
+
+A strong R:R with a low enough win rate can still be net negative — expectancy is the only number that combines both variables into a single, actionable verdict on whether a strategy has a real edge.
+
+## Why This Is Nearly Impossible to Calculate Manually
+
+To get a statistically meaningful expectancy number, you need at least 30-50 trades logged with exact entry price, exit price, quantity/lot size, and net P&L after charges. Doing this by hand across a month of intraday NSE trades, or by copy-pasting Kite contract notes into Excel, is where most traders quietly give up.
+
+This is the exact friction WickLog was built around. One-click imports from Zerodha Kite, Groww, and Dhan pull your trade history in directly — no manual CSV cleanup — and the built-in **Expectancy Calculator** runs this formula automatically against your logged trades, broken down by strategy tag, instrument, or time of day.
+
+[SCREENSHOT: WickLog Expectancy Calculator showing win%, avg win, avg loss, and calculated expectancy per trade]
+
+You can also ask **Ticker AI**, WickLog's conversational trading assistant, a direct question like *"What's my expectancy on BankNifty scalps this month vs last month?"* and get an answer pulled straight from your logged trade data — instead of rebuilding a pivot table every time.
+
+## Key Takeaways
+
+- Win rate alone is not a strategy verdict — expectancy is: `(Win% × Avg Win) − (Loss% × Avg Loss)`.
+- A high win rate with a poor risk-reward ratio can still be net-negative expectancy.
+- You need 30+ logged trades minimum for the number to mean anything statistically.
+- Recalculate expectancy per strategy/setup, not just account-wide — a single strategy tag can hide a losing sub-strategy dragging down a winning one.
+- Net expectancy should be calculated after brokerage and STT, not on gross P&L, since F&O charges compound fast on high-frequency setups.
+
+---
+
+## Frequently Asked Questions
+
+### What is a good trading expectancy value?
+Any positive expectancy means your strategy has a mathematical edge over enough trades — there's no universal "good" number since it depends on your capital and trade frequency. A scalper doing 20 trades/day with ₹50 expectancy can out-earn a swing trader with ₹500 expectancy doing 2 trades/week.
+
+### Can win rate be high but expectancy still negative?
+Yes — this happens when average losses are significantly larger than average wins, even with a 70%+ win rate. It's one of the most common blind spots for traders who cut winners early and let losers run.
+
+### How does WickLog calculate trading expectancy automatically?
+WickLog's Expectancy Calculator pulls your win rate, average win, and average loss directly from trades imported via Zerodha Kite, Groww, or Dhan, and computes the formula instantly. You can filter it by strategy tag, instrument, or date range instead of recalculating manually in Excel.
+
+### How many trades do I need before expectancy numbers are reliable?
+Most traders need at least 30-50 trades logged for the sample to be statistically meaningful — fewer than that and one outlier trade can distort the number heavily. This is also why consistent journaling matters more than a single "good month."
+
+---
+
+## Stop Guessing If Your Strategy Actually Works
+
+Your win rate is a feeling. Expectancy is math. Import your Zerodha, Groww, or Dhan trade history into WickLog and see your real expectancy per strategy in minutes.
+
+**[Calculate Your Trading Expectancy Free →](https://wicklog.in)**
