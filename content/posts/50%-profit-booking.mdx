@@ -1,0 +1,35 @@
+---
+title: "Scaling Out: The Math Behind 50% Profit Booking"
+description: "Learn the position-sizing math behind scaling out 50% of a trade at target, why it lowers variance, and how to calculate breakeven-plus-runner setups."
+date: "2026-09-26"
+slug: "scaling-out-50-percent-profit-booking-math"
+tags: ["risk-management", "position-sizing", "trading-psychology", "indian-stock-market", "options-trading"]
+author: "Priyanshu Verma"
+---
+
+> **TL;DR:** Scaling out means booking profit on roughly half your position at your first target and letting the rest run with a trailing or breakeven stop. The math works because it converts a binary win/loss outcome into a partial-win-guaranteed structure, lowering the variance of your equity curve without necessarily lowering your expectancy.
+
+You've been there: up 1.5R on a trade, it stalls, you hold for the "full target," and it round-trips back to your stop. You didn't lose money on a bad trade — you lost money on a *good* trade you managed like a coin flip. Scaling out exists specifically to stop this pattern, and the reason it works is arithmetic, not intuition.
+
+## The Root Problem
+
+The core issue with all-or-nothing exits is that they force every trade into one of two outcomes: full target or full stop, with nothing in between. This means your entire expectancy depends on correctly timing the exact top or bottom of a move — something even professional desks don't consistently do. Retail traders on NSE/BSE make this worse by holding full size through the entire move, so the psychological pressure to protect an open profit and the technical reality of "let winners run" are constantly in conflict.
+
+Scaling out resolves this conflict structurally instead of relying on willpower. By booking 50% at a predefined first target, you lock in a partial win the moment the trade proves you right, and the remaining 50% is now effectively a "free" position — its downside is capped at breakeven (or better) if you move your stop up, while its upside is uncapped.
+
+## The Breakdown
+
+### The core formula: locked-in R vs. runner R
+
+Assume a standard setup: you buy at ₹100, stop-loss at ₹98 (risk = ₹2/share = 1R), and first target at ₹104 (2R).
+
+| Action | Shares | Exit Price | P&L on This Leg | Cumulative R |
+|---|---|---|---|---|
+| Entry | 100 | ₹100 | — | 0R |
+| Scale out 50% at target | 50 | ₹104 | +₹200 | +1R (locked) |
+| Move stop to breakeven on remainder | 50 | ₹100 (stop) | ₹0 | +1R (worst case) |
+| OR remainder runs to ₹110 | 50 | ₹110 | +₹500 | +3.5R (best case) |
+
+The critical line is the "worst case" row. Without scaling out, a reversal after hitting ₹104 that comes back to your original ₹98 stop turns a +2R paper profit into a -1R realized loss — a 3R swing. With scaling out and a breakeven stop on the runner, the same reversal locks in +1R minimum. You've converted your worst-case outcome from a loss into a guaranteed win.
+
+### Why this doesn't require a higher win rate to help your expectancy
