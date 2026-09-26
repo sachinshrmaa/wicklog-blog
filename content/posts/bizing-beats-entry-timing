@@ -1,0 +1,39 @@
+---
+title: "1% Risk Rule: Why Position Sizing Beats Entry Timing"
+description: "Understand the 1% risk rule for Indian traders, the math behind capital preservation, and why position sizing matters more than a perfect entry."
+date: "2026-09-26"
+slug: "1-percent-risk-rule-position-sizing"
+tags: ["risk-management", "position-sizing", "trading-psychology", "indian-stock-market", "capital-preservation"]
+author: "Priyanshu Verma"
+---
+
+> **TL;DR:** The 1% risk rule means risking no more than 1% of your total trading capital on any single trade, regardless of how confident you feel about the setup. It works because it protects you from the compounding math of drawdowns — a loss of 50% requires a 100% gain to recover, and position sizing is what keeps you far away from that hole.
+
+You nailed the entry. Clean breakout, volume confirmation, textbook setup — and you still lost 8% of your account in one trade because you sized it like it was a sure thing. This is the part traders skip when they study charts: the entry was never the problem. The size was.
+
+## The Root Problem
+
+The retail obsession with entries exists because entries feel controllable and satisfying — you drew the trendline, you spotted the pattern, you were "right." Position sizing feels boring by comparison: it's just a number you calculate before the trade even starts. But entries only determine whether you're right or wrong on a given trade; position sizing determines how much that being-wrong actually costs you, and that's the number that decides whether you're still trading six months from now.
+
+The 1% risk rule formalizes this: on any single trade, the maximum you're willing to lose (not the capital deployed, but the actual loss if your stop is hit) should not exceed 1% of your total trading capital. On a ₹5,00,000 account, that's ₹5,000 per trade — not ₹5,000 worth of shares, but ₹5,000 as your worst-case loss if the stop triggers.
+
+## The Breakdown
+
+### The drawdown math that makes 1% non-negotiable
+
+The core reason position sizing outweighs entry quality is asymmetric recovery math. Losses and the gains needed to recover from them are not symmetric — they get exponentially worse as the loss deepens.
+
+| Drawdown | Gain Required to Recover |
+|---|---|
+| 10% | 11.1% |
+| 20% | 25% |
+| 30% | 42.9% |
+| 50% | 100% |
+| 70% | 233% |
+| 90% | 900% |
+
+A trader risking 1% per trade needs roughly 50+ consecutive losses to hit a 40% drawdown — a near-impossible streak with any functioning setup. A trader risking 10% per trade hits the same drawdown in just 4-5 bad trades, which is a normal losing streak for even a good strategy with a 50% win rate. The entry quality is identical in both scenarios; the position size is what determines whether the losing streak is a footnote or an account-ending event.
+
+### Calculating position size from the 1% rule
+
+The formula converts your risk rule into an actual share or lot quantity:
