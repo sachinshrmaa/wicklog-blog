@@ -1,0 +1,88 @@
+---
+title: "Why TradingView Backtests Overstate Your Net Profit"
+description: "Learn why TradingView's default backtest settings inflate net profit for Indian traders, covering slippage, commission, and repainting indicator errors."
+date: "2026-09-26"
+slug: "tradingview-backtest-net-profit-inflated"
+tags: ["backtesting", "trading-psychology", "indian-stock-market", "risk-management", "zerodha"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** TradingView backtests overstate net profit primarily because of default settings that assume zero or unrealistic slippage, ignore actual Indian brokerage and STT costs, and can use repainting indicators that show signals that wouldn't have existed in real time. The strategy tester's headline number is a ceiling, not a forecast — real execution always costs more than the backtest assumes.
+
+You spent three weekends building a Pine Script strategy. The Strategy Tester shows 340% net profit over two years. You go live with real capital and six months in, you're barely breakeven — same rules, same indicator, wildly different outcome. The backtest wasn't wrong exactly. It was answering a different question than the one you thought you were asking.
+
+## The Root Problem
+
+TradingView's Strategy Tester is a simulation engine, not a prediction of real trading outcomes, and the gap between the two comes from assumptions baked into the default configuration that most traders never audit. The tool is built to be flexible across every market globally — US equities, crypto, forex, Indian F&O — which means its defaults are generic, and generic defaults are almost always too generous for a retail trader executing on Zerodha Kite, Groww, or Dhan with real slippage and real Indian transaction costs.
+
+The three biggest sources of inflation aren't edge cases — they apply to nearly every default backtest run:
+
+1. **Commission and slippage defaults are often set to zero or unrealistically low values** unless manually configured per strategy.
+2. **Repainting indicators** can generate signals on historical bars that use information not actually available at that candle's close in real time.
+3. **The backtest doesn't know about your broker's actual order execution** — market depth, partial fills, and NSE circuit-driven halts don't exist in the simulation.
+
+## The Breakdown
+
+### Cost stacking: what's missing from the default net profit number
+
+Every Indian trade carries costs that most default TradingView setups either ignore or underestimate. Here's what compounds against your backtested number on a typical intraday F&O trade:
+
+| Cost Component | Typical Impact (Per Round Trip) | Included in Default Backtest? |
+|---|---|---|
+| Brokerage (flat/discount, e.g., ₹20 per order) | Fixed ₹ per trade | Only if manually added |
+| STT (0.05-0.1% depending on segment) | Varies by segment | Rarely by default |
+| Exchange transaction charges + SEBI fees | Small but compounding | Rarely by default |
+| GST on brokerage + charges | 18% on applicable charges | Rarely by default |
+| Slippage (market orders in volatile/low-liquidity windows) | Can exceed brokerage cost alone | Almost never by default |
+
+Individually small, these costs compound across hundreds of backtested trades. A strategy that shows +₹50,000 net profit over 300 trades with zero-cost assumptions can turn negative once ₹200-400 per round trip in real friction is applied — and 300 trades × ₹300 average friction is ₹90,000, which alone exceeds many "profitable" backtest results. [NEEDS SOURCE: aggregate cost-per-trade study for NSE F&O intraday]
+
+### Repainting: when the backtest sees the future
+
+A repainting indicator recalculates its own historical values as new price data arrives, meaning the signal you see on a historical candle in the Strategy Tester may not have existed at that candle's actual close. This is common with certain higher-timeframe indicators, some smoothing-based oscillators, and indicators using `request.security()` without proper offset handling in Pine Script.
+
+The practical effect: your backtest shows the strategy entering at the exact bottom of a move because the indicator "knew" the move was coming — using data that, in live trading, wouldn't be available until later. This isn't a minor accuracy issue; it can be the single largest source of inflated win rate in an otherwise sound-looking strategy.
+
+### The execution gap: backtest fills vs. real fills
+
+TradingView's default fill model assumes your order executes at the exact price of the bar's open or close, with no consideration for order book depth. Real execution on Zerodha Kite or Groww during the 11:30 AM-1:30 PM liquidity lull, or during the first five minutes after market open, routinely fills market orders several ticks away from the quoted price — and in F&O, wider bid-ask spreads on less liquid strikes make this worse.
+
+| Backtest Assumption | Real Execution Reality |
+|---|---|
+| Fill at exact bar close | Fill at best available price on the order book |
+| No partial fills | Partial fills possible on illiquid strikes |
+| No slippage unless configured | Slippage on every market order, higher in low-volume windows |
+| Instant execution | Milliseconds to seconds of latency, longer on mobile apps |
+
+## Key Takeaways
+
+- Default TradingView Strategy Tester settings assume little to no commission and slippage — always manually configure both to match your actual Zerodha, Groww, or Dhan cost structure before trusting the net profit figure.
+- Check your Pine Script for repainting behavior, particularly around higher-timeframe references or smoothing indicators, since repainting can silently inflate both win rate and net profit.
+- Treat the backtested net profit as a theoretical ceiling, not a target — real execution costs (STT, brokerage, GST, slippage) only ever subtract from this number, never add to it.
+- Forward-test on a small real position size before scaling capital into any backtested strategy, since live execution reveals fill quality issues no backtest can fully simulate.
+- Log your actual live trades against your backtested expectations to measure the real gap between simulation and execution — most traders never do this and never find out how large the gap actually is.
+
+[SCREENSHOT: WickLog backtesting (beta) module showing a strategy run alongside actual imported trade results for comparison]
+
+The only reliable way to know how much your backtest overstated reality is to compare it against what you actually executed. WickLog's backtesting module (beta) lets you test strategy logic against historical data, and because your live trades import directly from Zerodha Kite, Groww, or Dhan, you can hold your backtested expectancy up against your real logged expectancy in the same place — instead of trusting one number in TradingView and hoping it survives contact with the market.
+
+## Frequently Asked Questions
+
+### Why does my TradingView backtest show profit but my live trading loses money?
+The gap almost always comes from unconfigured commission and slippage settings, repainting indicators, or unrealistic fill assumptions in the Strategy Tester's defaults. Manually setting your actual brokerage, STT, and a realistic slippage estimate per trade closes most of this gap, though real execution during low-liquidity windows will still underperform any backtest.
+
+### How do I fix slippage settings in TradingView's Strategy Tester?
+You can set slippage in ticks under the Strategy Tester's Properties tab, but the default value is usually too low for Indian market conditions, especially in F&O or during the midday liquidity lull. A more reliable approach is to compare backtested numbers against your own historical fill quality logged from real trades.
+
+### What is a repainting indicator and how do I know if mine repaints?
+A repainting indicator changes its past signal values as new data comes in, meaning the backtest can show entries using information that wasn't available at that point in real time. You can test for repainting by comparing the indicator's signal on a historical bar against what it showed in real time when that bar was actually forming.
+
+### Can WickLog verify if my TradingView strategy actually works in real trading?
+WickLog's backtesting feature (currently in beta) lets you test strategy rules against historical data, and separately, importing your live trades from Zerodha Kite, Groww, or Dhan lets you compare backtested expectancy against your real, executed expectancy. This side-by-side view shows you the actual gap between simulation and live performance rather than relying on TradingView's numbers alone.
+
+---
+
+## Stop Trusting the Backtest — Verify It Against Real Trades
+A strategy is only as good as what it does with your actual fills, not a simulator's assumptions. Compare your backtested expectations against your real trading data.
+
+[Compare Your Real Results Free →](https://wicklog.in)
