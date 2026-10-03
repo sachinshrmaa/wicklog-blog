@@ -32,4 +32,64 @@ Assume a standard setup: you buy at ₹100, stop-loss at ₹98 (risk = ₹2/shar
 
 The critical line is the "worst case" row. Without scaling out, a reversal after hitting ₹104 that comes back to your original ₹98 stop turns a +2R paper profit into a -1R realized loss — a 3R swing. With scaling out and a breakeven stop on the runner, the same reversal locks in +1R minimum. You've converted your worst-case outcome from a loss into a guaranteed win.
 
-### Why this doesn't require a higher win rate to help your expectancy
+### Why this doesn't require a higher win rate to help your expectancy 
+
+**Example (cash equity):**
+- Account capital: ₹5,00,000
+- Risk per trade: 1% = ₹5,000
+- Entry: ₹250, Stop-loss: ₹240 (risk per share = ₹10)
+- Position size = ₹5,000 / ₹10 = **500 shares**
+
+Note what this formula does *not* ask: it doesn't ask how confident you are, how strong the setup looks, or how sure you are of the breakout. Your stop distance and your risk budget are the only two inputs — this is precisely why it removes emotion from sizing decisions.
+
+**Example (F&O, Nifty options):**
+- Account capital: ₹5,00,000
+- Risk per trade: 1% = ₹5,000
+- Premium at entry: ₹150, Stop-loss premium: ₹110 (risk per unit = ₹40)
+- Nifty lot size: 75 (subject to NSE revision)
+- Max lots by risk = ₹5,000 / (₹40 × 75) = 1.67 → **1 lot**
+
+In F&O, lot size rounding often forces you *below* your full 1% allocation rather than above it — which is the safer direction to round, but worth knowing so you don't assume you're using your full risk budget when you're actually under it.
+
+### Entry quality vs. position sizing: what each actually controls
+
+| Factor | What It Controls | What It Doesn't Control |
+|---|---|---|
+| Entry timing/quality | Win rate, initial trade favorability | How much you lose if wrong |
+| Stop-loss placement | Risk per share/unit | Whether the stop gets hit |
+| Position sizing (1% rule) | Total capital at risk, survivability | Whether any single trade wins |
+
+A perfect entry with oversized position risk still exposes your account to catastrophic single-trade loss. A mediocre entry with disciplined 1% sizing caps the damage regardless of outcome — this is why professional risk management prioritizes the sizing formula over entry refinement. [NEEDS SOURCE: comparative study on trader survivability by risk-per-trade percentage]
+
+## Key Takeaways
+
+- Risking 1% per trade means calculating your position size from your stop-loss distance, not from how much capital you feel like deploying.
+- Drawdown recovery math is asymmetric — a 50% loss needs a 100% gain to recover, which is why small, consistent risk-per-trade matters more than any single entry decision.
+- In F&O, lot size constraints often round your position size down below the full 1% budget — check this before assuming you're at full risk allocation.
+- Entry quality determines whether you're right; position sizing determines what being wrong costs you — conflating the two is the most common retail sizing mistake.
+- Calculate position size *before* you place the trade, not after you've already decided you like the setup — reversing this order is how sizing discipline quietly erodes.
+
+[SCREENSHOT: WickLog Position Size calculator showing capital, risk%, entry, and stop-loss inputs producing share/lot output]
+
+Most traders know the 1% rule exists and still don't apply it consistently, because doing the calculation manually before every trade is friction most people skip under time pressure. WickLog's Position Size calculator takes your account capital, risk percentage, entry, and stop-loss and returns the exact share or lot count in seconds — and once your trades are logged, Ticker AI, WickLog's conversational trading assistant, can tell you directly whether you're actually sticking to your stated risk rule or drifting from it.
+
+## Frequently Asked Questions
+
+### What is the 1% risk rule in trading?
+The 1% risk rule means limiting your maximum potential loss on any single trade to 1% of your total trading capital, calculated from your entry price and stop-loss distance. It's a capital preservation rule, not a profit target — it caps downside without limiting upside.
+
+### Is 1% risk per trade too conservative for Indian F&O traders?
+Not necessarily — many experienced F&O traders on Zerodha, Groww, or Dhan use between 0.5% and 2% depending on their strategy's win rate and volatility exposure. 1% is a common default because it balances meaningful position size with survivability through losing streaks, but the exact number should be back-tested against your own strategy's historical drawdowns.
+
+### How do I calculate position size for options trading using the 1% rule?
+Divide your risk amount (1% of capital) by your risk per unit (entry premium minus stop-loss premium), then divide by the lot size to get the number of lots. Lot size rounding usually rounds your position down rather than up, so always round to the nearest whole lot below your calculated number, never above.
+
+### Can WickLog tell me if I'm actually following my own risk rule?
+Yes — once your trades are imported from Zerodha Kite, Groww, or Dhan, you can ask Ticker AI questions like "what percentage of my capital did I risk on my last 20 trades" and get a direct answer from your actual trade history. This removes the guesswork of manually cross-checking every trade against your stated risk percentage.
+
+---
+
+## Stop Sizing Trades on Feel
+Your entries might be fine — it's your position sizing that decides whether one bad trade is a rounding error or a setback. Calculate it properly before your next trade.
+
+[Calculate Your Position Size Free →](https://wicklog.in)

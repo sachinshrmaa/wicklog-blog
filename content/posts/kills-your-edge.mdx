@@ -40,3 +40,42 @@ The math behind why this hurts you specifically:
 Your risk-reward ratio is only as good as the probability distribution it's based on. A 1:2 R:R setup with a 40% win rate is profitable in trending conditions — but the same setup's win rate typically collapses in range-bound, low-volume conditions because the "R" (your stop distance) gets hit by noise rather than genuine reversal.
 
 Run the expectancy formula honestly:
+
+If your morning-session win rate is 45% and your midday win rate drops to 25% on the identical setup, your expectancy for that 2-hour window is likely negative — even though your overall daily numbers might look acceptable because the morning session is subsidizing the loss. Most traders never isolate this because they look at daily P&L, not hourly P&L.
+
+### The overtrading trap specifically
+
+The 11:30-1:30 window doesn't just produce bad trades — it produces *more* trades. Boredom and impatience during low-movement periods push traders to lower their entry criteria just to stay engaged with the market. Each additional low-quality trade in this window also carries a fixed cost that compounds: STT (0.1% on delivery sell side, higher on F&O), brokerage, and slippage don't discriminate between your best and worst setups.
+
+## Key Takeaways
+
+- The 11:30 AM-1:30 PM window has structurally lower volume and volatility on NSE/BSE — treat it as a different market regime, not a bad version of the morning session.
+- Don't trust intuition on this — pull your own trade log and check win rate and expectancy by hour, not just by day.
+- If you must trade midday, tighten position size and widen your criteria for confirmation rather than loosening your stop-loss.
+- Overtrading in low-liquidity windows compounds fixed costs (STT, brokerage, slippage) against you even when individual losses look small.
+- A flat or losing midday block on an otherwise green day is a signal to stop trading for that window, not a reason to average down or "make it back."
+
+[SCREENSHOT: WickLog hourly P&L breakdown view showing win rate and expectancy split by time-of-day]
+
+The only way to know if this window is actually hurting *your* edge — not just the average trader's edge — is to look at your own numbers segmented by hour. Most Excel-based logs don't make this easy because timestamps get buried in raw broker exports. WickLog imports your trades directly from Zerodha Kite, Groww, or Dhan and lets you query them conversationally through Ticker AI — for example, asking "what's my win rate between 11:30 and 1:30 this month" and getting a straight answer instead of building a pivot table.
+
+## Frequently Asked Questions
+
+### Is the 11:30 AM to 1:30 PM window always bad for trading?
+No, it's not universally bad — it's structurally lower in volume and volatility, which changes which setups work. Range-bound or mean-reversion strategies can perform fine in this window; momentum and breakout strategies that rely on volume confirmation tend to underperform here.
+
+### How can I check if the midday lull is affecting my own trades?
+Segment your trade log by entry hour and compare win rate, average R multiple, and expectancy across the 9:15-10:30, 10:30-11:30, 11:30-1:30, and 1:30-3:30 blocks. WickLog's broker import (Kite, Groww, Dhan CSV) timestamps every trade automatically, and Ticker AI can answer time-segmented questions directly instead of requiring manual Excel formulas.
+
+### Should I avoid trading entirely between 11:30 AM and 1:30 PM?
+Not necessarily — the right move depends on your strategy type and your own historical data, not a blanket rule. If your logged expectancy for that window is negative, reducing size or sitting out is a data-backed decision rather than a superstition.
+
+### Does WickLog automatically sync trades in real time from my broker?
+No — WickLog uses one-click CSV imports from Zerodha Kite, Groww, and Dhan rather than live execution sync. You export your trade file from your broker and import it into WickLog for analysis, backtesting (beta), and Ticker AI querying.
+
+---
+
+## Stop Guessing Which Hours Are Costing You Money
+Your trade log already has the answer — it's just buried in timestamps you've never sorted by hour. Import your trades and ask Ticker AI where your edge actually breaks down.
+
+[Audit Your Trading Hours Free →](https://wicklog.in)
