@@ -1,0 +1,147 @@
+---
+title: "Daily Max Loss Rule: Stop Blow-Up Days Before They Happen"
+description: "Set a daily max loss in ₹ to stop revenge trading and blow-up days. A guide for Nifty and BankNifty F&O traders to cap drawdowns and protect capital."
+date: "2026-10-06"
+slug: "daily-max-loss-rule"
+tags: ["risk-management", "trading-journal", "indian-stock-market", "options-trading", "zerodha"]
+author: "Priyanshu Verma"
+---
+
+> **TL;DR:** A daily max loss is a fixed rupee limit, usually 1–2% of capital, after which you stop trading for the day. It stops blow-up days because losses compound on emotion, not logic: each revenge trade is larger than the last. Cap the day at ₹5,000 on ₹5 lakh and one bad morning stays survivable.
+
+You take a clean ₹2,000 stop-loss at 9:40 AM. By 10:15 you have doubled your lots to "make it back." By 11:00 you are down ₹30,000, and the plan you wrote last night is a distant memory. Almost nobody blows up on a single bad trade. They blow up on the fourth trade of a bad day.
+
+## The Root Problem
+
+Blow-up days happen because a loss changes how you size and select trades, so each trade after the first loss is worse than the one before it. The market is rarely the cause. Your state is.
+
+Three things usually stack up:
+
+1. **Loss aversion turns into chasing.** You stop trading your setup and start trading to get back to zero.
+2. **Size escalates.** A 1-lot Nifty trade becomes 3 lots because "this one has to work."
+3. **Time pressure replaces edge.** With the 3:30 PM close approaching, you take marginal setups just to recover.
+
+The maths punishes you twice. Losses are asymmetric: the bigger the hole, the harder the climb out.
+
+| Drawdown | Gain needed to recover |
+|---|---|
+| 5% | 5.3% |
+| 10% | 11.1% |
+| 20% | 25% |
+| 30% | 42.9% |
+| 50% | 100% |
+
+A single −6% day on a ₹5,00,000 account takes roughly six disciplined +1% days to repair. One uncontrolled morning can erase a week or more of careful work.
+
+Most F&O traders also carry costs on top of this. STT, brokerage and slippage don't shrink when you're losing, and high-frequency revenge trades inflate them. [NEEDS SOURCE: SEBI study on share of individual F&O traders posting net losses]
+
+## The Breakdown
+
+### What a Daily Max Loss Actually Is
+
+A daily max loss is a pre-committed rupee amount; once your realised plus open loss for the day touches it, you close positions and stop trading until the next session. It is a circuit breaker for you, not for the market.
+
+It differs from a per-trade stop-loss in one key way. A stop-loss protects you from one position. A daily max loss protects you from the sequence of decisions you make after that position goes wrong.
+
+| | Per-trade stop-loss | Daily max loss |
+|---|---|---|
+| What it limits | Loss on one position | Total loss for the day |
+| Protects against | A bad entry | Tilt, revenge trading, size creep |
+| Who enforces it | Order on the exchange | You (or your rules) |
+| Typical value | 0.25%–1% of capital | 1%–2% of capital |
+
+### The Same Bad Morning, With and Without a Cap
+
+The cap converts an open-ended loss into a known, survivable one. Here is a hypothetical ₹5,00,000 account on a volatile Bank Nifty expiry morning.
+
+| Trade | Behaviour | Without cap | With ₹5,000 cap |
+|---|---|---|---|
+| 1 | Planned size, stop hit | −₹2,000 | −₹2,000 |
+| 2 | Re-enter immediately, 2x lots | −₹4,000 | −₹4,000 (total −₹6,000, slight overshoot from slippage) |
+| 3 | "Last chance" 4x lots | −₹8,000 | **Stopped. Screens off.** |
+| 4 | Averaging down | −₹16,000 | — |
+| **Day total** | | **−₹30,000 (−6%)** | **≈ −₹6,000 (−1.2%)** |
+
+The numbers are illustrative, but the pattern is real: loss size roughly doubles each round of revenge. The cap doesn't make you right. It makes you wrong *cheaply*.
+
+[SCREENSHOT: WickLog day-wise P&L view highlighting a single −6% day against surrounding +0.5% to +1% days]
+
+### How to Choose the Number
+
+Pick a daily max loss that is small enough to survive and large enough that normal variance doesn't trigger it on a good day. A simple starting framework:
+
+| Method | Formula | Example (₹5,00,000 capital) |
+|---|---|---|
+| % of capital | 1%–2% of account | ₹5,000–₹10,000 |
+| Multiple of risk per trade | 2.5–3x your planned risk per trade | ₹2,000 risk → ₹5,000–₹6,000 |
+| Data-driven | Your 90th-percentile losing day from past trades | Pulled from your own history |
+
+Start at the tighter end. You can loosen a cap with evidence, but you can rarely un-learn a blow-up.
+
+Calibrating the data-driven version requires your actual trade history. In WickLog you can import your Kite, Groww or Dhan trade CSV and ask Ticker AI, WickLog's conversational trading assistant, questions like:
+
+- "What were my five worst days by P&L, and how many trades did I take on each?"
+- "On days I lost more than ₹5,000, how did my average lot size change after the first loss?"
+- "How many trades did I take after 1:30 PM on my losing days?"
+
+[SCREENSHOT: Ticker AI answering a question about worst trading days and trade count per day]
+
+Pair this with WickLog's built-in Position Size and Expectancy calculators to check that your per-trade risk and your daily cap are consistent with each other. If your cap allows only two full-risk losses, your strategy needs to be able to live with that.
+
+### Making the Rule Stick
+
+A rule you only enforce when you feel calm is not a rule. Make the cap mechanical:
+
+1. **Write it down before the open.** Put the rupee figure on paper or your trading screen at 9:00 AM, not after the first loss.
+2. **Define what counts.** Realised losses plus open mark-to-market. Decide this once.
+3. **Define what happens at the limit.** Close positions, log out of Kite (or Groww, or Dhan), and step away. Don't "just check" the chart.
+4. **Add friction.** Price alerts at 50% and 80% of your cap give you warnings before the limit, so the stop never feels like a surprise.
+5. **Review it weekly.** Count how many days you hit the cap and whether you actually stopped.
+
+One honest limitation: WickLog is a journal and analytics tool. You import trades after the fact, and it does not block orders or sync live with your broker. It can't enforce the cap for you. What it does is show you, in your own numbers, whether you respected it and what it cost you when you didn't.
+
+[SCREENSHOT: WickLog analytics view comparing trades taken before vs. after the first loss of the day]
+
+### Auditing Whether Your Cap Works
+
+You find out whether a daily max loss is working by comparing days you honoured it against days you broke it. After 4–6 weeks, check:
+
+| Metric | What it tells you |
+|---|---|
+| Days you hit the cap | Whether the number is too tight or your setups are off |
+| Days you traded past the cap | Your real discipline rate |
+| Average loss on cap days vs. non-cap blow-up days | The money the rule actually saved |
+| Trades per day after first loss | Early sign of tilt |
+| Worst-day P&L, month over month | Whether tail risk is shrinking |
+
+If you hit the cap three times a week, the problem is probably your strategy or sizing, not the cap. Lowering per-trade risk will do more than raising the limit.
+
+## Key Takeaways
+
+- A daily max loss is a fixed ₹ limit (typically 1–2% of capital) that ends your trading day when touched.
+- Blow-up days come from escalating size after losses, not from a single bad trade.
+- A 6% bad day needs roughly 6.4% to repair, which is more than a week of normal winning days.
+- Decide the number, and what "stopping" means, before 9:15 AM, never mid-drawdown.
+- Use your own trade history, not a generic rule, to refine the number over time.
+
+## Frequently Asked Questions
+
+### What is a good daily max loss for Nifty and Bank Nifty option traders?
+
+For most retail F&O traders, 1% to 2% of total trading capital is a sensible daily max loss. On a ₹5,00,000 account, that is ₹5,000 to ₹10,000. Beginners and anyone with a history of revenge trading should start near 1% and widen only after reviewing their own data.
+
+### Does WickLog stop me from trading once I hit my daily loss limit?
+
+No. WickLog is a trading journal and analytics tool that works from imported trade data (Zerodha Kite, Groww and Dhan CSV imports); it doesn't place, block or monitor orders in real time. It helps you see how often you broke your limit, what those days cost, and how your behaviour changed after the first loss.
+
+### How can Ticker AI help me find my blow-up days?
+
+Ticker AI lets you ask plain-language questions about your imported trades, such as "Which days did I lose more than ₹10,000?" or "Did I increase lot size after a losing trade?" It answers from your own data, so you can spot the pattern behind your worst days and set a cap based on evidence rather than guesswork.
+
+---
+
+## Audit Your Worst Trading Days
+
+Your next blow-up day is already visible in your past trades: the lot-size jumps, the late-day entries, the trades taken after the limit should have hit. Import your broker CSV and see exactly what your worst days looked like, then set a daily max loss from your own numbers.
+
+[Audit Your Worst Trading Days Free →](https://wicklog.in)
