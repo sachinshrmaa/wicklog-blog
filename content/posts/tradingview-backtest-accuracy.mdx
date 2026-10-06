@@ -2,6 +2,7 @@
 title: "TradingView Backtest Accuracy: Why Net Profits Lie"
 description: "Learn why TradingView backtests overstate net profit once costs, slippage and lot sizes hit. A reality check for Nifty and BankNifty F&O strategy traders."
 date: "2026-10-06"
+updated: "2026-10-06"
 slug: "tradingview-backtest-accuracy"
 tags: ["backtesting", "trading-journal", "indian-stock-market", "options-trading", "risk-management"]
 author: "Priyanshu Verma"
@@ -15,14 +16,15 @@ Your strategy shows a clean equity curve on TradingView: 380 trades, ₹1.4 lakh
 
 A TradingView backtest overstates profit because the Strategy Tester simulates an idealised market unless you explicitly configure otherwise. It is a hypothesis generator, not a P&L statement.
 
-Six gaps separate a backtest from your contract notes:
+Seven gaps separate a backtest from your contract notes:
 
 1. **Zero costs by default.** Commission and slippage start at 0 unless you set them in the strategy's properties. Every trade is free.
 2. **Perfect fills.** The tester fills at the bar's price on its own logic. Real orders face spreads, thin option books and queue position.
 3. **Wrong instrument.** Many backtests run on the Nifty index or a continuous futures chart. You can't trade the index, and options have premiums, theta and strikes the chart doesn't model.
 4. **Unrealistic sizing.** Percent-of-equity sizing allows fractional or arbitrary quantities. Real F&O trades in fixed lots, and your capital may not stretch to the lot count the test assumed.
-5. **Overfitting.** A strategy tuned on the same data it is judged on will look excellent on that data and mediocre on the next. [NEEDS SOURCE: academic or practitioner study on parameter-optimisation overfitting in retail backtests]
+5. **Overfitting.** A strategy tuned on the same data it is judged on will look excellent on that data and mediocre on the next. Bailey, Borwein, López de Prado and Zhu showed in ["The Probability of Backtest Overfitting"](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2326253) that the more parameter combinations you try, the more likely your best backtest is a fluke.
 6. **Intrabar and data limits.** Bar-based testing can't know whether a stop or a target was hit first inside a candle, and the available history may be shorter or thinner than you think. Check your plan's data depth before trusting a long-run result.
+7. **Repainting indicators.** Some indicators recalculate their past values as new bars arrive, so the backtest can act on signals that didn't exist at the time.
 
 Of these, costs are the easiest to quantify and the most often ignored.
 
@@ -38,17 +40,17 @@ For an options trade, the main cost layers are:
 
 | Cost | Applies to | Note |
 |---|---|---|
-| Brokerage | Per executed order | Flat per order at many discount brokers; check your broker's current rate card |
-| STT | Sell side on options (on premium) | Rates change with Union Budgets; verify the current rate |
-| Exchange transaction charges | Both sides, on turnover | Varies by segment; check the NSE circular |
-| SEBI turnover fee | Both sides | Very small, but not zero |
-| GST | On brokerage and transaction charges | Charged on fees, not on the trade value |
-| Stamp duty | Buy side | Check the current rate |
+| Brokerage | Per executed order | ₹20 per order at most discount brokers |
+| STT | Sell side, on premium | 0.15% since 1 April 2026 (was 0.10%) |
+| Exchange transaction charges | Both sides, on premium turnover | 0.03503% on NSE |
+| SEBI turnover fee | Both sides | ₹10 per crore of turnover |
+| GST | On brokerage and transaction charges | 18%, charged on fees, not on the trade value |
+| Stamp duty | Buy side, on premium | 0.003% |
 | Slippage | Every market or stop order | Not on any contract note; it shows up as a worse fill price |
 
-[NEEDS SOURCE: current STT, exchange transaction charge, SEBI fee and stamp duty rates for NSE index options, from the exchange or broker charge calculator]
+These are NSE index option rates as of October 2026; Union Budgets and exchange circulars change them, so check your broker's charge calculator once a year. On a 2-lot Nifty option round trip (buy ₹120, sell ₹128) they add up to about ₹86 ([full breakdown](/stt-hike-2026-fno-traders-cost)).
 
-Here is an illustrative example. The charge figures are placeholders to show the mechanics, so replace them with your broker's current numbers before publishing.
+Here is an illustrative example for a strategy trading a few lots per signal, so charges are higher than the 2-lot figure above.
 
 | Metric (hypothetical Nifty options strategy) | Backtest default | After realistic costs |
 |---|---|---|
@@ -63,7 +65,12 @@ A modest-looking ₹330 of friction per round trip removed about 79% of the prof
 
 Quick formula to run yourself:
 
-Use WickLog's Expectancy calculator, which takes your win rate and average win and loss, to test whether the edge survives when you subtract friction from each average.
+```
+Net per trade = Gross profit per trade − (Charges + Slippage) per round trip
+Breakeven friction = Gross profit per trade
+```
+
+If your realistic friction per round trip is anywhere close to your gross profit per trade, the edge is too thin to trade. Use WickLog's Expectancy calculator, which takes your win rate and average win and loss, to test whether the edge survives when you subtract friction from each average.
 
 ### Slippage, Lot Sizes and Expiry-Day Reality
 
@@ -71,11 +78,19 @@ Slippage is largest exactly when strategies fire hardest: at the open, around ne
 
 Three Indian-market specifics that backtests rarely capture:
 
-- **Fixed lot sizes.** Nifty and Bank Nifty options trade in exchange-defined lots, and lot sizes have been revised by the exchange over the years. [NEEDS SOURCE: current NSE lot sizes for Nifty and Bank Nifty] A strategy that "scales into 2.5 lots" doesn't exist in live trading.
+- **Fixed lot sizes.** Nifty options trade in lots of 65 and Bank Nifty in lots of 30 (from the January 2026 series), and NSE revises these periodically. A strategy that "scales into 2.5 lots" doesn't exist in live trading.
 - **Margin and capital.** A test that holds multiple lots through a drawdown may need more margin than your account has. In live trading you get a rejection or forced square-off, not a clean equity curve.
 - **Wide spreads in far strikes.** A backtest on the index can't tell you that your target strike had a ₹4 spread and almost no depth at 9:16 AM.
 
-[SCREENSHOT: TradingView Strategy Tester properties panel showing commission and slippage fields set to zero]
+{/* TODO screenshot: TradingView Strategy Tester properties panel showing commission and slippage fields set to zero */}
+
+### Repainting: When the Backtest Sees the Future
+
+**A repainting indicator changes its historical values as new data arrives, so a signal you see on an old candle may not have existed when that candle closed.** The Strategy Tester then enters at the exact bottom of a move because the indicator "knew" it was coming, using data a live trader wouldn't have had until later.
+
+Common culprits are higher-timeframe references, some smoothing-based oscillators, and Pine Script that calls `request.security()` without handling lookahead and the still-forming bar. Repainting can be the single biggest source of an inflated win rate in an otherwise sound-looking strategy, and no amount of cost modelling fixes it.
+
+To check: put the strategy on a live chart, note where signals appear as bars form, and compare them with what the same bars show an hour later. If signals move or vanish, the backtest is fiction until you fix the logic.
 
 ### The Checks That Make a Backtest Believable
 
@@ -98,7 +113,7 @@ WickLog includes a backtesting module, currently in beta, but the more useful mo
 - "How much did I pay in total charges versus my gross P&L this month?"
 - "What was my average P&L on trades opened in the first 15 minutes after 9:15 AM versus later in the day?"
 
-[SCREENSHOT: Ticker AI answering a question about total charges versus gross P&L for the month]
+{/* TODO screenshot: Ticker AI answering a question about total charges versus gross P&L for the month */}
 
 Whether charges appear in your analysis depends on what your broker's CSV includes, so check the export columns first. WickLog works on imported trades after the session. It doesn't place, block or monitor orders live.
 
@@ -131,6 +146,10 @@ Not out of the box. The Strategy Tester assumes zero commission and slippage by 
 ### How do I add brokerage and STT to a TradingView backtest?
 
 Open the strategy's properties and enter commission and slippage values, then rerun the test. Use your broker's current charge calculator to estimate per-trade costs, including STT, exchange charges, GST and stamp duty. Include a slippage figure as well, because slippage doesn't appear on any contract note.
+
+### What is a repainting indicator and how do I know if mine repaints?
+
+A repainting indicator changes its past signals as new data comes in, so the backtest can use information that wasn't available in real time. Watch the indicator on a live chart and compare the signals it shows while a bar is forming with what it shows on the same bar later. If they differ, it repaints.
 
 ### How can I compare my real trades with my backtest results?
 

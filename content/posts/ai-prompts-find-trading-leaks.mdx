@@ -2,12 +2,13 @@
 title: "5 AI Prompts to Find Your Trading Leaks Fast"
 description: "5 exact prompts to run through Ticker AI to uncover overtrading, poor risk-reward, and sizing mistakes in your Zerodha, Groww, or Dhan trade history."
 date: "2026-09-24"
+updated: "2026-10-06"
 slug: "ai-prompts-find-trading-leaks"
 tags: ["trading-journal", "indian-stock-market", "risk-management", "ticker-ai", "zerodha"]
 author: "Sachin Sharma"
 ---
 
-> **TL;DR:** A "trading leak" is a recurring, quantifiable mistake — like oversized positions after a win streak or low risk-reward on Friday expiry trades — that quietly erodes your P&L. These 5 prompts, run against your imported trade history in Ticker AI, surface leaks in minutes instead of hours of manual spreadsheet filtering.
+> **TL;DR:** A "trading leak" is a recurring, quantifiable mistake — like oversized positions after a win streak or low risk-reward on expiry-day trades — that quietly erodes your P&L. These 5 prompts, run against your imported trade history in Ticker AI, surface leaks in minutes instead of hours of manual spreadsheet filtering.
 
 You know your monthly P&L number. What most traders don't know is *which specific behavior* is responsible for most of the damage — because finding that answer manually means filtering a spreadsheet by date, instrument, time of day, and position size, cross-referencing four different theories, and usually giving up halfway through. The data to answer this already sits in your broker's contract notes. You're just not asking it the right question.
 
@@ -15,10 +16,10 @@ You know your monthly P&L number. What most traders don't know is *which specifi
 
 - A WickLog account with your trade history imported via one-click CSV/broker import from Zerodha Kite, Groww, or Dhan
 - At least 20-30 logged trades — fewer than that and any "pattern" Ticker AI surfaces is likely noise, not signal
-- Access to Ticker AI, WickLog's conversational trading assistant, which is available on the Pro plan (₹249/mo)
+- Access to Ticker AI, WickLog's conversational trading assistant, which is available on the Pro plan (₹349/month or ₹2,250/year)
 - Optional: notes/lessons attached to your trades (see below), since prompts that reference *why* you took a trade need that field populated
 
-[SCREENSHOT: WickLog dashboard with Ticker AI chat panel open alongside imported trade list](/blog/images/ticker-ai-chat.png)
+![WickLog dashboard with Ticker AI chat panel open alongside imported trade list](/blog/images/ticker-ai-chat.png)
 
 
 
@@ -29,7 +30,7 @@ Ask Ticker AI: *"Show me all trades I entered within 15 minutes of a stop-loss h
 
 This isolates the specific behavior of jumping back into the market immediately after a loss, before you've had time to reset. The reasoning: revenge trades are rarely planned, so they almost always carry weaker risk-reward setups than your baseline — this prompt gives you the number instead of the feeling. If the average R:R on these trades is meaningfully lower than your account average, you have a quantified leak, not a suspicion.
 
-[SCREENSHOT: Ticker AI response listing flagged trades with entry-time gap and R:R comparison]
+{/* TODO screenshot: Ticker AI response listing flagged trades with entry-time gap and R:R comparison */}
 
 ### Step 2: Isolate your worst time-of-day window
 Ask Ticker AI: *"Break down my win rate and average P&L by hour of day, from 9:15 AM to 3:30 PM."*
@@ -44,7 +45,7 @@ This tests for the most common and most expensive leak: sizing up out of overcon
 ### Step 4: Find your weakest instrument or setup type
 Ask Ticker AI: *"Compare my Expectancy across each instrument and strategy tag I've logged."*
 
-Expectancy (average win × win rate − average loss × loss rate) tells you which setups are actually profitable over time versus which just feel good because of a few memorable wins. A trader who's net profitable overall can still be bleeding money on one specific instrument — like BankNifty weekly options — while their Nifty swing trades carry the whole account.
+Expectancy (average win × win rate − average loss × loss rate) tells you which setups are actually profitable over time versus which just feel good because of a few memorable wins. A trader who's net profitable overall can still be bleeding money on one specific instrument — like Bank Nifty options — while their Nifty swing trades carry the whole account.
 
 ### Step 5: Check if your stated rules match your actual behavior
 Ask Ticker AI: *"Search my trade notes for any mention of moving my stop-loss, and show the P&L impact of those trades versus trades where the stop stayed fixed."*
@@ -61,7 +62,7 @@ This only works if you've been logging a brief note per trade — it's the one p
 ## Frequently Asked Questions
 
 ### Is WickLog free to use for Indian traders?
-Yes, WickLog's freemium tier covers broker imports, core journaling, and calculators at no cost. Ticker AI conversational querying — used for the prompts in this guide — is part of the ₹249/month Pro plan.
+Yes. WickLog's free plan covers Zerodha and Dhan tradebook file imports, manual journaling (50 trades a month), every analytics widget and the free calculators. Ticker AI, which you need for the prompts in this guide, is part of the Pro plan at ₹349/month or ₹2,250/year.
 
 ### How does WickLog import trades from Zerodha, Groww, or Dhan?
 WickLog uses one-click CSV/broker import to pull executed trade data directly from Kite, Groww, or Dhan contract notes, rather than requiring manual entry. Once imported, that data is what Ticker AI queries against.

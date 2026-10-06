@@ -2,6 +2,7 @@
 title: "Win Rate by Hour: Is the Lunch Chop Eating Your Profits?"
 description: "Indian intraday traders: measure win rate and net P&L by hour from 9:15 AM to 3:30 PM IST, find your losing window, and stop handing morning profits back."
 date: "2026-10-05"
+updated: "2026-10-06"
 slug: "win-rate-by-hour-intraday-trading-india"
 tags: ["intraday-trading", "trading-journal", "nifty", "overtrading", "trading-psychology"]
 author: "Sachin Sharma"
@@ -24,7 +25,7 @@ A typical NSE cash and F&O session (IST) has distinct phases:
 | 9:15–9:30 AM | Opening price discovery, gaps getting filled or extended, wide spreads in options |
 | 9:30–11:00 AM | Trend days often reveal themselves; strongest momentum for many setups |
 | 11:00 AM–12:00 PM | Moves slow; first pullbacks and failed breakouts |
-| 12:00–1:30 PM | Lower participation, tighter ranges, frequent false breaks ("lunch chop") [NEEDS SOURCE: NSE intraday volume profile data] |
+| 12:00–1:30 PM | Lower participation, tighter ranges, frequent false breaks ("lunch chop") |
 | 1:30–3:00 PM | Activity returns as traders position for the close |
 | 3:00–3:30 PM | Square-off flows, intraday positions closed, expiry-day premium crush |
 
@@ -81,7 +82,28 @@ A 34% win rate isn't automatically bad. A trend-following setup with 1:3 reward 
 4. **Cross-check the P&L calendar.** If your red days cluster on specific weekdays, such as expiry Tuesdays, the hourly leak may be concentrated there.
 5. **Ask a sharper question (Pro).** Ticker AI, WickLog's conversational trading assistant, can answer "What was my net P&L on Nifty option trades entered between 12 and 1:30 PM on non-expiry days in the last 60 days?"
 
-[SCREENSHOT: Win rate by hour widget showing a high morning win rate and a dip between 12 PM and 2 PM]
+![Win rate by hour widget, with each bar showing the win rate for trades entered in that hour](/blog/images/win-rate-by-hour-all.png)
+
+### A real example: not every trader has a lunch problem
+
+Here's what the widget showed for one real WickLog account. This trader's worst hour wasn't midday at all:
+
+| Hour | Win rate | Trades | Net P&L |
+| :--- | ---: | ---: | ---: |
+| 14:00 | 76.5% | 17 (13W/4L) | +₹9,218 |
+| 11:00 | 40.9% | 22 (9W/13L) | −₹218 |
+
+Their overall win rate was a healthy 60.83%, which hid the fact that the 11:00 hour was a net loser across 22 trades while 14:00 was their best window. That's a 35-point gap with the same trader, strategies and market. Click any hour in the widget to drill into its trades:
+
+![Drilled-in view of the 14:00 hour with a 76.5% win rate](/blog/images/win-rate-1400.png)
+
+This is why the session table above is a starting hypothesis, not a rule. Measure before you cut a window.
+
+### Analyse any batch of trades you pick
+
+Sometimes the question isn't about an hour but about a specific group of trades, such as last week's breakout entries or every short you took in August. Select those trades on the Trades screen and click **Analyze** to get a mini report for just that selection: win rate, wins and losses, total P&L, average win vs average loss, largest win and loss, and average holding days.
+
+![Selected trades analysis showing stats for four chosen trades](/blog/images/selected-trades-analysis.png)
 
 ### Turn the finding into a rule
 

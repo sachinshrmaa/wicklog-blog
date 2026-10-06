@@ -33,7 +33,7 @@ The maths punishes you twice. Losses are asymmetric: the bigger the hole, the ha
 
 A single −6% day on a ₹5,00,000 account takes roughly six disciplined +1% days to repair. One uncontrolled morning can erase a week or more of careful work.
 
-Most F&O traders also carry costs on top of this. STT, brokerage and slippage don't shrink when you're losing, and high-frequency revenge trades inflate them. [NEEDS SOURCE: SEBI study on share of individual F&O traders posting net losses]
+Most F&O traders also carry costs on top of this. STT, brokerage and slippage don't shrink when you're losing, and high-frequency revenge trades inflate them. That's part of why [SEBI's August 2026 study](https://www.sebi.gov.in/sebi_data/attachdocs/aug-2026/1787233506209.pdf) found that 87.7% of individual F&O traders lost money in FY2025-26.
 
 ## The Breakdown
 
@@ -64,7 +64,7 @@ The cap converts an open-ended loss into a known, survivable one. Here is a hypo
 
 The numbers are illustrative, but the pattern is real: loss size roughly doubles each round of revenge. The cap doesn't make you right. It makes you wrong *cheaply*.
 
-[SCREENSHOT: WickLog day-wise P&L view highlighting a single −6% day against surrounding +0.5% to +1% days]
+{/* TODO screenshot: WickLog day-wise P&L view highlighting a single −6% day against surrounding +0.5% to +1% days */}
 
 ### How to Choose the Number
 
@@ -84,7 +84,7 @@ Calibrating the data-driven version requires your actual trade history. In WickL
 - "On days I lost more than ₹5,000, how did my average lot size change after the first loss?"
 - "How many trades did I take after 1:30 PM on my losing days?"
 
-[SCREENSHOT: Ticker AI answering a question about worst trading days and trade count per day]
+{/* TODO screenshot: Ticker AI answering a question about worst trading days and trade count per day */}
 
 Pair this with WickLog's built-in Position Size and Expectancy calculators to check that your per-trade risk and your daily cap are consistent with each other. If your cap allows only two full-risk losses, your strategy needs to be able to live with that.
 
@@ -98,9 +98,9 @@ A rule you only enforce when you feel calm is not a rule. Make the cap mechanica
 4. **Add friction.** Price alerts at 50% and 80% of your cap give you warnings before the limit, so the stop never feels like a surprise.
 5. **Review it weekly.** Count how many days you hit the cap and whether you actually stopped.
 
-One honest limitation: WickLog is a journal and analytics tool. You import trades after the fact, and it does not block orders or sync live with your broker. It can't enforce the cap for you. What it does is show you, in your own numbers, whether you respected it and what it cost you when you didn't.
+One honest limitation: WickLog is a journal and analytics tool. It analyses trades after they happen, and it never places, blocks or monitors your orders. It can't enforce the cap for you. What it does is show you, in your own numbers, whether you respected it and what it cost you when you didn't.
 
-[SCREENSHOT: WickLog analytics view comparing trades taken before vs. after the first loss of the day]
+{/* TODO screenshot: WickLog analytics view comparing trades taken before vs. after the first loss of the day */}
 
 ### Auditing Whether Your Cap Works
 
@@ -132,7 +132,7 @@ For most retail F&O traders, 1% to 2% of total trading capital is a sensible dai
 
 ### Does WickLog stop me from trading once I hit my daily loss limit?
 
-No. WickLog is a trading journal and analytics tool that works from imported trade data (Zerodha Kite, Groww and Dhan CSV imports); it doesn't place, block or monitor orders in real time. It helps you see how often you broke your limit, what those days cost, and how your behaviour changed after the first loss.
+No. WickLog is a trading journal and analytics tool that works from your synced or imported trades (Zerodha Kite, Dhan, Groww or Angel One); it doesn't place, block or monitor orders in real time. It helps you see how often you broke your limit, what those days cost, and how your behaviour changed after the first loss.
 
 ### How can Ticker AI help me find my blow-up days?
 

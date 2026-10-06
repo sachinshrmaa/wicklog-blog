@@ -11,7 +11,7 @@ author: "Sachin Sharma"
 
 You found Tradervue on a YouTube video by a US day trader. You signed up, went looking for the Zerodha button, and found Interactive Brokers, Schwab and Fidelity instead. Now you are exporting a Kite tradebook, fixing column headers in Excel at 9 PM, and wondering if the "Commission" field is supposed to hold your brokerage, your STT, or all six Indian charges added up by hand.
 
-That friction is why most Indian traders who try a global journal quit it within a month. The tool isn't bad. It just wasn't built for a Bank Nifty weekly-expiry scalper paying 0.15% STT on every option sell.
+That friction is why most Indian traders who try a global journal quit it within a month. The tool isn't bad. It just wasn't built for a Nifty weekly-expiry scalper paying 0.15% STT on every option sell.
 
 This post compares the three journals Indian traders search for most, with the trade-offs stated plainly, including where a global tool is the better pick.
 
@@ -32,7 +32,7 @@ You buy 2 lots of a Nifty weekly call (lot size 65, so 130 quantity) at ₹120 a
 | Gross P&L | (128 − 120) × 130 | **+₹1,040.00** |
 | Brokerage | ₹20 × 2 orders | −₹40.00 |
 | STT | 0.15% × ₹16,640 sell premium | −₹24.96 |
-| Exchange transaction charges | ~0.035% × ₹32,240 premium turnover [NEEDS SOURCE] | −₹11.29 |
+| Exchange transaction charges | 0.03503% (NSE) × ₹32,240 premium turnover | −₹11.29 |
 | SEBI fees | ₹10 per crore of turnover | −₹0.03 |
 | Stamp duty | 0.003% × ₹15,600 buy premium | −₹0.47 |
 | GST | 18% × (brokerage + exchange + SEBI) | −₹9.24 |
@@ -71,7 +71,7 @@ For NSE F&O, the problems stack up:
 - **No NSE symbol logic.** Option symbols like `NIFTY25OCT25000CE` need to be parsed into underlying, expiry, strike and CE/PE before strike-level or expiry-day analysis means anything.
 - **Fees are a number you supply.** You calculate STT, exchange charges and GST per trade from your contract note, or you skip it and look at gross P&L.
 - **The free plan caps you at 30 trades a month.** An active Bank Nifty scalper can cross that in two sessions.
-- **Dollar pricing.** Silver at $29.95/month is several times the cost of an Indian-built journal at today's exchange rate. [NEEDS SOURCE: current USD/INR rate at publish date]
+- **Dollar pricing.** Silver at $29.95/month works out to well over ₹2,500 a month, before forex markup on your card, which is several times the cost of an Indian-built journal.
 
 ### TradesViz: the strongest global option for India, with paywalls where F&O traders need it
 
@@ -81,7 +81,7 @@ The catches for an Indian F&O trader are specific:
 
 - **The free plan is stocks-only.** Options and futures need Pro ($19.99/month) or Platinum.
 - **Auto-sync and AI tools sit on paid plans.** The free tier excludes both.
-- **Zerodha history.** TradesViz's own help article says its Zerodha API sync only returns trades from the current day, so you need to sync every trading day or fall back to file import. [NEEDS SOURCE: re-check TradesViz Zerodha docs before publishing; this may have changed]
+- **Zerodha history.** [TradesViz's own help article](https://www.tradesviz.com/blog/auto-import-zerodha/) says its Zerodha API sync only returns trades from the current day, so you need to sync every trading day or fall back to file import.
 - **Breadth over focus.** Supporting 250+ brokers worldwide is a strength, but it also means Indian-specific behaviour competes for attention with every other market.
 
 ### WickLog: narrower on purpose, built around the Indian contract note
@@ -96,7 +96,7 @@ What that focus gets you:
 - **Fills become trades correctly.** Smart trade matching merges partial fills of one order, then matches buys and sells FIFO per symbol and product type (MIS, CNC, MTF), so scale-outs, shorts, multi-day holds and position flips are handled.
 - **Read-only access.** WickLog reads trades, holdings, positions and margins. It never places, modifies or cancels orders.
 
-[SCREENSHOT: Dashboard "Net profit & charges" widget showing gross P&L, total charges broken down by STT/brokerage/GST, and net P&L for a month of Nifty options trades]
+{/* TODO screenshot: Dashboard "Net profit & charges" widget showing gross P&L, total charges broken down by STT/brokerage/GST, and net P&L for a month of Nifty options trades */}
 
 ## Which Journal Should an Indian Trader Pick?
 
@@ -121,7 +121,7 @@ Spreadsheets get abandoned because logging takes longer than trading. With WickL
 
 On the free plan, export your tradebook from Kite Console or Dhan and drop the file in. Re-importing an overlapping file skips fills already imported, so you can't double-count a trade.
 
-[SCREENSHOT: Sync options dialog showing broker selection, date range, and "open / closed / all" trade filter]
+{/* TODO screenshot: Sync options dialog showing broker selection, date range, and "open / closed / all" trade filter */}
 
 ### 2. Analytics that answer Indian-market questions
 
@@ -132,7 +132,7 @@ Every dashboard widget is free. The ones that matter most for F&O traders:
 - **Mistake pattern detector.** Flags red patterns from closed trades, such as one symbol that keeps losing, a high fast-stop-out rate, or your worst strategy.
 - **Equity curve vs benchmark.** Your cumulative P&L plotted against Nifty 50, Bank Nifty or Sensex, so you know whether active trading beat holding the index.
 
-[SCREENSHOT: Win rate by hour widget showing strong morning win rate and a drop between 12 PM and 2 PM]
+{/* TODO screenshot: Win rate by hour widget showing strong morning win rate and a drop between 12 PM and 2 PM */}
 
 ### 3. An analyst that has read your trades
 

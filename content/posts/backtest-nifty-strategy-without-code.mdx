@@ -41,15 +41,15 @@ Example strategy for this walkthrough:
 
 **Open Backtest, search for the symbol and choose the candle timeframe.** Start with daily candles over several years to get enough trades, then test intraday versions on 15-minute or 1-hour data.
 
-[SCREENSHOT: Backtest page with symbol search showing NIFTY selected and the timeframe dropdown]
+{/* TODO screenshot: Backtest page with symbol search showing NIFTY selected and the timeframe dropdown */}
 
 ### Step 3: Build the entry rule
 
-**Combine conditions from dropdowns.** Each condition compares an indicator (EMA, RSI, VWAP or price) using crosses above, crosses below, >, <, >=, <= or ==, against a number or another indicator. Join conditions with AND or OR, and choose long or short.
+**Combine conditions from dropdowns.** Each condition compares an indicator (EMA, RSI, VWAP or price) using crosses above, crosses below, `>`, `<`, `>=`, `<=` or `==`, against a number or another indicator. Join conditions with AND or OR, and choose long or short.
 
 For the example: `EMA(9) crosses above EMA(21)` AND `RSI(14) > 50`, direction long.
 
-[SCREENSHOT: Entry rule builder with EMA(9) crosses above EMA(21) AND RSI(14) > 50]
+{/* TODO screenshot: Entry rule builder with EMA(9) crosses above EMA(21) AND RSI(14) > 50 */}
 
 ### Step 4: Set exits, risk and sizing
 
@@ -71,7 +71,7 @@ For the example: `EMA(9) crosses above EMA(21)` AND `RSI(14) > 50`, direction lo
 
 Every simulated trade pays Indian charges: brokerage of ₹20 or 0.03% per leg (whichever is lower), STT, exchange transaction charges, SEBI fees, stamp duty and 18% GST. A strategy that only works before charges doesn't work.
 
-[SCREENSHOT: Backtest results panel showing net return, max drawdown, profit factor, Sharpe ratio and the low-sample warning]
+{/* TODO screenshot: Backtest results panel showing net return, max drawdown, profit factor, Sharpe ratio and the low-sample warning */}
 
 ### Step 6: Compare against simply holding the index
 
@@ -85,7 +85,7 @@ Every simulated trade pays Indian charges: brokerage of ₹20 or 0.03% per leg (
 
 **Save each run, change exactly one thing, and compare saved runs side by side.** For example: same rules with a 1.5% stop instead of 1%, or the same strategy on Bank Nifty. Changing three things at once tells you nothing about which change mattered.
 
-[SCREENSHOT: Side-by-side comparison of two saved backtest runs]
+{/* TODO screenshot: Side-by-side comparison of two saved backtest runs */}
 
 ## Common Mistakes & Troubleshooting
 

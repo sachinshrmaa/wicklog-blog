@@ -2,6 +2,7 @@
 title: "Position Size Calculator: Nifty & Bank Nifty Lots, 1% Rule"
 description: "Size Nifty and Bank Nifty lots with the 1% risk rule: formulas, option and futures examples by account size, and the lot-size trap small accounts miss."
 date: "2026-10-05"
+updated: "2026-10-06"
 slug: "position-size-nifty-bank-nifty-lots-1-percent-rule"
 tags: ["position-sizing", "risk-management", "nifty", "bank-nifty", "fno-trading"]
 author: "Sachin Sharma"
@@ -17,7 +18,14 @@ Lot sizing in India has a quirk that global position-sizing guides miss: you can
 
 **Most retail traders pick their lot count first and their stop-loss second, which makes risk per trade random.** The same "2 lots" can risk ₹1,300 on one trade and ₹9,000 on the next, depending on where the stop happens to be.
 
-The fix is to reverse the order: decide the rupee risk, find the stop the chart gives you, and let the math produce the lot count.
+The fix is to reverse the order:
+
+1. **Find your entry.**
+2. **Find your stop-loss.** This defines your risk per unit, not your position size.
+3. **Decide your rupee risk** for the trade (at most 1% of capital).
+4. **Back into the lot count** from those numbers.
+
+Conviction can change how likely you think the trade is to work. It should never change how much of your account is on the line.
 
 Why 1%? Because losing streaks are normal, and recovery is asymmetric.
 
@@ -38,7 +46,7 @@ Ten losses in a row sounds rare. For a strategy with a 40% win rate, any given r
 - **Capital:** the money in your trading account, not your net worth.
 - **Risk %:** 0.5–1% for most active traders; 2% is an upper limit.
 - **Stop distance:** entry price minus stop price, in premium points for options or index points for futures.
-- **Lot size:** NSE currently sets **Nifty at 65** and **Bank Nifty at 30** units per lot, effective from the January 2026 series. [NEEDS SOURCE: confirm against NSE's latest lot size circular before publishing; NSE revises these periodically]
+- **Lot size:** NSE currently sets **Nifty at 65** and **Bank Nifty at 30** units per lot, effective from the January 2026 series. NSE revises lot sizes periodically, so check the current contract specification before you size a trade.
 
 ### Example 1: Nifty option buyer, ₹5 lakh account
 
@@ -94,6 +102,20 @@ What you should not do is trade one lot and pretend it's 1%.
 
 Option premiums can gap through your stop, especially around big moves or close to expiry. Size assuming some slippage, and treat the formula's output as a ceiling.
 
+## Position Size Tells You What You Can Lose; Risk-Reward Tells You If It's Worth It
+
+**A well-sized trade with poor risk-reward is still a losing habit, just a slower one.** Your reward-to-risk ratio sets the win rate you need just to break even:
+
+| Reward : risk | Breakeven win rate |
+| :--- | ---: |
+| 1 : 1 | 50.0% |
+| 1 : 2 | 33.3% |
+| 1 : 3 | 25.0% |
+
+Most discretionary traders don't know their actual average reward-to-risk. If you're taking 1:1 setups, you need to win half your trades just to tread water, and that's before charges.
+
+![WickLog's free risk-reward calculator showing a 1:3 setup with a 25% breakeven win rate](/blog/images/Risk_Per_Trade.png)
+
 ## How to Check Whether You Actually Size This Way
 
 **Compare your planned risk with your actual average loss; if the average loss is bigger, your sizing or your stop discipline is leaking.** This is where a journal earns its keep.
@@ -103,7 +125,7 @@ Option premiums can gap through your stop, especially around big moves or close 
 - **Watch average loss vs average win.** The Key metrics widget shows both, free. If your average loss is 1.8× your average win, your stops are moving.
 - **Ask the question directly.** On Pro, Ticker AI, WickLog's conversational trading assistant, can answer "How often did my loss exceed my logged stop distance last month, and by how much?"
 
-[SCREENSHOT: Position size calculator with ₹5,00,000 capital, 1% risk and a ₹20 stop, showing 3 lots]
+{/* TODO screenshot: Position size calculator with ₹5,00,000 capital, 1% risk and a ₹20 stop, showing 3 lots */}
 
 ## Key Takeaways
 

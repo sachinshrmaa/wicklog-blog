@@ -2,13 +2,13 @@
 title: "How to Connect Dhan to WickLog"
 description: "Import your Dhan trades and open positions into WickLog in one click via secure, read-only OAuth login. Full setup guide, troubleshooting, and FAQ inside."
 date: "2026-08-01"
+updated: "2026-10-06"
 slug: "connect-dhan-wicklog"
-tags: ["Dhan", "Guide"]
+tags: ["dhan", "guide"]
 author: "Sachin Sharma"
-# coverImage: "/blog/images/your-cover.jpg"   ← optional, uncomment to use
 ---
 
-> **TL;DR:** Connect your Dhan account to WickLog in 3 steps using a secure, read-only login — no credentials are stored. Once connected, import trades for any timeframe, including open positions, in one click, and they'll flow straight into your Dashboard, Journals, and Ticker AI.
+> **TL;DR:** Connect your Dhan account to WickLog in 4 steps using a secure, read-only login — no credentials are stored. Once connected, import trades for any timeframe, including open positions, in one click, and they'll flow straight into your Dashboard, Journals, and Ticker AI.
 
 If you're logging trades manually from your Dhan console, connecting it to WickLog turns that into a one-click import. This guide walks through the full setup — connecting your account, importing trades, and where those trades show up once they're in.
 
@@ -23,21 +23,22 @@ If you're logging trades manually from your Dhan console, connecting it to WickL
 ### Step 1: Go to the Connect Demat screen
 From your WickLog dashboard, navigate to the **Connect Demat** screen. This is where all supported broker connections live.
 
-![WickLog Dashboard](/blog/images/dashboard-connect-demat.png)
+![The Connect Demat screen in WickLog](/blog/images/dashboard-connect-demat.png)
 
 
 ### Step 2: Connect your Dhan account
 Click **Connect** on the Dhan card. This takes you to Dhan's own official login page — not a WickLog-branded screen — where you'll enter your Dhan credentials and complete TOTP validation directly with Dhan. WickLog never sees or stores this login information; it only receives **read access to your tradebook** through this login flow. On success, you're redirected back to the WickLog Trades screen.
 
-![WickLog Connect Demat](/blog/images/connect-demat-dhan.png)
+![Connecting the Dhan card](/blog/images/connect-demat-dhan.png)
 
 ### Step 3: Import your trades
-On the Trades screen, click **Import from Demat** dropdown and select **Dhan** in the top-right corner. 
-![WickLog Trades ](/blog/images/import-dhan-trades.png)
+On the Trades screen, open the **Import from Demat** dropdown in the top-right corner and select **Dhan**.
 
-A popup will ask you to select what you want to import — past trades, current trades, or your open positions.
+![Selecting Dhan from the Import from Demat dropdown](/blog/images/import-dhan-trades.png)
 
-![WickLog Trades ](/blog/images/import-trades-modal.png)
+An **Import Options** popup asks what to bring in: pick a **Trade Type** (all, open or closed trades) and a **From/To** date range, then click **Import Trades**.
+
+![The Import Options popup with trade type and date range](/blog/images/import-trades-modal.png)
 
 
 ### Step 4: Confirm your trades have landed
@@ -51,7 +52,7 @@ Like WickLog's other broker connections, your Dhan session expires and needs to 
 
 - **"Connect" doesn't redirect anywhere** — check for a popup blocker; Dhan's login opens as part of the same flow but browser extensions can interfere.
 - **TOTP rejected** — make sure the code is current; the validation window is short, so a delay of even a few seconds can invalidate it.
-- **Open positions not showing** — make sure you selected "open positions" specifically in the import popup rather than a closed date range.
+- **Open positions not showing** — make sure **Trade Type** is set to open (or all) trades in the import popup, not closed trades.
 - **Trades not showing on Dashboard/Journals after import** — give it a moment to sync, then refresh; if trades appear on the Trades screen but not elsewhere, that's a sync delay, not a failed import.
 - **Session expired mid-use** — this isn't an error, it's the read-only session timing out. Just reconnect from the Connect Demat screen and re-import.
 
@@ -61,15 +62,17 @@ Like WickLog's other broker connections, your Dhan session expires and needs to 
 No. The connection is strictly read-only — WickLog can fetch your tradebook and positions but cannot place, modify, or cancel orders on your behalf.
 
 **Can I import my open positions, not just closed trades?**
-Yes. The import popup lets you pull past trades, current trades, or your open positions specifically.
+Yes. Set **Trade Type** to open trades in the import popup to pull just your open positions, or choose all trades to get everything in the date range.
 
 **Why do I have to reconnect Dhan so often?**
 Sessions expire by design. It's a deliberate security trade-off: a short-lived, read-only session reduces the window in which your account data could be exposed, compared to a permanent stored connection.
 
 **Is Dhan import available on the free plan?**
-This guide assumes a WickLog Pro account, since Dhan import currently requires Pro.
+The free plan covers manual journaling (50 trades and 50 journal entries a month), Zerodha and Dhan tradebook file imports, and every analytics widget. One-click Dhan sync is a Pro feature (₹349/month or ₹2,250/year).
 
 
 ## Try It
 
-Connect your Dhan account and see your full trade history, including open positions, in WickLog in under two minutes — [connect Dhan now](https://www.wicklog.in/).
+Connect your Dhan account and see your full trade history, including open positions, in WickLog in under two minutes — [connect Dhan now](https://wicklog.in/auth).
+
+Using another broker? See the guides for [Zerodha Kite](/connect-zerodha-kite-wicklog), [Groww](/groww-trading-journal-auto-import) and [Angel One](/angel-one-trading-journal-smartapi).
