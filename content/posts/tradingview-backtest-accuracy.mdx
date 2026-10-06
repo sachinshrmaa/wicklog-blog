@@ -1,0 +1,145 @@
+---
+title: "TradingView Backtest Accuracy: Why Net Profits Lie"
+description: "Learn why TradingView backtests overstate net profit once costs, slippage and lot sizes hit. A reality check for Nifty and BankNifty F&O strategy traders."
+date: "2026-10-06"
+slug: "tradingview-backtest-accuracy"
+tags: ["backtesting", "trading-journal", "indian-stock-market", "options-trading", "risk-management"]
+author: "Priyanshu Verma"
+---
+
+**TL;DR:** Most TradingView backtests overstate net profit because default settings assume zero costs, perfect fills and unlimited capital. Real Indian F&O trading adds brokerage, STT, exchange charges, GST, slippage and fixed lot sizes. Adding realistic costs often shrinks a backtested profit sharply, and sometimes flips it to a loss.
+
+Your strategy shows a clean equity curve on TradingView: 380 trades, ₹1.4 lakh net profit, a profit factor above 1.6. You go live on Nifty. Three weeks later you are down ₹18,000 and cannot explain why the same logic behaves differently. The strategy didn't change. The accounting did.
+
+## The Root Problem
+
+A TradingView backtest overstates profit because the Strategy Tester simulates an idealised market unless you explicitly configure otherwise. It is a hypothesis generator, not a P&L statement.
+
+Six gaps separate a backtest from your contract notes:
+
+1. **Zero costs by default.** Commission and slippage start at 0 unless you set them in the strategy's properties. Every trade is free.
+2. **Perfect fills.** The tester fills at the bar's price on its own logic. Real orders face spreads, thin option books and queue position.
+3. **Wrong instrument.** Many backtests run on the Nifty index or a continuous futures chart. You can't trade the index, and options have premiums, theta and strikes the chart doesn't model.
+4. **Unrealistic sizing.** Percent-of-equity sizing allows fractional or arbitrary quantities. Real F&O trades in fixed lots, and your capital may not stretch to the lot count the test assumed.
+5. **Overfitting.** A strategy tuned on the same data it is judged on will look excellent on that data and mediocre on the next. [NEEDS SOURCE: academic or practitioner study on parameter-optimisation overfitting in retail backtests]
+6. **Intrabar and data limits.** Bar-based testing can't know whether a stop or a target was hit first inside a candle, and the available history may be shorter or thinner than you think. Check your plan's data depth before trusting a long-run result.
+
+Of these, costs are the easiest to quantify and the most often ignored.
+
+## The Breakdown
+
+Costs, fills and sizing each eat into backtested profit in different ways. The sections below put numbers on them, then show how to reconcile a backtest against what you actually did.
+
+### How Costs Erase a Thin Edge
+
+Trading costs decide the result for any strategy whose average trade is small relative to the charges, which describes most intraday index strategies. A strategy with a gross edge of ₹300 per round trip needs net edge after costs to survive.
+
+For an options trade, the main cost layers are:
+
+| Cost | Applies to | Note |
+|---|---|---|
+| Brokerage | Per executed order | Flat per order at many discount brokers; check your broker's current rate card |
+| STT | Sell side on options (on premium) | Rates change with Union Budgets; verify the current rate |
+| Exchange transaction charges | Both sides, on turnover | Varies by segment; check the NSE circular |
+| SEBI turnover fee | Both sides | Very small, but not zero |
+| GST | On brokerage and transaction charges | Charged on fees, not on the trade value |
+| Stamp duty | Buy side | Check the current rate |
+| Slippage | Every market or stop order | Not on any contract note; it shows up as a worse fill price |
+
+[NEEDS SOURCE: current STT, exchange transaction charge, SEBI fee and stamp duty rates for NSE index options, from the exchange or broker charge calculator]
+
+Here is an illustrative example. The charge figures are placeholders to show the mechanics, so replace them with your broker's current numbers before publishing.
+
+| Metric (hypothetical Nifty options strategy) | Backtest default | After realistic costs |
+|---|---|---|
+| Trades | 380 | 380 |
+| Gross profit per trade | ₹420 | ₹420 |
+| Brokerage + taxes + charges per round trip | ₹0 | ₹150 |
+| Slippage per round trip (entry and exit) | ₹0 | ₹180 |
+| **Net per trade** | **₹420** | **₹90** |
+| **Net profit over 380 trades** | **₹1,59,600** | **₹34,200** |
+
+A modest-looking ₹330 of friction per round trip removed about 79% of the profit. If your slippage is ₹300 instead of ₹180, net per trade drops to −₹30 and the strategy loses money on paper. This is why a high-frequency strategy with a thin edge is the first to break.
+
+Quick formula to run yourself:
+
+Use WickLog's Expectancy calculator, which takes your win rate and average win and loss, to test whether the edge survives when you subtract friction from each average.
+
+### Slippage, Lot Sizes and Expiry-Day Reality
+
+Slippage is largest exactly when strategies fire hardest: at the open, around news, and on weekly expiry afternoons when option premiums gap in a few ticks. A backtest filling a stop at the exact trigger price will never see this.
+
+Three Indian-market specifics that backtests rarely capture:
+
+- **Fixed lot sizes.** Nifty and Bank Nifty options trade in exchange-defined lots, and lot sizes have been revised by the exchange over the years. [NEEDS SOURCE: current NSE lot sizes for Nifty and Bank Nifty] A strategy that "scales into 2.5 lots" doesn't exist in live trading.
+- **Margin and capital.** A test that holds multiple lots through a drawdown may need more margin than your account has. In live trading you get a rejection or forced square-off, not a clean equity curve.
+- **Wide spreads in far strikes.** A backtest on the index can't tell you that your target strike had a ₹4 spread and almost no depth at 9:16 AM.
+
+[SCREENSHOT: TradingView Strategy Tester properties panel showing commission and slippage fields set to zero]
+
+### The Checks That Make a Backtest Believable
+
+A backtest becomes credible when it survives costs, an out-of-sample test and a comparison against live results. Run these checks before risking capital:
+
+1. **Set commission and slippage honestly.** Enter per-order costs and a slippage value in the strategy properties, then rerun. If net profit collapses, you found the problem for free.
+2. **Stress the costs.** Rerun with slippage doubled. A robust strategy bends. A fragile one breaks.
+3. **Split your data.** Build the rules on one period and test on a period you never looked at. If results only hold in-sample, you've fitted noise.
+4. **Check trade count and sample size.** A strategy with 30 trades is an anecdote.
+5. **Paper-trade or trade 1 lot live.** Small live size is the cheapest test of real fills.
+6. **Reconcile.** Compare the live results to what the backtest predicted for the same days.
+
+### Reconciling a Backtest with Your Real Trades
+
+Reconciliation means comparing what the backtest said you would earn against what your broker says you actually earned. The gap is your real cost of execution.
+
+WickLog includes a backtesting module, currently in beta, but the more useful move here is the live-versus-expected comparison on your own data. Import your Zerodha Kite, Groww or Dhan trade CSV into WickLog, then use Ticker AI, WickLog's conversational trading assistant, to ask:
+
+- "What was my average P&L per trade over the last 30 days, and how does it split by weekday?"
+- "How much did I pay in total charges versus my gross P&L this month?"
+- "What was my average P&L on trades opened in the first 15 minutes after 9:15 AM versus later in the day?"
+
+[SCREENSHOT: Ticker AI answering a question about total charges versus gross P&L for the month]
+
+Whether charges appear in your analysis depends on what your broker's CSV includes, so check the export columns first. WickLog works on imported trades after the session. It doesn't place, block or monitor orders live.
+
+Here is how the two views compare:
+
+| | TradingView backtest | Your broker's trade history in WickLog |
+|---|---|---|
+| Fills | Simulated | Actual executed prices |
+| Costs | Zero unless configured | Reflected in your real results where the CSV includes them |
+| Lot sizing | Assumed by settings | What you actually traded |
+| Emotional errors | None | Included |
+| Best use | Generating and filtering ideas | Measuring what really happened |
+
+If your live expectancy per trade runs well below the backtested figure, don't assume the strategy "stopped working." First check the three suspects in order: costs, slippage, and whether you executed the rules as written.
+
+## Key Takeaways
+
+- TradingView's Strategy Tester assumes zero commission and slippage until you configure it, so default net profit is not realistic profit.
+- Thin-edge strategies die first. A few hundred rupees of friction per round trip can erase most of the profit, as in the ₹1.6 lakh to about ₹34,000 example above.
+- Test on the instrument you will actually trade, in real lot sizes, with margin you actually have.
+- Always stress-test with doubled slippage and an out-of-sample period before going live.
+- Compare live results with the backtest. The gap shows you whether the problem is the strategy or your execution.
+
+## Frequently Asked Questions
+
+### Are TradingView backtests accurate for Indian F&O strategies?
+
+Not out of the box. The Strategy Tester assumes zero commission and slippage by default and doesn't model option premiums, fixed lot sizes or margin unless you set them up. Treat the result as a screening tool for ideas, then validate with realistic costs and small live trades.
+
+### How do I add brokerage and STT to a TradingView backtest?
+
+Open the strategy's properties and enter commission and slippage values, then rerun the test. Use your broker's current charge calculator to estimate per-trade costs, including STT, exchange charges, GST and stamp duty. Include a slippage figure as well, because slippage doesn't appear on any contract note.
+
+### How can I compare my real trades with my backtest results?
+
+Import your Zerodha Kite, Groww or Dhan trade CSV into WickLog and compare your actual average P&L per trade with the figure your backtest predicted. Ticker AI lets you ask plain-language questions about your imported data, such as average P&L by time of day or total charges against gross P&L, subject to what your broker's CSV includes. The difference between the two numbers is your real execution cost.
+
+---
+
+## Measure What Your Strategy Actually Earns
+
+Your broker's trade history already holds the number your backtest can't give you: what the strategy earned after real fills, real lots and real charges. Import your CSV and compare it to the backtest, then decide whether the edge is real.
+
+[Compare Your Backtest to Real Trades Free →](https://wicklog.in)
