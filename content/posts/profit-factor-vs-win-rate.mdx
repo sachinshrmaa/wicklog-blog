@@ -1,0 +1,134 @@
+---
+title: "Profit Factor vs Win Rate: What Indian Traders Should Track"
+description: "Why profit factor beats win rate for Indian F&O traders: the formula, what a good number looks like, how STT and brokerage drag it down, and setup ranking."
+date: "2026-10-05"
+slug: "profit-factor-vs-win-rate-trading"
+tags: ["profit-factor", "trading-metrics", "fno-trading", "trading-journal", "indian-stock-market"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Profit factor is total profit from winning trades divided by total loss from losing trades. Above 1 you make money, below 1 you lose, whatever your win rate. Calculate it after charges: for active Nifty option traders, STT, brokerage and GST can drop a profit factor of 1.4 to below 1.2.
+
+"I win 65% of my trades." It's the most common way Indian traders describe themselves, and it says almost nothing about whether they make money.
+
+Win rate is a frequency. It counts how often you're right and ignores how much each right and wrong decision was worth. Profit factor, the ratio of what you made to what you lost, captures the second half. If you're only going to watch one number on your journal's dashboard, watch this one.
+
+## The Root Problem: Win Rate Rewards the Wrong Behaviour
+
+**Optimising for win rate pushes traders to book profits early and hold losers longer, which raises win rate and lowers profitability at the same time.** Every early exit adds a small win; every stop you move adds a loss that's bigger than planned.
+
+In F&O this shows up clearly. A trader exits Nifty calls at ₹8–10 of profit "before it reverses", but holds puts through a ₹25 drop hoping for a bounce. Their win rate climbs into the 60s. Their account doesn't.
+
+## The Breakdown: Profit Factor, Explained With Indian Numbers
+
+### The formula
+
+**Profit factor = sum of all winning trades ÷ sum of all losing trades (as a positive number).** Use net P&L, after all charges.
+
+You can also write it from averages:
+
+**Profit factor = (Win rate × Average win) ÷ (Loss rate × Average loss)**
+
+Reading it:
+
+| Profit factor | Meaning |
+| :--- | :--- |
+| Below 1.0 | Losing money overall |
+| 1.0–1.2 | Barely profitable; vulnerable to any cost increase or bad month |
+| 1.2–1.5 | Workable edge for an active trader |
+| 1.5–2.0 | Strong edge |
+| Above 2.0 | Excellent, or a sample too small to trust; check trade count |
+
+### Three setups, one trader
+
+*Hypothetical month for a Nifty options trader, all figures net of charges.*
+
+| Setup | Trades | Win rate | Avg win | Avg loss | Profit factor | Net P&L |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Opening range breakout | 60 | 63% | ₹1,100 | ₹1,500 | 1.27 | +₹8,800 |
+| Trend pullback | 40 | 38% | ₹3,200 | ₹1,100 | 1.75 | +₹20,500 |
+| Expiry-day cheap OTM buys | 30 | 20% | ₹4,000 | ₹1,200 | 0.83 | −₹4,800 |
+| **All trades** | **130** | **45%** | | | **1.27** | **+₹24,500** |
+
+Three things stand out:
+
+- **The highest win-rate setup is the weakest profitable one.** Opening range breakouts win 63% of the time but lose more per loser than they make per winner.
+- **The lowest win-rate profitable setup makes the most.** Trend pullbacks win only 38% of the time and produce 84% of the month's profit.
+- **The "lottery" setup loses money.** Expiry-day out-of-the-money buys feel exciting when they hit, but at a profit factor of 0.83, they're a cost centre.
+
+Ranked by win rate, this trader would cut trend pullbacks first. Ranked by profit factor, they'd cut expiry lottery tickets. Only the second is right.
+
+### How charges drag profit factor down
+
+**Charges reduce every winner and enlarge every loser, so they hit profit factor twice.** For a 2-lot Nifty option round trip on Zerodha, charges come to about ₹86, including 0.15% STT on the premium sold since April 2026.
+
+Take 100 trades with 45 winners:
+
+| | Gross | After ₹86 charges per trade |
+| :--- | ---: | ---: |
+| Total from winners | ₹60,000 | ₹56,130 |
+| Total from losers | ₹43,000 | ₹47,730 |
+| **Profit factor** | **1.40** | **1.18** |
+
+A comfortable-looking 1.40 becomes a thin 1.18. A journal or broker screen that reports gross P&L shows you the first number; your bank balance reflects the second.
+
+### Profit factor and expectancy: use both
+
+**Profit factor tells you the quality of the edge; expectancy tells you its size per trade.** A 1.8 profit factor on ₹200 trades makes less money than a 1.4 on ₹3,000 trades. Track both, and check the trade count. See our [trading expectancy formula](https://wicklog.in/blog/trading-expectancy-formula-indian-traders) guide for the companion calculation.
+
+### Don't forget drawdown
+
+Two strategies with the same profit factor can feel completely different to trade. One grinds up steadily; the other has a 25% drawdown in the middle. **Max drawdown**, the largest peak-to-trough fall in your equity curve, tells you whether you could actually hold on through the bad stretch.
+
+## How to Use Profit Factor in Your Trading
+
+**Calculate profit factor per setup, after charges, on at least 30–50 trades, and act on the ranking.**
+
+1. **Tag every trade with its setup.** Without tags, you only get one blended number.
+2. **Wait for a meaningful sample.** Under 30 trades per setup, one big winner can flip the result.
+3. **Cut or fix anything below 1.0.** Change one rule, or stop trading it.
+4. **Size up only what's above ~1.3.** Increase size on proven setups, not on your favourite ones.
+5. **Re-check after cost changes.** The April 2026 STT increase pushed some thin scalping setups below 1.0 without the trader changing anything.
+
+## Where to See It in WickLog
+
+**WickLog's Performance breakdown widget shows profit factor, max drawdown, expectancy and best and worst trade, all calculated from net P&L after Indian charges.** It's free.
+
+- **Key metrics widget:** win rate, average win and average loss, side by side, so you can see the payoff behind the win rate.
+- **Strategy edge radar:** ranks your strategies by net edge, with win rate and average P&L per setup.
+- **Equity curve:** cumulative P&L over time, optionally against Nifty 50, Bank Nifty or Sensex, so you can see drawdowns, not just totals.
+- **Ticker AI (Pro):** ask "Rank my strategy tags by profit factor after charges for the last 90 days, and show the trade count for each." Ticker AI, WickLog's conversational trading assistant, answers from your own trades.
+
+[SCREENSHOT: Performance breakdown widget showing profit factor 1.27, max drawdown and expectancy]
+
+[SCREENSHOT: Strategy edge radar comparing three setups by net edge and win rate]
+
+## Key Takeaways
+
+- **Profit factor = total wins ÷ total losses,** always after charges. Above 1 makes money; below 1 doesn't.
+- **High win rate can hide a weak edge** when winners are smaller than losers.
+- **Charges hit profit factor twice:** smaller winners, bigger losers. A 1.4 gross can be a 1.18 net.
+- **Rank setups by profit factor, not win rate,** and only after 30–50 trades each.
+- **Pair it with expectancy and max drawdown** to judge size and survivability.
+
+## Frequently Asked Questions
+
+### What is a good profit factor in trading?
+
+After charges, a profit factor between 1.2 and 1.5 is a workable edge for an active trader, and 1.5–2.0 is strong. Below 1.0 means you're losing money overall. Anything above 2.0 deserves a check on sample size before you trust it.
+
+### Is win rate or profit factor more important?
+
+Profit factor is more important, because it accounts for how much you win and lose, not just how often. A 35% win rate can be highly profitable with large winners, and a 70% win rate can lose money if losers are much bigger than winners.
+
+### Does WickLog calculate profit factor automatically?
+
+Yes. WickLog's free Performance breakdown widget shows profit factor from your net P&L after brokerage, STT, exchange fees, SEBI fees, stamp duty and GST, and the Strategy edge radar compares your setups.
+
+---
+
+## Rank Your Setups by What They Actually Earn
+
+Your win rate is the number you remember. Your profit factor is the number that pays. Import last month's Zerodha or Dhan tradebook and see which setups earn their place.
+
+[See Your Profit Factor Free →](https://wicklog.in)

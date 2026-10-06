@@ -1,0 +1,124 @@
+---
+title: "Win Rate by Hour: Is the Lunch Chop Eating Your Profits?"
+description: "Indian intraday traders: measure win rate and net P&L by hour from 9:15 AM to 3:30 PM IST, find your losing window, and stop handing morning profits back."
+date: "2026-10-05"
+slug: "win-rate-by-hour-intraday-trading-india"
+tags: ["intraday-trading", "trading-journal", "nifty", "overtrading", "trading-psychology"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Many Indian intraday traders make money in the first hour after 9:15 AM IST and give it back between noon and 1:30 PM. Splitting your win rate and net P&L by entry hour shows whether that's you. If one window loses consistently over 50+ trades, trading less in it is usually the cheapest edge you'll ever find.
+
+It's 9:52 AM. You caught the opening move in Nifty, booked ₹8,000, and the day is made. By 1:15 PM you've taken six more trades in a market that hasn't gone anywhere for two hours, and you're up ₹1,200.
+
+Nothing went dramatically wrong. You just kept trading after your edge stopped showing up. Most traders never notice because their P&L is reported per day, not per hour.
+
+## The Root Problem: Your Edge Has Business Hours, Your Trading Doesn't
+
+**Intraday setups depend on volatility and participation, both of which change through the trading day, but most traders apply the same rules from 9:15 AM to 3:30 PM.** A breakout strategy that works when volume is heavy fails repeatedly in a quiet, range-bound market.
+
+A typical NSE cash and F&O session (IST) has distinct phases:
+
+| Window | What usually happens |
+| :--- | :--- |
+| 9:15–9:30 AM | Opening price discovery, gaps getting filled or extended, wide spreads in options |
+| 9:30–11:00 AM | Trend days often reveal themselves; strongest momentum for many setups |
+| 11:00 AM–12:00 PM | Moves slow; first pullbacks and failed breakouts |
+| 12:00–1:30 PM | Lower participation, tighter ranges, frequent false breaks ("lunch chop") [NEEDS SOURCE: NSE intraday volume profile data] |
+| 1:30–3:00 PM | Activity returns as traders position for the close |
+| 3:00–3:30 PM | Square-off flows, intraday positions closed, expiry-day premium crush |
+
+These are tendencies, not laws. Your numbers are the only ones that matter, and they can differ completely from this table. That's why you measure.
+
+### Why the midday window costs more than it looks
+
+Three effects stack up in a slow market:
+
+- **Lower win rate.** Breakout and momentum setups fail more often when there's no follow-through.
+- **More trades.** Boredom and the urge to "make back" a small loss push trade count up.
+- **Charges on every trade.** Each Nifty option round trip of 2 lots costs roughly ₹85 in brokerage, STT (0.15% on the premium sold since April 2026), exchange fees, stamp duty and GST. Ten extra midday trades a week is over ₹3,000 a month in charges alone.
+
+## The Breakdown: Reading Your Win Rate by Hour
+
+**Group closed trades by entry hour, then compare trade count, win rate and net P&L after charges for each window.** Net P&L is the column that decides; win rate explains why.
+
+### An illustrative month
+
+*The following is a hypothetical Nifty options trader, not a real account.* 180 trades in a month, net of charges:
+
+| Entry window | Trades | Win rate | Net P&L |
+| :--- | ---: | ---: | ---: |
+| 9:15–10:00 AM | 52 | 56% | +₹21,400 |
+| 10:00–11:00 AM | 38 | 50% | +₹6,200 |
+| 11:00 AM–12:00 PM | 27 | 41% | −₹4,800 |
+| 12:00–1:30 PM | 41 | 34% | −₹14,900 |
+| 1:30–3:30 PM | 22 | 45% | −₹1,300 |
+| **Total** | **180** | **46%** | **+₹6,600** |
+
+Read it the way you'd read a P&L statement for a business:
+
+- **The first 105 minutes made ₹27,600.** That is the actual edge.
+- **Everything after 11 AM lost ₹21,000.** The trader worked six hours to keep a quarter of the morning's profit.
+- **The 12:00–1:30 PM window alone took 23% of all trades** and lost more than the 10–11 AM window made.
+
+Remove the midday window and the month goes from +₹6,600 to **+₹21,500**, with 41 fewer trades and roughly ₹3,500 less in charges. Stop trading after 11 AM entirely and it's +₹27,600.
+
+### Don't over-read small samples
+
+**Treat an hourly bucket as meaningful only after roughly 30–50 trades in it.** With 8 trades in the 3 PM window, one lucky expiry trade can flip the result. Look at 2–3 months together before you change your rules, and compare like with like: expiry Tuesdays (Nifty's weekly expiry) behave differently from other days.
+
+### Check win rate and payoff together
+
+A 34% win rate isn't automatically bad. A trend-following setup with 1:3 reward to risk is profitable at 34%. The midday problem in the example is a low win rate *and* small winners: range-bound markets cut targets short while stops still get hit in full. Compare average win and average loss within each window, not just the win rate.
+
+## How to Measure It in WickLog
+
+**WickLog's free Win rate by hour widget shows win rate and P&L by entry hour, using the trade times from your broker tradebook or manual entries.** No spreadsheet, pivot table or formula needed.
+
+1. **Get your trades in with timestamps.** Import your Zerodha or Dhan tradebook (free) or sync on Pro; execution times come with the data. For manual entries, fill in the entry time.
+2. **Set a date range of 2–3 months** on the dashboard so each hour has enough trades.
+3. **Read the Win rate by hour widget** for the window where win rate and P&L both drop.
+4. **Cross-check the P&L calendar.** If your red days cluster on specific weekdays, such as expiry Tuesdays, the hourly leak may be concentrated there.
+5. **Ask a sharper question (Pro).** Ticker AI, WickLog's conversational trading assistant, can answer "What was my net P&L on Nifty option trades entered between 12 and 1:30 PM on non-expiry days in the last 60 days?"
+
+[SCREENSHOT: Win rate by hour widget showing a high morning win rate and a dip between 12 PM and 2 PM]
+
+### Turn the finding into a rule
+
+Data only helps if it changes behaviour. Write the rule into a **playbook**, WickLog's place to document each setup with its conditions, and link the trades that follow it:
+
+- "Breakout setup: entries only between 9:30 and 11:00 AM."
+- "After 12:00 PM: only A+ setups, maximum 2 trades."
+- "Expiry Tuesday: no new option buys after 2:30 PM."
+
+Then check the same widget a month later. A rule you can't verify in your data is just a resolution.
+
+## Key Takeaways
+
+- **Measure P&L by entry hour, not by day.** Daily P&L hides a profitable morning and an unprofitable afternoon inside the same number.
+- **The midday window costs three ways:** lower win rate, more trades, and charges on every one of them.
+- **Decide on net P&L after charges,** using at least 30–50 trades per window and 2–3 months of data.
+- **Cutting a losing window is often the cheapest edge available:** no new strategy, just fewer bad trades.
+- **Write it down and re-check it.** A playbook rule plus the same widget next month tells you whether it worked.
+
+## Frequently Asked Questions
+
+### What is the best time to trade intraday in the Indian stock market?
+
+There's no universal best time; it depends on your setup. Many momentum traders find their best results between about 9:30 and 11:00 AM IST, and their worst in the 12:00–1:30 PM range, but you should confirm it with your own win rate and net P&L by hour across at least 2–3 months.
+
+### How do I calculate my win rate by hour?
+
+Group your closed trades by entry hour and, for each hour, divide winning trades by total trades. Compare net P&L after charges alongside it. WickLog's free Win rate by hour widget does this automatically from your imported or logged trades.
+
+### Is WickLog free to use for Indian traders?
+
+Yes. The free plan includes all dashboard widgets, including Win rate by hour and the P&L calendar, plus Zerodha and Dhan tradebook imports and 50 manual trades a month. Pro at ₹349/month adds broker auto-sync and Ticker AI.
+
+---
+
+## Find the Hours That Cost You Money
+
+Your tradebook already has every entry time. Import last month's trades, open Win rate by hour, and see which window is quietly paying for your losses.
+
+[Check Your Win Rate by Hour Free →](https://wicklog.in)

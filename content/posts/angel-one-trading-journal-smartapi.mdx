@@ -1,0 +1,144 @@
+---
+title: "Angel One Trading Journal: Sync SmartAPI Trades to WickLog"
+description: "Angel One traders: connect free SmartAPI credentials to WickLog and sync daily trades, holdings, positions and margins, with net P&L after charges."
+date: "2026-10-05"
+slug: "angel-one-trading-journal-smartapi"
+tags: ["angel-one", "trading-journal", "smartapi", "fno-trading", "broker-sync"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Angel One traders can sync trades into WickLog using SmartAPI, Angel One's free trading API. You enter an API key, client code, PIN and TOTP secret once, then sync holdings, positions, margins and the current day's tradebook. Angel One's API doesn't provide older trade history, so sync every trading day. It needs WickLog Pro.
+
+Angel One's app tells you what happened today. It doesn't tell you that your Bank Nifty trades have lost money four Mondays out of five, or that charges took 35% of last month's gross profit.
+
+For that you need your trades in a journal, every day, without typing them. This guide walks through connecting Angel One to WickLog with SmartAPI, including the one limitation you need to plan around.
+
+## What You'll Need
+
+**You need an Angel One account, a free SmartAPI app with TOTP enabled, and WickLog Pro.**
+
+| Requirement | Cost | Notes |
+| :--- | :--- | :--- |
+| Angel One trading account | Free to open | The account you trade from |
+| SmartAPI developer app | Free | Angel One doesn't charge for SmartAPI |
+| API key | Free | Generated when you create the SmartAPI app |
+| Client code and PIN | n/a | Your Angel One client ID and trading PIN/MPIN |
+| TOTP secret | Free | From enabling TOTP for SmartAPI |
+| WickLog Pro | ₹349/month or ₹2,250/year | Broker sync is a Pro feature |
+
+Angel One sync in WickLog is in **beta**.
+
+## The One Limitation: Today's Trades Only
+
+**Angel One's API returns only the current day's tradebook, so WickLog can import each day's trades only on that day.** Holdings and open positions sync at any time, but closed intraday trades from previous days can't be fetched later.
+
+In practice:
+
+- **Sync once every trading day,** after the market closes at 3:30 PM IST.
+- **Missed a day?** Those trades won't come through sync. Add them with WickLog's Excel template or the manual trade form.
+- **Older history:** bring it in with the template once, then sync daily going forward.
+
+If daily syncing doesn't fit your routine, a broker whose API provides trade history, like Zerodha Kite or Dhan, is easier to journal. Both are fully supported in WickLog.
+
+## Step-by-Step: Connect Angel One to WickLog
+
+### Step 1: Create a SmartAPI app
+
+**Log in to the SmartAPI developer portal with your Angel One credentials and create a new app.** Give it a name such as "WickLog", choose the trading API type, and enter a redirect URL if asked. When the app is created, copy the **API key**.
+
+[SCREENSHOT: SmartAPI developer portal create-app form with app name and API key shown]
+
+### Step 2: Enable TOTP and save the secret
+
+**Enable TOTP for SmartAPI and save the TOTP secret, not just the 6-digit code.** On the SmartAPI enable-TOTP page, enter your client ID and PIN, verify the OTP sent to your registered mobile and email, and you'll see a QR code.
+
+Most people scan the QR with an authenticator app and stop there. WickLog needs the **secret key** behind the QR code, usually shown as a text string alongside it, so it can generate a fresh login code at each sync.
+
+[SCREENSHOT: SmartAPI enable-TOTP page with the QR code and the text secret highlighted]
+
+### Step 3: Enter the credentials in WickLog
+
+**In WickLog, open Settings, go to the Connect tab, choose Angel One and enter four values: API key, client code, PIN and TOTP secret.** They're encrypted in your browser before they're stored, and they're never sent back to the browser afterwards.
+
+[SCREENSHOT: WickLog Settings > Connect with the four Angel One fields]
+
+### Step 4: Run your first sync
+
+**Click sync after market close.** WickLog logs in through SmartAPI and imports:
+
+- **Today's tradebook,** with fills matched into complete trades
+- **Holdings and open positions,** shown as open trades with live prices
+- **RMS margins:** free cash, utilised margin and holdings value in your capital ledger
+
+[SCREENSHOT: Sync dialog with Angel One selected]
+
+### Step 5: Confirm entry dates on open positions
+
+**Open positions created from Angel One holdings or positions are flagged "entry date estimated".** The snapshot doesn't always include when you first bought. Set the real date so holding periods and monthly P&L are correct.
+
+### Step 6: Make the daily sync a habit
+
+**Tie the sync to something you already do after 3:30 PM,** like writing your journal entry. Sync, check the day's net P&L on the dashboard, write two lines in the journal. Five minutes.
+
+## Is It Safe to Store SmartAPI Credentials?
+
+**WickLog only reads data and never places, modifies or cancels orders, but the combination of API key, PIN and TOTP secret is powerful, so understand what you're storing.** Together they can log in to your SmartAPI session, which supports trading.
+
+What we do:
+
+- **Read-only use.** WickLog only calls what it needs to read trades, holdings, positions and margins.
+- **Encryption at rest.** All four values are encrypted in your browser before storage and never returned to the browser.
+- **Removal on lapse.** If WickLog Pro ends, broker connections are deleted automatically.
+
+What you control:
+
+- **Use a dedicated SmartAPI app** for WickLog rather than one shared with an algo platform.
+- **Revoke at any time** by deleting the app in the SmartAPI portal or resetting TOTP. WickLog can't sync after that.
+
+## Common Mistakes & Troubleshooting
+
+### "Login failed" on sync
+
+Usually one of four values is wrong. The most common mistake is entering a 6-digit TOTP code instead of the TOTP **secret**. The code changes every 30–60 seconds; the secret doesn't.
+
+### "Yesterday's trades are missing"
+
+Angel One's API only provides the current day's tradebook. Add missed days with the Excel template or manual entry, and sync daily from now on.
+
+### "Sync stopped working after I reset my PIN"
+
+Update the PIN in WickLog's Connect settings. The same applies if you regenerate the API key or reset TOTP.
+
+### "Net P&L doesn't match Angel One's P&L"
+
+WickLog applies Angel One's brokerage formula plus STT, exchange fees, SEBI fees, stamp duty and GST to each trade, on rates in force since April 2026. Compare against your contract note, and mark options exercised at expiry with the "options exercised" flag so STT is calculated correctly.
+
+## Who It's For
+
+**Angel One sync suits traders who trade most days and will sync each evening.**
+
+- **Intraday option traders** on Nifty or Bank Nifty who want win rate by hour and the P&L calendar without typing trades
+- **Swing traders** holding several positions who want open risk and floating P&L in one place
+- **Multi-broker traders** with Angel One alongside Zerodha or Dhan, combining them in one dashboard filtered by demat account
+
+## Frequently Asked Questions
+
+### Does WickLog support Angel One?
+
+Yes. WickLog syncs Angel One holdings, positions, RMS margins and the current day's tradebook through SmartAPI. It's a Pro feature, currently in beta.
+
+### Can WickLog import my old Angel One trades?
+
+Not through sync, because Angel One's API only returns the current day's trades. You can import older trades once using WickLog's Excel template, then sync every trading day going forward.
+
+### Is SmartAPI free?
+
+Yes. Angel One doesn't charge for SmartAPI. You only need to create an app in the SmartAPI developer portal and enable TOTP.
+
+---
+
+## Turn Angel One's Daily Tradebook Into a Real Journal
+
+Five minutes after the close is enough to keep a complete record. Connect SmartAPI once, sync tonight, and see your net P&L after charges by hour and by setup.
+
+[Connect Your Angel One Trades →](https://wicklog.in)

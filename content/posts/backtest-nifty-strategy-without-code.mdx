@@ -1,0 +1,134 @@
+---
+title: "How to Backtest a Nifty Strategy Without Code (After Costs)"
+description: "Backtest an EMA or RSI strategy on Nifty, Bank Nifty or NSE stocks without code: a step-by-step guide with STT and brokerage applied to every trade."
+date: "2026-10-05"
+slug: "backtest-nifty-strategy-without-code"
+tags: ["backtesting", "nifty", "trading-strategy", "indian-stock-market", "algo-trading"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** You can backtest a Nifty, Bank Nifty or NSE stock strategy without writing code by building entry and exit rules from indicators like EMA, RSI and VWAP. The result only means something if every simulated trade pays Indian charges and the sample is large enough. WickLog's backtester does both, on daily, 1-hour and 15-minute candles, on the Pro plan.
+
+Every trader has a strategy they "know" works. A 9/21 EMA crossover on the 15-minute Nifty chart. RSI above 50 for longs. Buy when price reclaims VWAP.
+
+Then you check how they know, and it's usually a handful of remembered trades plus some charts from YouTube. A backtest replaces "I think it works" with a number: how many trades, how much it made after costs, and how deep it fell along the way. Until recently that meant Python. It doesn't anymore.
+
+## What You'll Need
+
+**You need a strategy you can state as exact rules, a symbol and timeframe, and WickLog Pro.** No coding, no data downloads.
+
+- **Clear rules.** "Buy when EMA 9 crosses above EMA 21 and RSI 14 is above 50" works. "Buy when it looks strong" doesn't.
+- **A symbol.** Any NSE stock, or the Nifty 50 or Bank Nifty index.
+- **A timeframe.** Daily, 1-hour or 15-minute candles. Intraday tests cover up to the last 60 days.
+- **WickLog Pro** (₹349/month or ₹2,250/year). The backtesting engine is a Pro feature.
+
+**One important limit:** WickLog backtests run on stock and index prices, not on option or futures contracts. Testing a rule on the Nifty index tells you whether the directional signal works; it doesn't simulate option premiums, theta or IV. Treat it as a test of the signal, not of a specific options trade.
+
+## Step-by-Step Walkthrough
+
+### Step 1: Write your rules down first
+
+**Write your entry, exit, stop and size rules in plain language before you touch the builder.** It stops you tweaking rules mid-test until the result looks good.
+
+Example strategy for this walkthrough:
+
+- **Entry (long):** EMA(9) crosses above EMA(21) AND RSI(14) > 50
+- **Exit:** EMA(9) crosses below EMA(21)
+- **Stop loss:** 1% · **Target:** 2%
+- **Size:** 10% of capital per trade, starting capital ₹1,00,000
+
+### Step 2: Choose the symbol and timeframe
+
+**Open Backtest, search for the symbol and choose the candle timeframe.** Start with daily candles over several years to get enough trades, then test intraday versions on 15-minute or 1-hour data.
+
+[SCREENSHOT: Backtest page with symbol search showing NIFTY selected and the timeframe dropdown]
+
+### Step 3: Build the entry rule
+
+**Combine conditions from dropdowns.** Each condition compares an indicator (EMA, RSI, VWAP or price) using crosses above, crosses below, >, <, >=, <= or ==, against a number or another indicator. Join conditions with AND or OR, and choose long or short.
+
+For the example: `EMA(9) crosses above EMA(21)` AND `RSI(14) > 50`, direction long.
+
+[SCREENSHOT: Entry rule builder with EMA(9) crosses above EMA(21) AND RSI(14) > 50]
+
+### Step 4: Set exits, risk and sizing
+
+**Add the exit rule, stop loss %, target % and position sizing.** You can exit on the opposite signal, on stop or target, or whichever comes first. Size by fixed quantity or by a percentage of capital, and set your starting capital.
+
+### Step 5: Run it and read the results
+
+**Run the test and read the metrics in this order: trade count, net return, max drawdown, profit factor, then win rate.** Win rate goes last because it's the easiest number to misread.
+
+| Metric | What to check |
+| :--- | :--- |
+| Total trades | Fewer than ~30? WickLog shows a low-sample-size warning. Don't trust the rest yet. |
+| Net return % | After all charges. This is the headline. |
+| Max drawdown | The worst peak-to-trough fall. Could you sit through it with real money? |
+| Profit factor | Above ~1.3 after charges is a workable edge. |
+| Expectancy | Average net result per trade. |
+| Sharpe ratio | Return relative to volatility; useful for comparing two versions. |
+| Win rate | Read alongside average win and loss, never alone. |
+
+Every simulated trade pays Indian charges: brokerage of ₹20 or 0.03% per leg (whichever is lower), STT, exchange transaction charges, SEBI fees, stamp duty and 18% GST. A strategy that only works before charges doesn't work.
+
+[SCREENSHOT: Backtest results panel showing net return, max drawdown, profit factor, Sharpe ratio and the low-sample warning]
+
+### Step 6: Compare against simply holding the index
+
+**Turn on the benchmark comparison to plot Nifty 50, Bank Nifty or Sensex buy-and-hold against your equity curve.** If your strategy made 9% while the index made 14% with a smaller drawdown, the strategy isn't worth the screen time.
+
+### Step 7: Inspect individual trades on the chart
+
+**Open the candlestick chart with every simulated entry and exit marked, and look at 10–15 trades.** Check that entries happen where you'd actually take them. If most trades fire in sideways chop, you'll see it immediately.
+
+### Step 8: Save the run and test one change at a time
+
+**Save each run, change exactly one thing, and compare saved runs side by side.** For example: same rules with a 1.5% stop instead of 1%, or the same strategy on Bank Nifty. Changing three things at once tells you nothing about which change mattered.
+
+[SCREENSHOT: Side-by-side comparison of two saved backtest runs]
+
+## Common Mistakes & Troubleshooting
+
+**Most backtests mislead for a few predictable reasons: too few trades, too many tweaks, and ignoring costs.**
+
+### Curve fitting
+
+If you try 40 EMA combinations and pick the best, you've found what worked on that past data, not what will work next. Pick parameters with a reason, test a few, and confirm on a different symbol or period.
+
+### Too few trades on intraday data
+
+Intraday tests are capped at 60 days. A 15-minute strategy that triggers twice a week gives you about 17 trades. That's not enough. Use daily data for the main test, or test the same intraday rule on several stocks.
+
+### Testing on the index, trading options
+
+A profitable index signal doesn't guarantee profitable option trades. Premium decay, implied volatility and wider spreads change the result. Use the backtest to validate direction and timing, then track your real option trades in your journal to see whether the edge survives.
+
+### "My result changed between runs"
+
+Check that the date range, timeframe and sizing are identical. Intraday ranges move forward each day because they cover the last 60 days.
+
+### A 90% win rate
+
+Almost always a tiny sample, a very wide stop with a tight target, or both. Check trade count and average loss before getting excited.
+
+## Frequently Asked Questions
+
+### Can I backtest a trading strategy for free in India?
+
+WickLog's backtesting engine is part of the Pro plan at ₹349/month or ₹2,250/year. It needs no code and includes Indian charges on every simulated trade. The free plan covers journaling and analytics of your real trades, including Zerodha and Dhan tradebook imports.
+
+### Can I backtest options strategies on Nifty?
+
+Not directly in WickLog. Backtests run on NSE stocks and the Nifty 50 and Bank Nifty indices, not on option or futures contracts. You can test the directional signal on the index, then measure your real option trades in your journal.
+
+### Does the backtest include STT and brokerage?
+
+Yes. Every simulated trade pays brokerage (₹20 or 0.03% per leg, whichever is lower), STT, exchange transaction charges, SEBI fees, stamp duty and 18% GST, so results are net of Indian costs.
+
+---
+
+## Test the Rule Before You Risk the Capital
+
+A strategy you've backtested after costs is a strategy you can size with confidence; one you haven't is a guess. Build your rules, run them on Nifty, and compare the result against just holding the index.
+
+[Backtest Your Strategy After Costs →](https://wicklog.in)

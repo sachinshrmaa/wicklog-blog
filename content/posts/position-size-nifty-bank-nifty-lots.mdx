@@ -1,0 +1,136 @@
+---
+title: "Position Size Calculator: Nifty & Bank Nifty Lots, 1% Rule"
+description: "Size Nifty and Bank Nifty lots with the 1% risk rule: formulas, option and futures examples by account size, and the lot-size trap small accounts miss."
+date: "2026-10-05"
+slug: "position-size-nifty-bank-nifty-lots-1-percent-rule"
+tags: ["position-sizing", "risk-management", "nifty", "bank-nifty", "fno-trading"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Under the 1% rule, number of lots = (capital × 1%) ÷ (stop distance × lot size). With Nifty at 65 units per lot and Bank Nifty at 30, a ₹5 lakh account risking ₹5,000 can trade 3 Nifty option lots with a ₹20 premium stop. If one lot's risk exceeds 1%, the right size is zero, not one.
+
+Most blown-up F&O accounts didn't die from a bad strategy. They died from one good-looking trade sized at five lots when the account could carry one.
+
+Lot sizing in India has a quirk that global position-sizing guides miss: you can't buy 2.4 lots. Exchange lot sizes force your risk into fixed steps, and on a small account, the smallest step is often bigger than 1%. This guide works through the math with real Nifty and Bank Nifty numbers.
+
+## The Root Problem: Traders Size by Conviction, Not by Stop Distance
+
+**Most retail traders pick their lot count first and their stop-loss second, which makes risk per trade random.** The same "2 lots" can risk ₹1,300 on one trade and ₹9,000 on the next, depending on where the stop happens to be.
+
+The fix is to reverse the order: decide the rupee risk, find the stop the chart gives you, and let the math produce the lot count.
+
+Why 1%? Because losing streaks are normal, and recovery is asymmetric.
+
+| Risk per trade | Account after 10 straight losses | Gain needed to recover |
+| :--- | ---: | ---: |
+| 1% | −9.6% | +10.6% |
+| 2% | −18.3% | +22.4% |
+| 5% | −40.1% | +67.0% |
+
+Ten losses in a row sounds rare. For a strategy with a 40% win rate, any given run of ten trades has about a 1-in-165 chance of being all losses. At 6–7 trades a day, that's roughly a year of trading, so expect to see it. At 5% risk, that streak leaves you needing a 67% return just to get back to where you started.
+
+## The Breakdown: Position Size Formulas for Nifty and Bank Nifty
+
+**Number of lots = rupee risk ÷ (stop distance per unit × lot size), always rounded down.** Everything else is plugging in numbers.
+
+### The inputs
+
+- **Capital:** the money in your trading account, not your net worth.
+- **Risk %:** 0.5–1% for most active traders; 2% is an upper limit.
+- **Stop distance:** entry price minus stop price, in premium points for options or index points for futures.
+- **Lot size:** NSE currently sets **Nifty at 65** and **Bank Nifty at 30** units per lot, effective from the January 2026 series. [NEEDS SOURCE: confirm against NSE's latest lot size circular before publishing; NSE revises these periodically]
+
+### Example 1: Nifty option buyer, ₹5 lakh account
+
+- Capital: ₹5,00,000 at 1% risk = **₹5,000**
+- Buy a Nifty call at ₹140, stop at ₹120 → stop distance **₹20**
+- Risk per lot: ₹20 × 65 = **₹1,300**
+- Lots: ₹5,000 ÷ ₹1,300 = 3.85 → **3 lots** (₹3,900 at risk)
+
+### Example 2: Bank Nifty option buyer, same account
+
+- Risk budget: **₹5,000**
+- Buy a Bank Nifty put at ₹310, stop at ₹250 → stop distance **₹60**
+- Risk per lot: ₹60 × 30 = **₹1,800**
+- Lots: ₹5,000 ÷ ₹1,800 = 2.78 → **2 lots** (₹3,600 at risk)
+
+### Example 3: Nifty futures, same account
+
+- Risk budget: **₹5,000**
+- Long at 25,000, stop at 24,940 → stop distance **60 points**
+- Risk per lot: 60 × 65 = **₹3,900**
+- Lots: ₹5,000 ÷ ₹3,900 = 1.28 → **1 lot**
+
+Futures risk adds up fast. A 100-point stop on one Nifty futures lot is ₹6,500, already over 1% of a ₹5 lakh account.
+
+### Add charges to your risk
+
+**Your real loss on a stopped-out trade is the stop distance plus charges, so include roughly ₹80–100 per option round trip in your risk budget.** For a Nifty option trade of 2 lots, Zerodha-style charges (₹40 brokerage, 0.15% STT on the sell, exchange fees, stamp duty and GST) come to about ₹85. On futures, the April 2026 STT increase to 0.05% pushed a one-lot Nifty round trip to roughly ₹950.
+
+On small risk budgets this matters. If you risk ₹1,000 per trade, ₹90 of charges is 9% of it.
+
+## The Lot-Size Trap: When One Lot Is Already Too Big
+
+**If the risk on a single lot exceeds your 1% budget, the correct position size is zero.** Taking one lot "because you can't trade less" is how small accounts end up risking 3–5% per trade without noticing.
+
+Maximum stop distance you can afford for one lot at 1% risk:
+
+| Account size | 1% risk | Max stop, 1 Nifty lot (65) | Max stop, 1 Bank Nifty lot (30) |
+| :--- | ---: | ---: | ---: |
+| ₹1,00,000 | ₹1,000 | ₹15.4 per unit | ₹33.3 per unit |
+| ₹3,00,000 | ₹3,000 | ₹46.2 per unit | ₹100.0 per unit |
+| ₹5,00,000 | ₹5,000 | ₹76.9 per unit | ₹166.7 per unit |
+| ₹10,00,000 | ₹10,000 | ₹153.8 per unit | ₹333.3 per unit |
+
+On a ₹1 lakh account, a Nifty option trade whose chart stop is ₹25 away risks ₹1,625, which is 1.6%. Your choices are:
+
+1. **Skip the trade.** Not every setup fits your account.
+2. **Choose a different strike** where a ₹15 stop is structurally valid. Moving the stop closer just to fit the math only guarantees more stop-outs.
+3. **Accept a higher risk %** knowingly, and cap the number of such trades.
+
+What you should not do is trade one lot and pretend it's 1%.
+
+### Stops are not guarantees
+
+Option premiums can gap through your stop, especially around big moves or close to expiry. Size assuming some slippage, and treat the formula's output as a ceiling.
+
+## How to Check Whether You Actually Size This Way
+
+**Compare your planned risk with your actual average loss; if the average loss is bigger, your sizing or your stop discipline is leaking.** This is where a journal earns its keep.
+
+- **Use the free calculators.** WickLog's [position size calculator](https://wicklog.in/tools/position-size-calculator) gives shares or lots from capital, risk % and stop distance. The [risk-reward calculator](https://wicklog.in/tools/risk-reward-calculator) shows your breakeven win rate: at 1:2 reward to risk, you need just over 33%.
+- **Log the stop with every trade.** WickLog's trade form has stop-loss and target fields. With Zerodha sync on Pro, pending stop-loss and GTT trigger prices are imported as the trade's stop.
+- **Watch average loss vs average win.** The Key metrics widget shows both, free. If your average loss is 1.8× your average win, your stops are moving.
+- **Ask the question directly.** On Pro, Ticker AI, WickLog's conversational trading assistant, can answer "How often did my loss exceed my logged stop distance last month, and by how much?"
+
+[SCREENSHOT: Position size calculator with ₹5,00,000 capital, 1% risk and a ₹20 stop, showing 3 lots]
+
+## Key Takeaways
+
+- **Lots = rupee risk ÷ (stop distance × lot size), rounded down.** Pick risk first, lots last.
+- **At Nifty 65 and Bank Nifty 30 per lot,** a ₹1 lakh account can only afford a ₹15 Nifty option stop on one lot at 1% risk.
+- **If one lot breaks your 1% budget, the answer is zero lots,** a different strike, or a deliberate exception, never a quiet 3% bet.
+- **Budget charges into risk.** About ₹85 per option round trip and roughly ₹950 per Nifty futures round trip after the April 2026 STT hike.
+- **Verify with data.** Average loss larger than planned risk means your stops or your sizing are slipping.
+
+## Frequently Asked Questions
+
+### How many lots of Nifty should I trade with ₹1 lakh capital?
+
+At 1% risk, ₹1 lakh gives a ₹1,000 risk budget, so one Nifty lot of 65 only fits if your stop is within about ₹15 per unit. For most option setups that means trading one lot at most, and skipping trades with wider stops. For Nifty futures, one lot needs a stop under about 15 points, which is rarely realistic.
+
+### What is the 1% rule in trading?
+
+The 1% rule means never risking more than 1% of your trading capital on a single trade, measured from entry to stop-loss. It keeps a normal losing streak, such as 10 losses in a row, to a drawdown of under 10%.
+
+### Is WickLog's position size calculator free?
+
+Yes. WickLog's position size, risk-reward and trading expectancy calculators are free public tools that need no account. Logging trades and checking your actual risk against plan works on the free journal plan.
+
+---
+
+## Audit Your Sizing Against Your Real Trades
+
+The calculator tells you what you should risk. Your tradebook tells you what you actually risked. Import last month's trades and compare your average loss with your 1% budget.
+
+[Audit Your Trade Sizing Free →](https://wicklog.in)

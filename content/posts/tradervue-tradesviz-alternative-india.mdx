@@ -1,0 +1,195 @@
+---
+title: "Tradervue Alternative for India: A Journal Built for F&O"
+description: "Tradervue and TradesViz vs WickLog for Indian F&O traders: broker sync, STT-accurate net P&L and INR pricing compared, so you pick the right journal."
+date: "2026-10-05"
+slug: "tradervue-tradesviz-alternative-india"
+tags: ["trading-journal", "indian-stock-market", "fno-trading", "zerodha", "tradervue-alternative"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Tradervue is a US-built journal with no native Indian broker sync and no NSE charge model, so Indian F&O traders log trades and fees by hand. TradesViz supports Zerodha, Dhan and Angel One, but F&O and auto-sync need its dollar-priced paid plans. WickLog is built only for Indian traders: free F&O tradebook imports, STT-accurate net P&L, and ₹349/month Pro.
+
+You found Tradervue on a YouTube video by a US day trader. You signed up, went looking for the Zerodha button, and found Interactive Brokers, Schwab and Fidelity instead. Now you are exporting a Kite tradebook, fixing column headers in Excel at 9 PM, and wondering if the "Commission" field is supposed to hold your brokerage, your STT, or all six Indian charges added up by hand.
+
+That friction is why most Indian traders who try a global journal quit it within a month. The tool isn't bad. It just wasn't built for a Bank Nifty weekly-expiry scalper paying 0.15% STT on every option sell.
+
+This post compares the three journals Indian traders search for most, with the trade-offs stated plainly, including where a global tool is the better pick.
+
+## The Root Problem: A Journal That Gets Your Net P&L Wrong Is Worse Than No Journal
+
+**An Indian F&O trader's journal is only useful if it shows P&L after charges, and global journals were not designed around Indian charges.** Every option round trip on NSE carries six separate costs: brokerage, Securities Transaction Tax (STT), exchange transaction charges, SEBI turnover fees, stamp duty, and 18% GST on brokerage and exchange fees.
+
+Those costs got heavier this year. From **1 April 2026**, Budget 2026 raised STT on option premium sales from 0.10% to 0.15% and on futures sales from 0.02% to 0.05%. For high-frequency F&O traders, that moved the breakeven line up again.
+
+Here is what that looks like on a single, ordinary Nifty options trade.
+
+### Worked example: one Nifty option scalp on Zerodha
+
+You buy 2 lots of a Nifty weekly call (lot size 65, so 130 quantity) at ₹120 and sell at ₹128.
+
+| Line item | Calculation | Amount |
+| :--- | :--- | ---: |
+| Gross P&L | (128 − 120) × 130 | **+₹1,040.00** |
+| Brokerage | ₹20 × 2 orders | −₹40.00 |
+| STT | 0.15% × ₹16,640 sell premium | −₹24.96 |
+| Exchange transaction charges | ~0.035% × ₹32,240 premium turnover [NEEDS SOURCE] | −₹11.29 |
+| SEBI fees | ₹10 per crore of turnover | −₹0.03 |
+| Stamp duty | 0.003% × ₹15,600 buy premium | −₹0.47 |
+| GST | 18% × (brokerage + exchange + SEBI) | −₹9.24 |
+| **Net P&L** | | **≈ +₹954** |
+
+About ₹86 of charges on one trade looks harmless. Now scale it.
+
+Say you take 8 trades a day, win half of them, and your average winner and loser are the same ₹1,040 size. Your gross P&L is roughly flat. Your charges are roughly ₹690 a day. Over 20 trading sessions, that is **about ₹13,800 lost in a month in which your spreadsheet says you broke even.**
+
+A journal that stores only gross P&L, or asks you to type a single "fees" number per trade, hides exactly this leak. That is the core test for any trading journal in India: does it compute net P&L the way your contract note does, without you doing the math?
+
+## The Breakdown: Tradervue vs TradesViz vs WickLog for Indian Traders
+
+**For Indian F&O traders, the deciding factors are broker support, Indian charge calculation, F&O access on the free plan, and pricing in rupees.** Feature counts matter less than whether your Zerodha or Dhan tradebook lands in the journal correctly.
+
+Pricing and plan details below were checked against each product's public pages in October 2026. Global tools change plans often, so confirm before you subscribe.
+
+| | **Tradervue** | **TradesViz** | **WickLog** |
+| :--- | :--- | :--- | :--- |
+| Built for | US equities and futures | Global, multi-asset (has an India section) | Indian retail traders only |
+| Indian broker auto-sync | None listed | Zerodha, Dhan, Angel One, Fyers | Zerodha Kite, Dhan (official OAuth); Groww, Angel One (beta) |
+| Indian broker file import | Generic CSV mapping | Upstox, Groww, 5paisa, ICICI Direct and more | Zerodha tradebook and holdings, Dhan tradebook, WickLog template |
+| STT, stamp duty, SEBI fee, GST per trade | No Indian charge model; manual fee entry | Tracks STT, GST, exchange charges and brokerage | Per-broker brokerage formula plus all Indian charges, updated for the April 2026 STT revision |
+| F&O on the free plan | Free plan capped at 30 trades/month | Free plan is stocks-only | Yes: options and futures, manual and tradebook imports |
+| AI analysis | None advertised | AI Q&A, AI coach, AI chat on paid plans | Ticker AI on Pro |
+| Backtesting | No | Yes | Yes (Pro): NSE stocks, Nifty 50, Bank Nifty, with Indian charges |
+| Paid pricing | $29.95 or $49.95/month | $19.99 or $29.99/month (lower billed yearly) | ₹349/month or ₹2,250/year |
+| Sign-in | Email | Email | Google |
+
+### Tradervue: solid for US traders, a manual-entry job for Indian ones
+
+**Tradervue does not list native support for any Indian broker, so Indian traders import via generic CSV mapping and enter charges themselves.** Its reporting is mature, and if you also trade US stocks through a US broker, it is a reasonable pick for that account.
+
+For NSE F&O, the problems stack up:
+
+- **No NSE symbol logic.** Option symbols like `NIFTY25OCT25000CE` need to be parsed into underlying, expiry, strike and CE/PE before strike-level or expiry-day analysis means anything.
+- **Fees are a number you supply.** You calculate STT, exchange charges and GST per trade from your contract note, or you skip it and look at gross P&L.
+- **The free plan caps you at 30 trades a month.** An active Bank Nifty scalper can cross that in two sessions.
+- **Dollar pricing.** Silver at $29.95/month is several times the cost of an Indian-built journal at today's exchange rate. [NEEDS SOURCE: current USD/INR rate at publish date]
+
+### TradesViz: the strongest global option for India, with paywalls where F&O traders need it
+
+**TradesViz is the most India-capable global journal: it auto-syncs Zerodha, Dhan and Angel One and tracks Indian charges.** If you trade Indian and US markets from one journal, or want hundreds of chart types, it deserves a serious look.
+
+The catches for an Indian F&O trader are specific:
+
+- **The free plan is stocks-only.** Options and futures need Pro ($19.99/month) or Platinum.
+- **Auto-sync and AI tools sit on paid plans.** The free tier excludes both.
+- **Zerodha history.** TradesViz's own help article says its Zerodha API sync only returns trades from the current day, so you need to sync every trading day or fall back to file import. [NEEDS SOURCE: re-check TradesViz Zerodha docs before publishing; this may have changed]
+- **Breadth over focus.** Supporting 250+ brokers worldwide is a strength, but it also means Indian-specific behaviour competes for attention with every other market.
+
+### WickLog: narrower on purpose, built around the Indian contract note
+
+**WickLog, an AI trading journal built only for Indian retail traders, treats Indian charges, symbols and brokers as the default rather than an add-on.** It doesn't support US brokers or forex, and that is the trade-off.
+
+What that focus gets you:
+
+- **F&O on the free plan.** Log up to 50 manual trades a month, and import Zerodha or Dhan tradebooks without limits. Broker tradebook imports don't count toward the 50-trade cap.
+- **Net P&L that matches your contract note.** Each trade carries your broker's brokerage formula plus STT (delivery, intraday, options, exercised options, futures), exchange charges, SEBI fees, stamp duty and GST, already on the post-April 2026 STT rates.
+- **Full Zerodha history on sync.** Kite sync pulls your chosen date range (default: last 30 days) through Kite's tradebook report, not just today's fills. If that report isn't ready, WickLog skips history entirely rather than importing half of it and inventing partial exits.
+- **Fills become trades correctly.** Smart trade matching merges partial fills of one order, then matches buys and sells FIFO per symbol and product type (MIS, CNC, MTF), so scale-outs, shorts, multi-day holds and position flips are handled.
+- **Read-only access.** WickLog reads trades, holdings, positions and margins. It never places, modifies or cancels orders.
+
+[SCREENSHOT: Dashboard "Net profit & charges" widget showing gross P&L, total charges broken down by STT/brokerage/GST, and net P&L for a month of Nifty options trades]
+
+## Which Journal Should an Indian Trader Pick?
+
+**Pick by where you trade, not by feature count.** A journal you keep using beats a more powerful one you abandon after week three.
+
+| If you are… | Pick | Why |
+| :--- | :--- | :--- |
+| Trading US stocks through a US broker | Tradervue or TradesViz | Native US broker support |
+| Trading India and US from one journal | TradesViz | Supports both markets in one place |
+| An Indian F&O trader who wants to start free | WickLog | F&O and tradebook imports on the free plan |
+| A Nifty/Bank Nifty scalper with high trade counts | WickLog Pro | Auto-sync, accurate per-trade charges, ₹349/month |
+| On Upstox, 5paisa or ICICI Direct | TradesViz, or WickLog via template import | WickLog has no direct import for these brokers yet |
+| Testing a strategy on NSE before trading it | WickLog Pro or TradesViz | Both backtest; WickLog applies Indian charges to every simulated trade |
+
+## What Indian Traders Actually Need from a Journal
+
+**Accurate data in, honest numbers out, and a short weekly review loop.** Everything else is decoration.
+
+### 1. Zero manual entry for executed trades
+
+Spreadsheets get abandoned because logging takes longer than trading. With WickLog Pro, you connect Zerodha Kite or Dhan once via official OAuth, then sync with one click. Kite tokens expire daily around 6 AM IST, so you reconnect each day you sync; Dhan tokens last 24 hours.
+
+On the free plan, export your tradebook from Kite Console or Dhan and drop the file in. Re-importing an overlapping file skips fills already imported, so you can't double-count a trade.
+
+[SCREENSHOT: Sync options dialog showing broker selection, date range, and "open / closed / all" trade filter]
+
+### 2. Analytics that answer Indian-market questions
+
+Every dashboard widget is free. The ones that matter most for F&O traders:
+
+- **Win rate by hour.** Shows whether your 9:15–10:00 AM trades pay for your 12:00–1:30 PM chop trades, or the other way round.
+- **P&L calendar.** A daily green/red heatmap that makes red-day clusters (often post-loss revenge sessions) obvious.
+- **Mistake pattern detector.** Flags red patterns from closed trades, such as one symbol that keeps losing, a high fast-stop-out rate, or your worst strategy.
+- **Equity curve vs benchmark.** Your cumulative P&L plotted against Nifty 50, Bank Nifty or Sensex, so you know whether active trading beat holding the index.
+
+[SCREENSHOT: Win rate by hour widget showing strong morning win rate and a drop between 12 PM and 2 PM]
+
+### 3. An analyst that has read your trades
+
+**Ticker AI, WickLog's conversational trading assistant, answers questions using your own trades and journal entries as context.** Generic chatbots can explain what a profit factor is. Ticker AI can tell you yours, broken down by setup.
+
+Questions that work well:
+
+- "What is my net P&L on Bank Nifty options expiry days vs other days?"
+- "Which strategy tag has the worst profit factor after charges?"
+- "How did my trades after 1 PM perform last month?"
+
+Ticker AI follows SEBI-safe rules: no buy or sell tips, no price predictions, only analysis of what you have already done. It is a Pro feature with 15 credits per month on the monthly plan; credits are deducted when you send a message and refunded automatically if the AI fails to respond.
+
+If you don't want to pay for AI, the **weekly AI review email** is free: every Monday at 9 AM IST, if you closed at least one trade the previous week, you get a short report covering your best and worst trade, strategy breakdown, patterns and mistakes, and one takeaway for the week ahead.
+
+## Key Takeaways
+
+- **Gross P&L lies for F&O traders.** At 0.15% STT on option sells plus five other charges, a gross-flat month of active scalping can be a five-figure net loss.
+- **Tradervue is a US-first tool.** No listed Indian broker support and no Indian charge model means manual work for NSE traders.
+- **TradesViz is the strongest global choice for India,** but options, futures, auto-sync and AI sit behind dollar-priced paid plans.
+- **WickLog trades breadth for depth:** India-only, with F&O and tradebook imports free, per-broker Indian charges, full Zerodha history sync, and Pro at ₹349/month.
+- **Pick by where you trade.** US or multi-market accounts suit global tools; an India-only F&O account suits an India-only journal.
+
+## Frequently Asked Questions
+
+### What is the best Tradervue alternative for Indian traders?
+
+For India-only F&O and equity traders, WickLog is the closest fit because it imports Zerodha and Dhan tradebooks for free and calculates Indian charges per trade. TradesViz is the better alternative if you also trade US markets and want one journal for both. Tradervue itself has no listed Indian broker integration.
+
+### Does Tradervue work with Zerodha?
+
+Tradervue does not list Zerodha among its supported brokers, so you would need to map a Kite tradebook CSV manually. You would also need to enter STT, exchange charges, stamp duty and GST yourself, since Tradervue has no Indian charge model.
+
+### Is WickLog free to use for Indian traders?
+
+Yes, WickLog's free plan includes 50 manual trades and 50 journal entries per month, unlimited Zerodha and Dhan tradebook imports, and every analytics widget. Pro costs ₹349/month or ₹2,250/year and adds broker auto-sync, Ticker AI and backtesting.
+
+### How does WickLog import trades from Zerodha or Dhan?
+
+On Pro, you connect Zerodha Kite or Dhan through their official OAuth login and sync trades for a date range with one click. On the free plan, you upload the tradebook file exported from Kite Console or Dhan. Either way, partial fills are merged and matched into complete trades, and duplicate fills are skipped on re-import.
+
+### Does WickLog support Upstox?
+
+Not directly yet. WickLog auto-syncs Zerodha Kite and Dhan, with Groww and Angel One in beta. Upstox traders can bring trades in using WickLog's Excel/CSV template.
+
+### Can WickLog place trades or access my funds?
+
+No, WickLog has read-only access. It reads trades, holdings, positions and margins, and never places, modifies or cancels orders or touches funds. Broker credentials and tokens are encrypted at rest before storage.
+
+### How does Ticker AI help identify trading mistakes?
+
+Ticker AI reads your own trade history and journal entries and answers specific questions with your numbers, such as which setup loses most after charges or how your afternoon trades perform. It gives no tips or predictions; it only analyses what you have already traded.
+
+---
+
+## See What Your Trades Actually Netted After Charges
+
+If your journal shows gross P&L, you are reviewing a number your bank account never sees. Drop in last month's Zerodha or Dhan tradebook and see your real net P&L, charges and all, on the free plan.
+
+[Import Your Tradebook Free →](https://wicklog.in)

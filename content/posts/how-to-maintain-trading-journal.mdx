@@ -1,0 +1,139 @@
+---
+title: "How to Maintain a Trading Journal: Indian F&O Trader Guide"
+description: "How to maintain a trading journal as an Indian F&O trader: a 5-minute daily routine, a 30-minute weekly review, and the only fields that really matter."
+date: "2026-10-05"
+slug: "how-to-maintain-trading-journal-india"
+tags: ["trading-journal", "trading-psychology", "indian-stock-market", "fno-trading", "trading-routine"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Maintaining a trading journal takes about 5 minutes a day and 30 minutes a week if trade data is imported, not typed. Log three things by hand: the setup, your planned stop, and one honest note about the day. Then review weekly by hour, setup and red-day clusters, and turn one finding into one rule.
+
+Most traders start a journal after a bad week and stop it after a good one. The journal itself was rarely the problem. It asked for too much: 22 columns per trade, typed in at 8 PM, after a day that already went wrong.
+
+A journal you maintain for a year beats a perfect one you maintain for three weeks. This guide is the minimum version that still works, built around Indian market hours and how F&O traders actually trade.
+
+## What You'll Need
+
+**You need a place to store trades, your broker's tradebook, and a fixed 5-minute slot after 3:30 PM IST.** That's it.
+
+- **A journal.** WickLog's free plan works; so does a spreadsheet if you trade fewer than 15–20 times a month.
+- **Your tradebook,** exported from Zerodha Console or Dhan, or synced automatically on WickLog Pro.
+- **A short list of setup names** you actually trade, such as `ORB`, `VWAP-reclaim`, `expiry-short-straddle`.
+- **A fixed time.** Right after market close or before dinner. Not "this weekend".
+
+## Step-by-Step: The Daily and Weekly Routine
+
+### Step 1: Get your trades in without typing them
+
+**Never type execution data your broker already recorded.** Entry price, exit price, time, quantity and charges are in your tradebook; manual entry adds errors and burns the time you need for reflection.
+
+In WickLog, upload your Zerodha or Dhan tradebook on the free plan, or sync Zerodha Kite or Dhan with one click on Pro. Fills are matched into complete trades and charges are calculated per trade, so your net P&L is ready before you start.
+
+[SCREENSHOT: Trades page after a tradebook import, showing matched trades with net P&L]
+
+### Step 2: Tag each trade with its setup
+
+**The setup tag is the single most valuable field you add by hand.** Without it, you can't tell which of your strategies makes money and which one quietly pays for nothing.
+
+Rules that keep tags useful:
+
+- **Use a fixed list.** `breakout` and `BO` and `Breakout trade` become three strategies in your analytics.
+- **Tag impulse trades honestly.** A tag like `no-setup` is more useful than pretending every trade was planned.
+- **Keep it under 8 setups.** If you have 15, you don't have 15 edges.
+
+### Step 3: Record your planned stop and target
+
+**Your stop at entry is what turns P&L into R-multiples, and R-multiples are how you see whether your stops are slipping.** WickLog's trade form has stop-loss and target fields. With Zerodha sync on Pro, pending stop-loss and GTT trigger prices are imported automatically as the trade's stop.
+
+### Step 4: Write a 5-minute daily entry
+
+**One short entry per day beats a paragraph per trade.** Write it straight after close while the day is still clear.
+
+A template that takes under 5 minutes:
+
+```text
+Market mood: bullish / bearish / neutral
+Plan this morning: (1 line — what you were looking for)
+What I actually did: (1 line)
+Best decision today:
+Worst decision today:
+One rule for tomorrow:
+```
+
+In WickLog's journal, tag the entry with a market mood (bullish, bearish or neutral) and link the trades it refers to. Add a chart screenshot if a single image explains the day better than words.
+
+[SCREENSHOT: Journal entry with market mood tag, linked trades and a chart image]
+
+### Step 5: Run a 30-minute weekly review
+
+**Weekly is the right frequency for review: daily is too emotional, monthly is too late.** Pick a fixed slot, such as Saturday morning.
+
+Work through four questions, in this order:
+
+1. **Where did net P&L come from?** Filter the week, check the P&L calendar for any outsized red day.
+2. **Which setup worked, which didn't?** Compare net P&L by strategy tag.
+3. **When did I trade badly?** Check win rate by hour. Many intraday traders lose most of their week in the 12:00–1:30 PM window.
+4. **What did my journal say on the worst day?** Read the entry. The cause is usually written there in your own words.
+
+WickLog also sends a free AI-written weekly review every Monday at 9 AM IST if you closed at least one trade that week. It covers best and worst trade, strategy breakdown, journal insights, patterns and mistakes, and one takeaway, which makes a good starting point for your own review.
+
+### Step 6: Update your playbook once a month
+
+**A playbook is where your setups live as written rules, so the journal has something to measure against.** In WickLog, each playbook has a category, a status (draft, active or deprecated) and the trades linked to it.
+
+Once a month, look at each active setup:
+
+- **Profitable after charges over 30+ trades?** Keep it active.
+- **Losing over 30+ trades?** Change one rule, or mark it deprecated.
+- **Fewer than 30 trades?** Keep collecting. Don't judge it yet.
+
+## Common Mistakes & Troubleshooting
+
+**Most journals fail from too much friction or too little honesty, not from missing features.**
+
+### Logging only losing trades (or only winning ones)
+
+Selective logging makes every statistic wrong. Import the full tradebook so every trade is recorded whether you feel like writing about it or not.
+
+### Too many fields
+
+If logging takes longer than 5 minutes a day, you'll stop. Execution data should be imported. Hand-entered fields should be setup, stop and one daily note.
+
+### Reviewing gross P&L
+
+A month that's flat in gross terms can be a five-figure loss after STT, brokerage and GST for an active option trader. Always review net P&L.
+
+### Inconsistent setup tags
+
+Pick names once and stick to them. If you've already got messy tags, filter by each variant and fix them before your monthly review.
+
+### Judging a setup on 6 trades
+
+Small samples lie. Wait for 30–50 trades in a setup before deciding it works or doesn't.
+
+### Reviewing during market hours
+
+Reading your journal at 11 AM after two losses is how revenge trades start. Keep review outside 9:15 AM–3:30 PM IST.
+
+## Frequently Asked Questions
+
+### What should I write in a trading journal?
+
+Write your setup, planned stop and target for each trade, plus one short daily entry: the market mood, your plan, what you did, your best and worst decision, and one rule for tomorrow. Execution details like prices, times and charges should come from your broker's tradebook, not from typing.
+
+### How long does it take to maintain a trading journal?
+
+About 5 minutes a day and 30 minutes a week, if trades are imported automatically. Typing every trade by hand typically takes 20–40 minutes a day for active F&O traders, which is why most manual journals are abandoned.
+
+### Is WickLog free to use for Indian traders?
+
+Yes. The free plan includes 50 journal entries and 50 manual trades a month, unlimited Zerodha and Dhan tradebook imports, playbooks, all dashboard widgets and the weekly AI review email. Pro at ₹349/month adds broker auto-sync and Ticker AI.
+
+---
+
+## Make Your Journal a 5-Minute Habit
+
+The routine works only if the data is already there when you sit down. Import last month's Zerodha or Dhan tradebook, write today's entry, and run your first weekly review this Saturday.
+
+[Start Your Journal Free →](https://wicklog.in)

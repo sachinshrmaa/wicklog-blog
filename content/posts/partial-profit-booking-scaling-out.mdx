@@ -1,0 +1,112 @@
+---
+title: "Partial Profit Booking: The Math of Scaling Out in F&O"
+description: "Does partial profit booking help F&O traders? The math of scaling out of Nifty option lots, when it beats a full exit, and what it costs in charges."
+date: "2026-10-05"
+slug: "partial-profit-booking-scaling-out"
+tags: ["partial-profit-booking", "risk-management", "fno-trading", "nifty", "trading-journal"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Partial profit booking means exiting part of a position at a first target and letting the rest run. It lowers your average win but turns many would-be losers into small winners, especially if you move the stop to entry after booking. Whether it helps you depends on how often your trades reverse, which your own trade data can answer.
+
+You're long 3 lots of a Nifty call. It's up ₹15. Do you book everything, hold everything for your ₹30 target, or book one lot and let two ride?
+
+Most traders answer this by mood. After a run of reversals they book everything early; after missing a big move they hold everything. Both feel right in the moment, and neither is a plan. Scaling out is a plan, and like any plan it has math you can check.
+
+## The Root Problem: Full Exits Force an All-or-Nothing Bet
+
+**With a single target and a single stop, every trade becomes a binary bet: you either get the whole target or the whole loss.** Trades that move strongly in your favour and then reverse, which is common in Nifty options, end as full losses.
+
+Partial booking changes the shape of your outcomes. You give up some of the best-case profit in exchange for banking something on trades that would otherwise round-trip into a loss.
+
+## The Breakdown: Scaling Out, Worked Through
+
+### The setup
+
+*Illustrative example, Nifty lot size 65.*
+
+- Buy **3 lots (195 qty)** of a Nifty call at **₹100**, stop at **₹85**
+- Risk: ₹15 × 195 = **₹2,925**
+
+**Plan A, full exit:** sell all 195 at ₹130 target, or all at ₹85 stop.
+
+**Plan B, scale out:** sell 1 lot at ₹115 and move the stop on the rest to entry (₹100); sell 1 lot at ₹130; trail the last lot with a ₹15 trailing stop.
+
+### Four ways the trade can play out
+
+| Price path | Plan A: full exit | Plan B: scale out |
+| :--- | ---: | ---: |
+| 1. Straight down to ₹85 | −₹2,925 | −₹2,925 |
+| 2. Up to ₹115, then back to ₹85 | −₹2,925 | **+₹975** |
+| 3. Up to ₹130, then reverses (trail exits at ₹115) | **+₹5,850** | +₹3,900 |
+| 4. Runs to ₹160 (trail exits at ₹150) | +₹5,850 | **+₹6,175** |
+
+How Plan B adds up:
+
+- **Path 2:** 65 × ₹15 = ₹975 on the first lot; the other two exit at entry for ₹0.
+- **Path 3:** ₹975 + 65 × ₹30 = ₹1,950 + 65 × ₹15 = ₹975 on the trailed lot → ₹3,900.
+- **Path 4:** ₹975 + ₹1,950 + 65 × ₹50 = ₹3,250 → ₹6,175.
+
+### What the table really says
+
+**Scaling out wins on reversals and runners; full exits win on clean moves to target.** Which matters more depends entirely on how often each path happens in your trading.
+
+- If many of your trades reach the first target and then fail (path 2), scaling out turns them from full losses into small wins. This alone can transform results.
+- If your trades usually go cleanly to target or straight to stop (paths 1 and 3), scaling out just shrinks your winners.
+- If you occasionally catch big trend moves (path 4), the trailed portion captures them; a fixed target never does.
+
+### Be honest about what's doing the work
+
+**Much of Plan B's protection comes from moving the stop to entry after the first booking, not from the partial exit itself.** You could move the stop to breakeven on a full position too. Test the two decisions separately: the breakeven stop and the partial booking each have their own effect on your win rate and average win.
+
+### The cost of more exits
+
+**Each extra exit order adds brokerage and GST, though STT stays roughly the same.** STT is charged on the sell value, so splitting one sell into three doesn't change it much. Brokerage does change: at ₹20 per order, three exits instead of one add ₹40 in brokerage plus GST, about ₹47 per trade. At 100 trades a month, that's roughly ₹4,700, small against the losses it can prevent, but worth knowing.
+
+### Lot sizes limit how finely you can scale
+
+**You can only scale out in whole lots, so trading 1 lot means no scaling at all.** With Nifty at 65 units and Bank Nifty at 30 per lot, a meaningful three-part exit needs at least 3 lots. If your risk budget only allows 1–2 lots, choose between a single target and a two-part exit, rather than oversizing to make scaling possible.
+
+## How to Find Out Whether Scaling Out Works for You
+
+**Your own trade history tells you how often trades reach the first target and then reverse, which is the number that decides it.** Here's how to measure it in WickLog.
+
+1. **Record partial exits properly.** WickLog tracks exited quantity against total quantity for each trade, with booking methods including partial book, scale out, full exit, SL hit and target hit. Realised P&L counts the booked part; the rest is unrealised at the live price.
+2. **P&L lands in the right period.** Booked portions are counted in the period they were realised, so a scale-out across month-end doesn't distort either month.
+3. **Tag the exit style.** Use strategy tags like `orb-full-exit` and `orb-scale-out` for a month, then compare net P&L, win rate and average win per tag in the Strategy edge radar.
+4. **Check your reversal rate.** Use your trade charts, which show entry and exit on the candlestick, to see how many losing trades first moved in your favour by your first-target distance.
+5. **Ask directly (Pro).** Ticker AI, WickLog's conversational trading assistant, can answer: "Compare net P&L, win rate and average win for my orb-full-exit and orb-scale-out tags over the last 60 days."
+
+Broker-synced and tradebook-imported trades are matched first-in, first-out, so a scale-out shows up as one trade with partial bookings, not as three separate trades that inflate your trade count.
+
+[SCREENSHOT: A Nifty option trade with two partial bookings showing exited vs total quantity, realised and unrealised P&L]
+
+## Key Takeaways
+
+- **Scaling out trades best-case profit for fewer full losses.** It helps most when your trades often reverse after an initial move.
+- **The breakeven stop does much of the work.** Test it separately from the partial exit.
+- **Extra exits cost about ₹47 per trade** in brokerage and GST; STT barely changes.
+- **Lot sizes set the minimum.** A three-part scale-out needs at least 3 lots; don't oversize to make it possible.
+- **Let your data decide.** Tag both styles for a month and compare net results.
+
+## Frequently Asked Questions
+
+### Is partial profit booking a good strategy?
+
+It depends on how your trades behave. Partial booking helps when many trades move in your favour and then reverse, because it banks a profit before the reversal. If your trades usually go cleanly to target or to stop, it mostly reduces your average win.
+
+### How do I record partial profit booking in a trading journal?
+
+Record the total quantity and the quantity exited at each booking, with the price and date of each. WickLog does this automatically for broker-synced and tradebook-imported trades, tracks realised and unrealised P&L separately, and assigns each booked portion to the period it was realised in.
+
+### Does scaling out increase charges?
+
+Slightly. Each additional exit order adds brokerage and GST, roughly ₹24 per extra order on a ₹20-per-order broker. STT is charged on the sell value, so it stays about the same whether you exit in one order or three.
+
+---
+
+## Let Your Trades Settle the Scaling Debate
+
+You don't need another opinion on scaling out; you need your own reversal rate. Import last month's Zerodha or Dhan tradebook, tag your exit styles, and compare them in a month.
+
+[Test Your Exit Strategy Free →](https://wicklog.in)

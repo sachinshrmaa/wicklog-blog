@@ -1,0 +1,127 @@
+---
+title: "STT Hike 2026: What It Really Costs Indian F&O Traders"
+description: "STT on F&O rose on 1 April 2026. See what it costs Nifty option and futures traders per trade and per month, the new breakeven, and how to track net P&L."
+date: "2026-10-05"
+slug: "stt-hike-2026-fno-traders-cost"
+tags: ["stt", "fno-trading", "indian-stock-market", "nifty", "trading-costs"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** From 1 April 2026, STT rose from 0.10% to 0.15% on option premium sales and from 0.02% to 0.05% on futures sales. A one-lot Nifty futures round trip now costs about ₹960 in total charges, double the old ₹475, so a scalper needs roughly 15 points per lot just to break even.
+
+Six months after the Budget 2026 STT hike, most F&O traders have filed it under "a bit more tax". The broker app shows the same green and red numbers it always did, just slightly smaller.
+
+For a futures scalper it isn't slightly smaller. The cost of a single round trip doubled. For an option scalper taking 150+ trades a month, it's a new line item worth a week of profits. This post puts exact numbers on both.
+
+## What Changed: STT Rates Before and After 1 April 2026
+
+**Budget 2026 increased Securities Transaction Tax on equity derivatives, effective 1 April 2026; STT on cash-market equity was not part of this change.** Securities Transaction Tax (STT) is a tax on the value of securities transactions on Indian exchanges, collected by your broker on every applicable trade.
+
+| Transaction | Paid by | Before 1 Apr 2026 | From 1 Apr 2026 | Change |
+| :--- | :--- | ---: | ---: | ---: |
+| Futures, sale | Seller | 0.02% of contract value | 0.05% | +150% |
+| Options, sale of premium | Seller | 0.10% of premium | 0.15% | +50% |
+| Options, exercised | Buyer | 0.125% of settlement value | 0.15% | +20% |
+
+Two things in that table matter more than they look:
+
+- **Futures STT is on the full contract value,** not on profit and not on margin. On Nifty that's lakhs of rupees per lot.
+- **Option buyers pay STT when they sell,** and option writers pay it when they open the short. Either way, every round trip pays it once.
+
+## The Breakdown: Cost per Trade, Before and After
+
+**Use real lot sizes and full charges, not just STT, because brokerage, exchange fees, stamp duty and GST sit on top.** All examples assume Zerodha-style ₹20 per order brokerage and the current Nifty lot size of 65.
+
+### Nifty futures: one lot, intraday round trip
+
+Assume Nifty at 25,000, so one lot has a contract value of 65 × 25,000 = **₹16,25,000**. Buy and sell at roughly the same level.
+
+| Charge | Before Apr 2026 | From Apr 2026 |
+| :--- | ---: | ---: |
+| Brokerage (₹20 × 2) | ₹40.00 | ₹40.00 |
+| STT on sell side | ₹325.00 | ₹812.50 |
+| Exchange transaction charges (~0.00173% each side) [NEEDS SOURCE] | ₹56.23 | ₹56.23 |
+| SEBI fees (₹10 per crore) | ₹3.25 | ₹3.25 |
+| Stamp duty (0.002% on buy) | ₹32.50 | ₹32.50 |
+| GST (18% on brokerage + exchange + SEBI) | ₹17.91 | ₹17.91 |
+| **Total per round trip** | **≈ ₹475** | **≈ ₹962** |
+| **Points per lot to break even** | **≈ 7.3** | **≈ 14.8** |
+
+STT went from about two-thirds of the cost of a futures trade to more than 84% of it. Brokerage, the number most traders compare brokers on, is now 4% of the bill.
+
+**At 3 futures round trips a day for 20 trading days, the STT increase alone costs about ₹29,250 a month on one lot.**
+
+### Nifty options: 2 lots, buy ₹120, sell ₹128
+
+130 units, sell-side premium of 128 × 130 = ₹16,640.
+
+| Charge | Before Apr 2026 | From Apr 2026 |
+| :--- | ---: | ---: |
+| STT on premium sold | ₹16.64 | ₹24.96 |
+| All other charges | ≈ ₹61 | ≈ ₹61 |
+| **Total per round trip** | **≈ ₹78** | **≈ ₹86** |
+
+Per trade, the option increase looks small: about ₹8. At 8 trades a day for 20 days, that's **₹1,331 extra a month**, and total charges come to about ₹13,800 a month. If your average winner is ₹1,000, you need roughly 14 winning trades a month just to pay the toll.
+
+### Exercised options: the expiry trap
+
+**Letting an in-the-money long option expire triggers STT of 0.15% on its settlement value, which can be far larger than STT on selling the premium.** Squaring off before close usually costs much less. WickLog has an "options exercised" flag on each trade so STT is calculated on the right basis when this happens.
+
+## What This Means for How You Trade
+
+**Higher fixed costs per trade punish frequency, so the cheapest response is fewer, larger-edge trades rather than a cheaper broker.** Brokerage is a small slice of an F&O trade's cost now; switching brokers to save ₹10 an order barely moves the total.
+
+Practical adjustments, by style:
+
+| Style | Impact | What to check |
+| :--- | :--- | :--- |
+| Futures scalper | Breakeven doubled to ~15 points per Nifty lot | Average win in points; drop setups targeting under 25–30 points |
+| Option scalper | ~₹86 per 2-lot round trip; adds up with frequency | Charges as % of gross profit each month |
+| Option writer | STT on premium collected rose 50% | Net premium retained after charges |
+| Swing / positional F&O | Few trades, small relative impact | Rollover costs and exercise risk at expiry |
+
+### Watch your charges-to-gross ratio
+
+**Divide total monthly charges by gross profit; if it's above 30–40%, your trade frequency is eating your edge.** This single ratio tells you more about the STT hike's effect on you than any rate table.
+
+## How to Track Your Real, After-STT P&L
+
+**Your broker's P&L screen is easy to read in gross terms; you need per-trade net P&L to see the hike's effect.** Contract notes have every charge, but nobody adds them up across 200 trades by hand.
+
+WickLog computes charges per trade from your broker's brokerage formula plus STT (delivery, intraday, options, exercised options and futures), exchange fees, SEBI fees, stamp duty and 18% GST, on the rates in force since 1 April 2026. All of this is on the free plan:
+
+- **Net profit & charges widget:** gross vs net P&L with the charges broken down, for any date range.
+- **Before/after comparison:** set the date range to January–March 2026, then April–June 2026, and compare charges as a share of gross profit.
+- **Backtests with Indian charges (Pro):** test a Nifty or NSE stock strategy with every simulated trade paying brokerage, STT, exchange fees, SEBI fees, stamp duty and GST, so a 20-point scalping system shows its real result.
+
+[SCREENSHOT: Net profit & charges widget comparing Q1 2026 and Q2 2026, with STT highlighted]
+
+## Key Takeaways
+
+- **STT on futures sales went from 0.02% to 0.05%,** on options premium sales from 0.10% to 0.15%, from 1 April 2026.
+- **A one-lot Nifty futures round trip now costs ~₹962,** up from ~₹475. Breakeven roughly doubled to ~15 points.
+- **Option scalpers pay ~₹86 per 2-lot round trip;** the cost scales with frequency, not conviction.
+- **Brokerage barely matters now** compared with STT on F&O; trade frequency matters far more than broker choice.
+- **Track charges as a share of gross profit** every month. If it's rising, you're trading more for the same edge.
+
+## Frequently Asked Questions
+
+### What is the new STT rate on options and futures in 2026?
+
+From 1 April 2026, STT is 0.05% on the sale of futures (up from 0.02%), 0.15% on the sale of option premium (up from 0.10%), and 0.15% on exercised options (up from 0.125%). The rates were announced in Budget 2026.
+
+### How much STT do I pay on one Nifty futures lot?
+
+With Nifty at 25,000 and a lot size of 65, one lot is worth ₹16.25 lakh, so STT on the sell side is about ₹812. Including brokerage, exchange fees, stamp duty and GST, a full intraday round trip costs roughly ₹960.
+
+### Does WickLog calculate STT and other charges automatically?
+
+Yes. WickLog calculates per-trade charges using your broker's brokerage formula plus STT, exchange fees, SEBI fees, stamp duty and GST, on the post-April 2026 rates. It works for trades from Zerodha and Dhan tradebook imports, broker sync and manual entries, on the free plan.
+
+---
+
+## See What the STT Hike Cost You
+
+Your contract notes already show it, one trade at a time. Import your Zerodha or Dhan tradebook and see your net P&L and charges for the months before and after April.
+
+[See Your Net P&L After STT Free →](https://wicklog.in)

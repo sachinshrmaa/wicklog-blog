@@ -1,0 +1,132 @@
+---
+title: "Best Trading Journal for India: 9 Checks Before You Pick"
+description: "Choosing a trading journal for the Indian market? Nine checks for F&O traders on broker sync, STT-accurate P&L, trade matching, pricing and data safety."
+date: "2026-10-05"
+slug: "best-trading-journal-india-checklist"
+tags: ["trading-journal", "indian-stock-market", "fno-trading", "zerodha", "best-trading-journal"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** The best trading journal for Indian traders imports from your actual broker, turns tradebook fills into complete trades, calculates STT, GST and other Indian charges per trade, and understands F&O symbols and lot sizes. Check those four first. Price in rupees, read-only broker access and review tools like win rate by hour decide the rest.
+
+Search "best trading journal India" and you'll get ten listicles, most written by a journal ranking itself first. That's not a criticism; we build one too. But it means the ranking is the least useful part of any of those articles.
+
+What actually separates a journal you'll keep using from one you'll abandon by week three is a short list of checks you can run yourself in a 10-minute free trial. Here they are, in order of how often they break for Indian traders.
+
+## The Root Problem: Most Journals Fail on Data, Not Features
+
+**Indian traders abandon journals because the data going in is wrong or takes too long to enter, not because the dashboard lacks charts.** A journal with 200 metrics built on miscounted trades and gross P&L is 200 wrong numbers.
+
+Three Indian-specific facts make this harder than it looks:
+
+- **Broker exports list fills, not trades.** A 4-lot Nifty option order can appear as three partial fills; a scale-out appears as two sells.
+- **F&O charges are large and multi-part.** Brokerage, STT, exchange charges, SEBI fees, stamp duty and 18% GST, with STT on option premium sales raised to 0.15% and on futures sales to 0.05% from 1 April 2026.
+- **Symbols carry structure.** An option symbol encodes underlying, expiry, strike and CE/PE. Without parsing, strike-level or expiry-day analysis is impossible.
+
+So start with data, then look at analysis.
+
+## The Breakdown: 9 Checks for Any Trading Journal in India
+
+### Check 1: Does it import from the broker you actually use?
+
+**A journal is only useful if your trades arrive in it without retyping.** Look for two things: auto-sync (connect once, sync on demand) and tradebook file import (upload what your broker exports).
+
+Test it with last month's real tradebook, not the demo data. WickLog auto-syncs Zerodha Kite and Dhan through their official OAuth logins, with Groww and Angel One in beta, and imports Zerodha and Dhan tradebook files on the free plan.
+
+### Check 2: Does it turn fills into trades correctly?
+
+**Import a day where you scaled in or out, then count the trades.** If the journal shows more trades than you took, its win rate and average win are wrong.
+
+Good matching merges partial fills of one order, matches buys and sells first-in-first-out per symbol, and keeps intraday (MIS) separate from delivery (CNC) and margin (MTF) positions. It should also handle shorts and positions that flip direction.
+
+### Check 3: Does it calculate Indian charges per trade?
+
+**Your journal's net P&L should be within a few rupees of your contract note.** Compare one busy day.
+
+A single 2-lot Nifty option round trip on Zerodha costs about ₹86 in charges at current rates. At 8 trades a day, that's roughly ₹13,800 a month, enough to turn a gross-flat month into a real loss. A journal that only stores gross P&L, or makes you type one "fees" number, hides exactly this.
+
+### Check 4: Does it understand F&O instruments?
+
+**It should recognise options and futures, CE/PE, lot quantities and product types without manual columns.** Trading Nifty weekly options on expiry Tuesdays? You want to filter by that, not reconstruct it in a pivot table.
+
+### Check 5: Does it handle partial exits and month-end correctly?
+
+**Book half a position this month and half next month; the P&L should land in the months it was realised.** Many spreadsheets and simple journals assign the whole trade to the entry date, which distorts monthly results.
+
+### Check 6: Is F&O on the free plan, and is pricing in rupees?
+
+**Several global journals restrict free plans to stocks only or a handful of trades, and price paid tiers in dollars.** Check exactly what the free tier includes for options and futures.
+
+For reference, WickLog's free plan includes F&O, 50 manual trades a month, unlimited Zerodha and Dhan tradebook imports and every dashboard widget. Pro is ₹349/month or ₹2,250/year.
+
+### Check 7: Is broker access read-only, and is your data encrypted?
+
+**A journal never needs permission to place orders or move funds.** Confirm that access is read-only and ask how stored data is protected.
+
+WickLog only reads trades, holdings, positions and margins. Trade details, journal content and broker credentials are encrypted at rest with AES-GCM. That protects against casual reads of the database; it isn't end-to-end encryption, and we don't claim it is.
+
+### Check 8: Does it answer the review questions you'll actually ask?
+
+**The useful questions are about when, what and how you lose, not just how much.** Look for:
+
+- Win rate and P&L by entry hour (the 12:00–1:30 PM chop question)
+- A daily P&L calendar to spot red-day clusters
+- Performance by setup or strategy tag
+- Profit factor, expectancy and max drawdown, not just win rate
+- Optionally, an AI analyst that answers questions from your own trades
+
+### Check 9: Can you get your data out?
+
+**You should be able to export every trade, in a format your CA can use.** Avoid any tool that locks your history in. WickLog exports all trades to a formatted `.xlsx`.
+
+## How the Main Options Compare
+
+**Excel suits low-frequency equity traders; global journals suit multi-market traders; India-built journals suit India-only F&O traders.** Here's how the categories score on the checks above.
+
+| Check | Excel / Google Sheets | Global journals (e.g. Tradervue, TradesViz) | WickLog |
+| :--- | :--- | :--- | :--- |
+| 1. Indian broker import | Manual | Varies: TradesViz syncs major Indian brokers; Tradervue lists none | Zerodha, Dhan sync; Groww, Angel One beta; Zerodha/Dhan file import |
+| 2. Fills → trades | Manual | Varies | Automatic FIFO matching |
+| 3. Indian charges per trade | Your formulas | Varies by tool | Per-broker brokerage + all charges, post-April 2026 STT |
+| 4. F&O symbols | Manual columns | Varies | Parsed |
+| 5. Partial exits by period | Manual | Varies | Automatic |
+| 6. F&O free, INR pricing | Free | Often paid, USD | Free F&O; ₹349/month Pro |
+| 7. Read-only, encrypted | Local file | Varies | Read-only; encrypted at rest |
+| 8. Review tools | Build your own | Extensive | 12 widgets; Ticker AI on Pro |
+| 9. Export | Native | Usually | `.xlsx` export |
+
+Global tools change their plans often, so verify current details before subscribing. We compared Tradervue and TradesViz in depth in our [Tradervue alternative for India](https://wicklog.in/blog/tradervue-tradesviz-alternative-india) post.
+
+## What About Upstox, ICICI Direct and Other Brokers?
+
+**Broker coverage is the check most likely to rule a journal out, so start there.** WickLog doesn't have a direct import for Upstox, 5paisa, ICICI Direct or Kotak yet. Traders on those brokers can bring trades in with WickLog's Excel template, but if you trade often, a journal with native support for your broker will save you more time. That's the honest answer.
+
+## Key Takeaways
+
+- **Test with your real tradebook,** not demo data. Data quality decides everything else.
+- **Count trades after import.** More trades than you took means fill matching is broken.
+- **Match net P&L to your contract note.** If it doesn't, the journal is reporting gross numbers.
+- **Check what the free plan covers for F&O,** and what the paid plan costs in rupees.
+- **Pick by your broker first.** A great journal without your broker is a data-entry job.
+
+## Frequently Asked Questions
+
+### Which is the best trading journal for the Indian stock market?
+
+The best one is the journal that imports from your broker, matches fills into trades, and calculates Indian charges per trade. For Zerodha and Dhan F&O traders, WickLog does all three on the free plan. Traders who also trade US markets may prefer a global journal like TradesViz.
+
+### Is there a free trading journal for the Indian market?
+
+Yes. WickLog's free plan includes F&O, Zerodha and Dhan tradebook imports, 50 manual trades a month, and all analytics widgets including win rate by hour and the P&L calendar. Broker auto-sync and Ticker AI, its conversational analyst, are on Pro.
+
+### Which trading journal supports Zerodha and Upstox integration?
+
+WickLog supports Zerodha through official Kite Connect sync and tradebook import, but has no direct Upstox import yet. Upstox traders can use WickLog's Excel template, or choose a journal that lists native Upstox support.
+
+---
+
+## Run the 9 Checks on Your Own Trades
+
+Every check above takes minutes with real data. Import last month's Zerodha or Dhan tradebook, count the trades, and compare net P&L against your contract note.
+
+[Test It With Your Tradebook Free →](https://wicklog.in)

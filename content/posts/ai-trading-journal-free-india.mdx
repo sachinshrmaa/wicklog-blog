@@ -1,0 +1,152 @@
+---
+title: "AI Trading Journal Free: What AI Finds in Your Trades"
+description: "What a free AI trading journal can and can't do for Indian F&O traders: the questions that expose overtrading and time-of-day leaks, with honest limits."
+date: "2026-10-05"
+slug: "ai-trading-journal-free-india"
+tags: ["ai-trading-journal", "trading-journal", "indian-stock-market", "ticker-ai", "trading-psychology"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** An AI trading journal is only as useful as the trade data it can read. Pasting a CSV into ChatGPT gets generic advice; a journal-grounded AI answers with your numbers, like net P&L after 1 PM or your worst setup after charges. WickLog's weekly AI review email is free; Ticker AI, its conversational analyst, is on the ₹349/month Pro plan.
+
+You already know you overtrade after a loss. Every trader does. What you don't know is the exact price: how many trades you take in the 30 minutes after a red one, what they net after STT and brokerage, and whether it's worse on Nifty expiry Tuesdays.
+
+That is the gap an AI trading journal should close. Not a chatbot that tells you "manage your emotions", but an analyst that has read every fill you took and can put a rupee figure on the habit.
+
+## The Root Problem: Your Mistakes Hide in Data You Never Re-Read
+
+**Traders repeat the same mistakes because the evidence is spread across hundreds of trades and no one reads them back.** A P&L screen shows today's result. It does not show that 9 of your last 12 red days started with a loss before 10 AM, followed by four quick re-entries.
+
+Three things keep these patterns invisible:
+
+- **Volume.** An active options trader logs 150–300 trades a month. Reviewing them by hand is a weekend job nobody does twice.
+- **Gross vs net.** Kite's P&L view and most spreadsheets are read in gross terms. The leak often shows up only after STT (0.15% on option premium sales since April 2026), brokerage and GST.
+- **Memory bias.** You remember the big winner and the big loser. The ₹600 loss you took four times on a Tuesday afternoon doesn't register, even when it adds up to more than either.
+
+An AI journal earns its place by doing the re-reading for you and answering in numbers.
+
+## The Breakdown: Generic AI vs an AI That Has Read Your Trades
+
+**The difference between ChatGPT and an AI trading journal is grounding: whether the model sees your full, cleaned trade history every time you ask.** Same underlying technology, very different answers.
+
+| | **ChatGPT / Claude with a pasted CSV** | **Journal-grounded AI (e.g. Ticker AI)** |
+| :--- | :--- | :--- |
+| Data it sees | Whatever you paste this session | Your trades and journal entries, each time you ask |
+| Data quality | Raw tradebook fills; you clean it | Fills merged and matched into trades, with charges |
+| Indian charges | Only if you calculate and include them | Computed per trade (STT, brokerage, GST, stamp duty, SEBI, exchange) |
+| Follow-up questions | Re-paste or hope it fits in context | Ask freely; history is already there |
+| Market tips or predictions | May give them if asked | Declines (SEBI-safe rules) |
+| Effort per review | 15–30 minutes of export and cleanup | Type a question |
+
+The cleanup step matters more than it looks. A Zerodha tradebook lists fills, not trades. A single 4-lot Nifty option order can show up as three partial fills, and a scale-out shows up as two separate sells. Feed that to a general chatbot and it will happily count five "trades" where you took one, and every win-rate number it gives you will be wrong.
+
+### What Ticker AI is, and what it isn't
+
+**Ticker AI, WickLog's conversational trading assistant, answers questions using your own trades and journal entries as context.** It runs on Google Gemini 2.5 Flash and answers with specific numbers and patterns from your history.
+
+It is deliberately limited:
+
+- **No buy/sell tips and no price predictions.** It frames everything as past performance, in line with SEBI rules on investment advice.
+- **No off-topic chat.** It declines requests unrelated to your trading.
+- **It reads, it doesn't trade.** WickLog only has read-only broker access and can never place or modify orders.
+
+It is a Pro feature. Monthly Pro includes 15 credits per billing cycle, and 1 credit covers a message of up to 50 words. Credits are deducted when you send a message and refunded automatically if the AI fails to respond. Top-ups cost ₹79 for 50 credits.
+
+[SCREENSHOT: Ticker AI chat window with suggested-question chips and the credits panel]
+
+## Seven Questions That Find Real Leaks in an Indian F&O Account
+
+**The best AI journal prompts ask for a comparison in rupees, after charges, over a defined period.** Vague prompts ("how am I doing?") get vague answers.
+
+These are written for Ticker AI, but they work as a review checklist with any journal.
+
+### 1. "Compare my net P&L on trades taken within 30 minutes of a losing trade vs all other trades, last 60 days."
+
+This is the closest data proxy for revenge trading. WickLog does not tag trades with emotions; it doesn't need to. Entry timestamps after a loss tell the story.
+
+### 2. "Break down my win rate and net P&L by entry hour for Nifty options."
+
+Morning momentum and the 12:00–1:30 PM range behave very differently. Many intraday traders find their first hour pays for their afternoon. The free **Win rate by hour** dashboard widget shows this too; the AI lets you slice it by instrument or setup.
+
+### 3. "Which strategy tag has the lowest profit factor after charges?"
+
+A setup that wins 60% of the time can still lose money if its losers are twice the size of its winners. Profit factor (gross wins ÷ gross losses) after charges is the honest ranking.
+
+### 4. "How did I do on Nifty expiry Tuesdays vs other days this quarter?"
+
+Expiry-day option premiums decay fast, and many traders size up for the "cheap lottery" trade. Find out whether yours pay.
+
+### 5. "What share of my monthly gross profit went to charges in each of the last three months?"
+
+If this number is rising, you are trading more for the same edge. Since the April 2026 STT revision, many option scalpers have seen it jump.
+
+### 6. "List my five largest losses and what my journal entries said that day."
+
+This links outcomes to context. If your journal says "missed the morning move, chasing" on three of your five worst days, that is the pattern.
+
+### 7. "Which symbols have I traded more than 10 times with negative net P&L?"
+
+The repeated losing symbol is one of the most common leaks. WickLog's free **Mistake pattern detector** widget flags it automatically from closed trades.
+
+### An illustrative example
+
+*The following is a hypothetical account, not a real user.* A Nifty options trader with 214 trades in two months asks question 1. A grounded answer looks like this:
+
+> "You took 41 trades within 30 minutes of a losing trade. Their win rate was 34% versus 52% for your other 173 trades, and they netted −₹18,420 after ₹3,650 in charges. 29 of the 41 were on Tuesdays."
+
+That one answer turns a vague feeling ("I chase after losses") into a rule you can test: no new entry for 30 minutes after a stop-out, and no re-entry at all on expiry afternoon. You can write that rule into a WickLog playbook and check in a month whether it held.
+
+## What You Get Free vs on Pro
+
+**WickLog's free plan includes an AI-written weekly review; the conversational Ticker AI needs Pro.** Here is the full split for AI and analysis features.
+
+| Feature | Free | Pro (₹349/month or ₹2,250/year) |
+| :--- | :--- | :--- |
+| Weekly AI review email (Mondays, 9 AM IST) | ✅ | ✅ |
+| Analytics dashboard, all 12 widgets | ✅ | ✅ |
+| Mistake pattern detector | ✅ | ✅ |
+| Win rate by hour, P&L calendar | ✅ | ✅ |
+| Ticker AI conversational analyst | ❌ | ✅ 15 credits/month (180 upfront on annual) |
+| Broker auto-sync (Zerodha, Dhan, Groww and Angel One in beta) | ❌ | ✅ |
+| Zerodha and Dhan tradebook file import | ✅ | ✅ |
+
+The **weekly AI review email** goes out every Monday at 9 AM IST to anyone who closed at least one trade the previous week. It covers the week at a glance, best and worst trade, strategy breakdown, journal insights, patterns and mistakes, and one takeaway for the coming week. You can switch it off in Settings.
+
+## Is It Safe to Give an AI Your Trade History?
+
+**Your trade data in WickLog is encrypted at rest, and the AI only sees it when you ask a question.** Trade symbols, prices, quantities, notes, journal content and AI chat messages are AES-GCM encrypted before storage.
+
+Be clear about what that means. When you send a message, your decrypted trade and journal context is sent to Google's Gemini model to generate the answer. Encryption at rest protects against casual database reads; it is not end-to-end encryption. If you are not comfortable with a third-party model reading your trade history, use the dashboard widgets, which need no AI at all.
+
+## Key Takeaways
+
+- **AI is only as good as its data.** Raw tradebook fills pasted into a chatbot produce wrong win rates; matched trades with Indian charges produce useful answers.
+- **Ask for rupees, after charges, over a period.** "Net P&L of trades within 30 minutes of a loss, last 60 days" beats "am I a revenge trader?"
+- **You don't need emotion tags to find emotional trading.** Timestamps, sequence and journal notes reveal it.
+- **Start free.** The weekly AI review and every dashboard widget cost nothing; upgrade to Ticker AI when you want to ask your own questions.
+
+## Frequently Asked Questions
+
+### Is there a free AI trading journal for Indian traders?
+
+Yes. WickLog's free plan includes an AI-written weekly trading review by email, plus all dashboard analytics, Zerodha and Dhan tradebook imports, and 50 manual trades a month. The conversational AI analyst, Ticker AI, is part of Pro at ₹349/month.
+
+### Can ChatGPT analyse my Zerodha trades?
+
+It can read a tradebook you paste in, but it sees raw fills rather than complete trades and won't calculate Indian charges unless you supply them. That usually produces inflated trade counts and gross-only P&L. A journal that matches fills and computes STT, brokerage and GST first gives the AI accurate inputs.
+
+### How does Ticker AI help identify trading mistakes?
+
+Ticker AI reads your trade history and journal entries and answers specific questions with your own numbers, such as which setup loses most after charges or how trades taken right after a loss perform. It gives no tips or predictions and only analyses trades you have already taken.
+
+### Does Ticker AI give buy or sell recommendations?
+
+No. Ticker AI follows SEBI-safe rules: no buy or sell advice, no price predictions, and all answers framed as past performance. It will decline requests for trade calls.
+
+---
+
+## Find the Leak Before It Finds Your Capital
+
+The pattern costing you money is already in your tradebook. Import last month's Zerodha or Dhan trades, check the Mistake pattern detector and Win rate by hour, and read your first AI weekly review next Monday.
+
+[Find Your Trading Leaks Free →](https://wicklog.in)

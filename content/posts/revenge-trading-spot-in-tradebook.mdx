@@ -1,0 +1,122 @@
+---
+title: "Revenge Trading: How to Spot It in Your Own Tradebook"
+description: "Revenge trading costs Indian F&O traders more than any bad setup. Five data signals that expose it in your tradebook, and rules that stop the spiral."
+date: "2026-10-05"
+slug: "revenge-trading-signs-tradebook"
+tags: ["revenge-trading", "trading-psychology", "fno-trading", "trading-journal", "risk-management"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Revenge trading is taking unplanned trades to win back a recent loss. It shows up in data as more trades, bigger size and quick re-entries right after a loss, and as rare red days far larger than your normal ones. Measure those signals in your tradebook, then set rules that trigger before the urge does.
+
+You get stopped out of a Nifty call at 10:12 AM. ₹2,400 gone. It was a clean setup, a fair stop. Fine.
+
+At 10:19 you buy the put, because the market "owes you" the move. Stopped out. At 10:31 you double the size. By 11:15, the ₹2,400 loss is ₹14,000, and the morning you'll remember for the next three weeks is set.
+
+Every trader knows this story. The problem is that it doesn't feel like revenge while it's happening. It feels like "getting back to even". That's why you need to find it in data, not memory.
+
+## The Root Problem: Losses Hurt More Than Gains Feel Good
+
+**Revenge trading comes from loss aversion: a loss feels roughly twice as painful as an equal gain feels good, so traders take extra risk to erase it quickly.** This tendency is well documented in behavioural finance research. [NEEDS SOURCE: Kahneman & Tversky, prospect theory, for the ~2x loss-aversion estimate]
+
+In F&O, the setup for revenge is unusually good:
+
+- **Leverage is instant.** Doubling size in Nifty options is one tap.
+- **The market is open for 6¼ hours.** From 9:15 AM to 3:30 PM IST, there's always another candle to "make it back" on.
+- **Expiry days amplify it.** Cheap, fast-moving premiums on Nifty's weekly expiry make a recovery trade look easy.
+- **Every attempt costs money even when it breaks even.** Each 2-lot Nifty option round trip is about ₹86 in charges, including 0.15% STT on the premium sold.
+
+The damage isn't from one bad trade. It's the cluster: a normal loss followed by four to six unplanned trades.
+
+## The Breakdown: 5 Signals of Revenge Trading in Your Data
+
+**You don't need emotion tags to detect revenge trading; timestamps, sizes and daily P&L reveal it.** Look at 2–3 months of trades for these patterns.
+
+### Signal 1: Trade frequency spikes after a loss
+
+Compare the number of trades in the 60 minutes after a losing trade with the 60 minutes after a winning one. If you trade noticeably more after losses, you're reacting, not following a plan.
+
+### Signal 2: Position size grows after a loss
+
+Check quantity on the trade immediately after a loss. If your normal size is 2 lots and post-loss trades are often 3–4, you're trying to recover faster, which is the definition of revenge.
+
+### Signal 3: Re-entry in the same instrument within minutes
+
+A re-entry within 10–15 minutes of a stop-out in the same symbol, often in the opposite direction, is the clearest single sign. Real setups rarely re-form that fast.
+
+### Signal 4: Outlier red days
+
+**Your worst days should look like your normal losing days, just a bit bigger; if a few are 3–5 times your average losing day, those are almost always revenge days.**
+
+*The following is a hypothetical account for illustration.*
+
+| Measure | Value |
+| :--- | ---: |
+| Average losing day | −₹3,200 |
+| Three worst days | −₹14,800, −₹12,100, −₹11,600 |
+| Net P&L for the quarter | +₹9,400 |
+| Net P&L excluding those three days | **+₹47,900** |
+
+Three days erased 80% of a quarter's profit. On each of them, the daily journal entry starts with an early loss.
+
+### Signal 5: Trades without a setup
+
+If you tag trades by setup, count the untagged or `no-setup` trades. Revenge trades rarely belong to a playbook. If most of your no-setup trades come right after a loss, that's the pattern.
+
+## Rules That Stop the Spiral
+
+**Rules work against revenge trading only if they trigger mechanically, before the urge, not when you "feel" emotional.** Decide them when the market is closed.
+
+| Rule | Why it works |
+| :--- | :--- |
+| 30-minute pause after any stop-out | Lets the urge pass; most revenge trades happen within minutes |
+| No size increase on the next trade after a loss | Removes the "win it back faster" option |
+| Daily loss limit of 2× your average losing day | Caps the outlier days that erase weeks |
+| Stop after 3 consecutive losses | Three in a row usually means the market isn't offering your setup today |
+| No same-symbol re-entry for 15 minutes | Kills the instant flip-and-chase |
+
+Write these rules into your trading plan and keep them where you'll see them during the day. Some brokers, including Zerodha, offer a kill switch that disables trading in a segment for the rest of the day, which makes a daily limit enforceable rather than optional. [NEEDS SOURCE: confirm which brokers offer a kill switch and how it works]
+
+## How to Find Revenge Trades in WickLog
+
+**WickLog doesn't tag your emotions; it gives you the data views that make revenge patterns obvious.** All of these are free except Ticker AI.
+
+1. **P&L calendar.** A daily green and red heatmap with amounts and trade counts. Outlier red days, and the high trade counts that usually come with them, stand out immediately.
+2. **Trade log by day.** Filter to a bad day and sort by time. Watch for shorter gaps between trades and growing quantities after the first loss.
+3. **Mistake pattern detector.** Flags red patterns from closed trades, including a repeated losing symbol and a high fast-stop-out rate, both common in revenge sequences.
+4. **Daily journal.** Read the entry from each outlier day. You've usually already written down what happened.
+5. **Ticker AI (Pro).** Ask, for example: "Compare my win rate and net P&L for trades entered within 30 minutes of a losing trade vs all other trades in the last 90 days." Ticker AI, WickLog's conversational trading assistant, answers from your own trades.
+
+[SCREENSHOT: P&L calendar with three outlier red days highlighted and their trade counts]
+
+Then check again in a month. If the outlier red days disappear, the rules are working.
+
+## Key Takeaways
+
+- **Revenge trading is a cluster, not a trade:** one normal loss followed by several unplanned, larger, faster trades.
+- **Find it in data:** post-loss trade frequency, post-loss size, quick same-symbol re-entries, outlier red days and no-setup trades.
+- **A few outlier days can erase a quarter's profit.** Compare net P&L with and without them.
+- **Rules must trigger mechanically:** a pause after a stop-out, no size increase, a daily loss limit, stop after 3 losses.
+- **Re-check monthly.** Fewer outlier red days is the proof.
+
+## Frequently Asked Questions
+
+### What is revenge trading?
+
+Revenge trading is taking unplanned, often larger trades to quickly recover a recent loss. It's driven by loss aversion rather than a trading setup, and it typically turns a normal losing trade into a large losing day.
+
+### How do I stop revenge trading in F&O?
+
+Set mechanical rules before the market opens: pause for 30 minutes after any stop-out, never increase size on the next trade after a loss, stop trading after three consecutive losses, and set a daily loss limit. Then check your tradebook monthly to confirm outlier red days are shrinking.
+
+### How does Ticker AI help identify trading mistakes?
+
+Ticker AI reads your trade history and journal entries and answers specific questions with your own numbers, such as how trades taken soon after a loss performed compared with your others. It doesn't give tips or predictions; it analyses trades you've already taken.
+
+---
+
+## Find Your Revenge Days Before the Next One
+
+Your worst days are already in your tradebook, with timestamps. Import last quarter's Zerodha or Dhan trades and look at your P&L calendar's darkest red days.
+
+[Find Your Revenge Days Free →](https://wicklog.in)

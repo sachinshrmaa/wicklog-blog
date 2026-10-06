@@ -1,0 +1,145 @@
+---
+title: "Groww Trading Journal: Auto-Import Your Groww F&O Trades"
+description: "Groww traders: connect a Groww Trade API key to WickLog and auto-import F&O and equity trades, positions and margins, with net P&L after Indian charges."
+date: "2026-10-05"
+slug: "groww-trading-journal-auto-import"
+tags: ["groww", "trading-journal", "fno-trading", "indian-stock-market", "broker-sync"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** Groww traders can auto-import trades into WickLog by pasting a Groww Trade API key and secret into Settings. WickLog then syncs holdings, positions, executed order trades and margins, with net P&L after Indian charges. You need WickLog Pro (₹349/month) and an active Groww Trade API subscription, which Groww charges separately.
+
+Groww made investing easy enough that millions of first-time traders started there. Then they moved into F&O, and discovered that the app is built for placing trades, not for reviewing them.
+
+You can see today's P&L. You can't easily see your win rate on Nifty options by hour, your net P&L after STT and GST for the month, or which of your setups has lost money five Tuesdays in a row. That's what a journal is for, and this guide shows how to get your Groww trades into one without typing them.
+
+## What You'll Need
+
+**You need a Groww account, an active Groww Trade API subscription, an API key and secret, and a WickLog Pro plan.** Here is each piece and what it costs.
+
+| Requirement | Cost | Notes |
+| :--- | :--- | :--- |
+| Groww account with equity or F&O | Free to open | The account you trade from |
+| Groww Trade API subscription | ₹499 + taxes per month, charged by Groww [NEEDS SOURCE: confirm current Groww pricing at publish] | Groww's own fee for API access; not a WickLog charge |
+| API key and secret | Included with the API subscription | Generated in Groww's API settings |
+| WickLog Pro | ₹349/month or ₹2,250/year | Broker sync is a Pro feature |
+
+Groww sync in WickLog is in **beta**. It works, but we're still refining edge cases, and we want to hear about any mismatch you find.
+
+**Not ready to pay for the Groww API?** On WickLog's free plan you can log up to 50 trades a month by hand, or fill WickLog's Excel template and import it. Direct tradebook-file import is currently available for Zerodha and Dhan, not Groww.
+
+## Step-by-Step: Connect Groww to WickLog
+
+### Step 1: Activate the Groww Trade API
+
+**Subscribe to Groww's Trade API from your Groww account before generating keys.** Groww lists it as available to anyone with a Groww account, covering stocks, F&O and MTF on NSE and BSE.
+
+[SCREENSHOT: Groww Trade API subscription page]
+
+### Step 2: Generate an API key and secret
+
+**Create a new API key in Groww's API settings, give it a recognisable name like "WickLog", and copy both the key and the secret.** The secret is usually shown only once; if you lose it, generate a new key.
+
+Groww offers more than one authentication method. WickLog uses the **API key and secret** method, so choose that one.
+
+[SCREENSHOT: Groww API keys page with "Generate API key" and the key name field]
+
+### Step 3: Paste the credentials into WickLog
+
+**In WickLog, open Settings, go to the Connect tab, choose Groww and paste the key and secret.** Both are encrypted in your browser before they're stored, and they're never sent back to the browser afterwards.
+
+[SCREENSHOT: WickLog Settings > Connect with the Groww API key and secret fields]
+
+### Step 4: Run your first sync
+
+**Click sync, choose a date range and whether to import open, closed or all trades.** At each sync, WickLog exchanges your key and secret with Groww for a short-lived access token, then imports:
+
+- **Executed order trades,** matched into complete trades
+- **Holdings and open positions,** shown as open trades with live prices
+- **Margins:** free cash, utilised margin and holdings value, shown in your capital ledger
+
+Because WickLog requests a fresh token at each sync, you don't need to log in to Groww again every morning, unlike daily-expiring logins on some other broker APIs.
+
+[SCREENSHOT: Sync options dialog with Groww selected, date range and trade type]
+
+### Step 5: Confirm entry dates on open positions
+
+**Open positions created from Groww holdings or positions can show "entry date estimated".** A holdings snapshot doesn't always include the date you first bought. Confirm or correct the date so holding periods and monthly P&L are accurate.
+
+### Step 6: Check your net P&L
+
+**Open the dashboard and look at the Net profit & charges widget.** WickLog applies Groww's brokerage formula plus STT, exchange charges, SEBI fees, stamp duty and 18% GST to each trade, on the STT rates in force since 1 April 2026.
+
+From here, everything on the dashboard works on your Groww data: win rate by hour, the P&L calendar, the mistake pattern detector and the strategy edge radar.
+
+[SCREENSHOT: Dashboard showing Groww trades in the Net profit & charges and Win rate by hour widgets]
+
+## Is It Safe to Give a Journal Your Groww API Key?
+
+**WickLog only reads data from Groww and never places, modifies or cancels orders, but you should understand what the key itself can do.** Groww's Trade API supports trading, so treat the key like a password.
+
+What we do on our side:
+
+- **Read-only use.** WickLog calls only the endpoints needed to read trades, holdings, positions and margins.
+- **Encryption at rest.** The key and secret are encrypted in your browser before they're stored, and never returned to the browser.
+- **No funds access.** WickLog never touches funds or bank details.
+
+What you control:
+
+- **Revoke any time.** Delete the key in Groww's API settings and WickLog can no longer sync.
+- **One key per app.** Don't reuse the key you use for an algo platform; create a separate one named for WickLog.
+- **When Pro ends, the connection is removed.** If your WickLog Pro subscription lapses, broker connections are deleted automatically.
+
+## Common Mistakes & Troubleshooting
+
+### "Sync failed: invalid credentials"
+
+Usually a copy-paste issue: an extra space, or the key and secret pasted into the wrong fields. Paste them again. If it still fails, generate a new key and secret in Groww and reconnect.
+
+### "Sync worked last month, now it fails"
+
+Check that your Groww Trade API subscription is still active. If Groww's API access lapses, the key stops working even though it still appears in WickLog.
+
+### "Some older trades are missing"
+
+WickLog can only import what Groww's API returns for the date range you choose. [NEEDS SOURCE: confirm how far back Groww's trade history endpoint goes] For anything older, add trades with WickLog's Excel template.
+
+### "My open position shows the wrong entry date"
+
+Open positions imported from snapshots are flagged "entry date estimated". Edit the trade to set the real date.
+
+### "My net P&L doesn't match Groww's P&L screen"
+
+Groww's app may calculate P&L differently, for example before some charges, while WickLog shows net P&L after brokerage, STT, exchange fees, SEBI fees, stamp duty and GST. Compare against your contract note instead, and mark options that were exercised at expiry with the "options exercised" flag so STT is calculated correctly.
+
+## Who It's For
+
+**Groww sync is worth it for active traders who take enough trades that typing them is a chore.** In practice:
+
+- **Groww F&O traders** taking several Nifty option trades a day
+- **Swing traders** holding multiple positions who want open risk and floating P&L in one view
+- **Multi-broker traders** using Groww alongside Zerodha or Dhan, who want one combined dashboard and drawdown
+
+If you trade a few times a month, the free plan with manual entry is enough.
+
+## Frequently Asked Questions
+
+### Does WickLog work with Groww?
+
+Yes. WickLog syncs Groww holdings, positions, executed trades and margins using a Groww Trade API key and secret. Groww sync is a Pro feature and is currently in beta.
+
+### Do I need to pay Groww to use the API?
+
+Yes. Groww charges its own monthly fee for Trade API access, separate from WickLog's Pro plan. Check Groww's current pricing before subscribing.
+
+### Can WickLog place trades on my Groww account?
+
+No. WickLog uses the Groww API key only to read trades, holdings, positions and margins, and never places, modifies or cancels orders. You can revoke the key from Groww at any time.
+
+---
+
+## Review Your Groww Trades, Not Just Place Them
+
+Groww shows you today's P&L. A journal shows you why. Connect your Groww API key, sync last month's trades, and see your net P&L after charges, by hour and by setup.
+
+[Connect Your Groww Trades →](https://wicklog.in)

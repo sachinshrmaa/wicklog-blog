@@ -1,0 +1,146 @@
+---
+title: "Trading Journal Excel Template vs Auto Journal: India Guide"
+description: "Why Excel trading journals break for Indian F&O traders, plus a step-by-step guide to importing a Zerodha or Dhan tradebook into a free automated journal."
+date: "2026-10-05"
+slug: "trading-journal-excel-vs-automated-india"
+tags: ["trading-journal", "trading-journal-excel", "zerodha", "dhan", "indian-stock-market"]
+author: "Sachin Sharma"
+---
+
+> **TL;DR:** An Excel trading journal works until you scale out of positions, trade F&O, or take more than a few trades a day. Then partial fills, Indian charges and P&L dating break it. Indian traders can import a Zerodha or Dhan tradebook into WickLog for free, and fills are matched into trades with net P&L after STT, brokerage and GST.
+
+Week one of a trading spreadsheet is satisfying. Columns for date, symbol, entry, exit, quantity, P&L. Conditional formatting turns the losers red.
+
+Week three, you scale out of a Bank Nifty position in two parts, take nine Nifty option trades on expiry Tuesday, and get home at 7 PM to a Kite tradebook with 31 rows that need to become 11 trades. You tell yourself you'll do it on Saturday. You don't.
+
+This guide covers where spreadsheets genuinely break for Indian traders, when Excel is still fine, and how to move your trade history into an automated journal without losing data.
+
+## Where Excel Trading Journals Break for Indian Traders
+
+**Spreadsheets break on five specific things: fills vs trades, partial exits, Indian charges, F&O symbols and which month a P&L belongs to.** None of these show up in week one, which is why the template looks fine at first.
+
+| Problem | In Excel | In WickLog |
+| :--- | :--- | :--- |
+| One order filled in 3 parts | 3 rows you merge by hand | Partial fills of one order merged automatically |
+| Scale-out in 2 exits | Split the row, recalc average and P&L | Exited vs total quantity tracked; realised and unrealised P&L split |
+| STT, stamp duty, SEBI fee, exchange charges, GST | Formula per segment, updated whenever rates change | Computed per trade with per-broker brokerage, on post-April 2026 STT rates |
+| `NIFTY` option symbol parsing | Manual columns for strike, expiry, CE/PE | Parsed on import |
+| Position held across month-end | P&L lands in the wrong month unless you re-date it | P&L assigned to the period it was realised |
+| Shorts and position flips | Easy to mis-sign | FIFO matching per symbol and product type handles both |
+| Analytics | Pivot tables you build and maintain | 12 dashboard widgets, including win rate by hour and P&L calendar |
+| Time per day for an active trader | 20–40 minutes | Import a file, or one-click sync on Pro |
+
+The charges row deserves a closer look. Budget 2026 raised STT on option premium sales from 0.10% to 0.15% and on futures sales from 0.02% to 0.05%, effective 1 April 2026. Every spreadsheet with hard-coded STT formulas has been quietly overstating net P&L since then, unless someone updated it.
+
+### When Excel is still the right tool
+
+**If you take fewer than 15–20 trades a month, mostly delivery equity with single entries and exits, a spreadsheet works fine.** WickLog offers a free Excel and Google Sheets [trading journal template](https://wicklog.in/tools/trading-journal-template) for exactly that case.
+
+Move to an automated journal when any of these become true:
+
+- You trade F&O, especially options with multiple lots.
+- You scale in or out of positions.
+- You take more than 3–4 trades a day.
+- You've skipped logging for more than a week because it felt like a chore.
+
+## What You'll Need
+
+**To move to an automated journal you need a Google account, your broker tradebook file, and about 10 minutes.** Nothing needs to be paid for the file-import route.
+
+- **A WickLog account.** Sign-in is Google only. The free plan is enough for tradebook imports.
+- **A tradebook export** from Zerodha Console or Dhan, as `.csv` or `.xlsx`.
+- **Optional: your old spreadsheet**, if you want history from before your broker export window.
+- **Optional: Pro (₹349/month)** if you want one-click sync with Zerodha Kite or Dhan instead of file uploads.
+
+## Step-by-Step: Import Your Tradebook into WickLog
+
+### Step 1: Export your tradebook from your broker
+
+**Download the tradebook, not the P&L statement.** The P&L report summarises by symbol; the tradebook lists every execution, which is what trade matching needs.
+
+- **Zerodha:** in Console, open the tradebook report, choose the segment (Equity or F&O) and date range, and download it.
+- **Dhan:** download your trade history from Dhan's reports section.
+
+Export each segment separately if your broker splits them, and don't edit the file. WickLog detects the format from the column headers.
+
+[SCREENSHOT: Zerodha Console tradebook report with segment and date range selected]
+
+### Step 2: Open Trades and choose Import
+
+**In WickLog, go to Trades and use the Excel/CSV import.** The importer accepts `.xlsx`, `.xls` and `.csv` and recognises four formats automatically: WickLog's template, Zerodha holdings export, Zerodha tradebook and Dhan tradebook.
+
+[SCREENSHOT: Trades page with the Import button and file picker open]
+
+### Step 3: Let fills be matched into trades
+
+**Tradebook rows are grouped by order and matched first-in, first-out into complete trades.** A 3-part fill becomes one entry; a buy followed by two partial sells becomes one trade with a partial booking.
+
+If you already have open trades in WickLog for the same symbols, matching sells in the tradebook can close them. Broker tradebook imports don't count toward the free plan's 50-manual-trades-a-month limit.
+
+### Step 4: Check the result on the dashboard
+
+**Open the dashboard and compare the Net profit & charges widget with your broker's P&L for the same period.** Gross P&L should match closely. Net P&L will be lower than your gross figure by your charges; that gap is the point.
+
+[SCREENSHOT: Net profit & charges widget showing gross P&L, charges breakdown and net P&L]
+
+### Step 5: Bring in older history from your spreadsheet
+
+**For trades older than your tradebook export, paste them into WickLog's template and import that file.** Keep one row per trade, with entry and exit details. Download the template from the import screen so the column headers match.
+
+### Step 6 (optional, Pro): Switch to one-click sync
+
+**On Pro, connect Zerodha Kite or Dhan via their official OAuth login and sync instead of uploading files.** Zerodha sync pulls a date range you choose (default: last 30 days), including older history through Kite's tradebook report, plus holdings, positions and pending stop-loss or GTT trigger prices.
+
+Kite tokens expire daily around 6 AM IST, so you reconnect each day you sync. Dhan tokens last 24 hours. Groww and Angel One sync are in beta; Angel One's API only provides the current day's trades.
+
+[SCREENSHOT: Settings > Connect page with Zerodha Kite and Dhan connect buttons]
+
+## Common Mistakes & Troubleshooting
+
+**Most import problems come from edited files, the wrong report, or overlapping date ranges.** Here are the fixes.
+
+### "The import didn't recognise my file"
+
+The importer identifies the format from the header row. If you renamed, deleted or reordered columns, or opened and re-saved the file in a way that changed headers, it falls back to the WickLog template format. Re-download the original tradebook and import it unedited.
+
+### "I imported the P&L statement and got strange trades"
+
+Broker P&L statements are summaries, not executions. Use the tradebook report.
+
+### "Will importing the same month twice create duplicates?"
+
+No. Each imported fill gets a key, and re-importing an overlapping tradebook skips fills already imported. You can safely export "last 3 months" every month.
+
+### "My open positions show an estimated entry date"
+
+Open positions created from broker holdings or position snapshots don't always include the original buy date. WickLog flags them "entry date estimated" until the opening fill is found or you confirm the date.
+
+### "My sells closed the wrong lot"
+
+Matching is FIFO per symbol and product type, so intraday (MIS) trades never close delivery (CNC) holdings. If you hold the same stock in both, check the product type on the original trades.
+
+### "Net P&L doesn't match my contract note exactly"
+
+Small differences usually come from rounding or from options that were exercised at expiry, which attract STT on settlement value. Mark those trades with the "options exercised" flag so STT is calculated on the right basis.
+
+## Frequently Asked Questions
+
+### Is there a free trading journal template for the Indian market?
+
+Yes. WickLog offers a free Excel and Google Sheets trading journal template, delivered by email from its tools page. If you trade F&O or take several trades a day, the free WickLog plan's tradebook import does the matching and charge calculation for you.
+
+### How does WickLog import trades from Zerodha or Dhan?
+
+On the free plan, you upload the tradebook file exported from Zerodha Console or Dhan, and WickLog matches fills into trades. On Pro, you connect Zerodha Kite or Dhan through official OAuth and sync a date range with one click.
+
+### Can I export my trades back to Excel?
+
+Yes. WickLog exports all your trades to a formatted `.xlsx` file with gross P&L and trade details, which is useful for your CA at tax time. The export contains data, not live formulas.
+
+---
+
+## Stop Rebuilding Your Spreadsheet Every Weekend
+
+Your broker already records every trade. Export last month's tradebook, import it in two minutes, and see your net P&L after STT and GST without a single formula.
+
+[Import Your Tradebook Free →](https://wicklog.in)
