@@ -4,28 +4,25 @@ import { BLOG_URL } from '@/lib/utils';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
-  const tags = getAllTags();
-
-  const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${BLOG_URL}/${post.frontmatter.slug}`,
-    lastModified: new Date(post.frontmatter.date),
-    changeFrequency: 'monthly',
-    priority: 0.8,
-  }));
-
-  const tagEntries: MetadataRoute.Sitemap = tags.map((tag) => ({
-    url: `${BLOG_URL}/tags/${encodeURIComponent(tag)}`,
-    changeFrequency: 'weekly',
-    priority: 0.5,
-  }));
+  const latest = posts[0]?.frontmatter;
 
   return [
     {
       url: BLOG_URL,
+      lastModified: latest ? new Date(latest.updated ?? latest.date) : undefined,
       changeFrequency: 'weekly',
       priority: 1,
     },
-    ...postEntries,
-    ...tagEntries,
+    ...posts.map(({ frontmatter }) => ({
+      url: `${BLOG_URL}/${frontmatter.slug}`,
+      lastModified: new Date(frontmatter.updated ?? frontmatter.date),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+    ...getAllTags().map((tag) => ({
+      url: `${BLOG_URL}/tags/${tag.slug}`,
+      changeFrequency: 'weekly' as const,
+      priority: 0.5,
+    })),
   ];
 }

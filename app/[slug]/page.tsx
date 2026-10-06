@@ -1,55 +1,63 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import Image from 'next/image';
-import { compileMDX } from 'next-mdx-remote/rsc';
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettyCode from 'rehype-pretty-code';
-import { getAllPosts, getPostBySlug } from '@/lib/posts';
+import { getAllPosts, getPostBySlug, getRelatedPosts } from '@/lib/posts';
+import { renderMDX } from '@/lib/mdx';
+import { ogImageUrl } from '@/lib/og';
+import Link from 'next/link';
+import { extractHeadings } from '@/lib/toc';
+import { primaryTopic, tagLabel } from '@/lib/tags';
 import { SuggestedPosts } from '@/components/suggested-posts';
-import { mdxComponents } from '@/components/mdx-components';
-import { TagChip } from '@/components/post-card';
-import { formatDate, BLOG_URL, SITE_NAME } from '@/lib/utils';
+import { TagChip } from '@/components/tag-chip';
+import { MobileTableOfContents, TableOfContents } from '@/components/table-of-contents';
+import { ReadingProgress } from '@/components/reading-progress';
+import { ShareButtons } from '@/components/share-buttons';
+import { CtaCard } from '@/components/cta-card';
+import { formatDate, BLOG_URL, BLOG_TITLE, SITE_NAME, SITE_URL } from '@/lib/utils';
 
 interface PageProps {
   params: { slug: string };
 }
 
-export async function generateStaticParams() {
+export const dynamicParams = false;
+
+export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.frontmatter.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export function generateMetadata({ params }: PageProps): Metadata {
   const post = getPostBySlug(params.slug);
   if (!post) return {};
 
   const { frontmatter } = post;
-  const ogImage = `${BLOG_URL}/og?title=${encodeURIComponent(frontmatter.title)}&description=${encodeURIComponent(frontmatter.description ?? '')}`;
+  const url = `${BLOG_URL}/${frontmatter.slug}`;
+  const image = frontmatter.coverImage ?? ogImageUrl(frontmatter.title, frontmatter.description);
 
   return {
     title: frontmatter.title,
     description: frontmatter.description,
     authors: [{ name: frontmatter.author }],
+    keywords: frontmatter.tags,
     openGraph: {
       type: 'article',
+      siteName: BLOG_TITLE,
+      locale: 'en_IN',
       title: frontmatter.title,
       description: frontmatter.description,
-      url: `${BLOG_URL}/${frontmatter.slug}`,
+      url,
       publishedTime: frontmatter.date,
+      modifiedTime: frontmatter.updated ?? frontmatter.date,
+      authors: [frontmatter.author],
       tags: frontmatter.tags,
-      images: [{ url: ogImage, width: 1200, height: 630 }],
+      images: [{ url: image, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title: frontmatter.title,
       description: frontmatter.description,
-      images: [ogImage],
+      images: [image],
     },
-    alternates: {
-      canonical: `${BLOG_URL}/${frontmatter.slug}`,
-    },
+    alternates: { canonical: url },
   };
 }
 
@@ -57,131 +65,145 @@ export default async function PostPage({ params }: PageProps) {
   const post = getPostBySlug(params.slug);
   if (!post) notFound();
 
-  const allPosts = getAllPosts();
   const { frontmatter, content, readingTime } = post;
-
-  const { content: mdxContent } = await compileMDX({
-    source: content,
-    options: {
-      mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [
-          rehypeSlug,
-          [
-            rehypeAutolinkHeadings,
-            { behavior: 'wrap', properties: { className: ['anchor'] } },
-          ],
-          [
-            rehypePrettyCode,
-            {
-              theme: { dark: 'github-dark', light: 'github-light' },
-              keepBackground: false,
-            },
-          ],
-        ],
-      },
-    },
-    components: mdxComponents,
-  });
+  const mdxContent = await renderMDX(content);
+  const url = `${BLOG_URL}/${frontmatter.slug}`;
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: frontmatter.title,
     description: frontmatter.description,
     datePublished: frontmatter.date,
-    author: {
-      '@type': 'Person',
-      name: frontmatter.author,
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      url: 'https://wicklog.in',
-    },
-    url: `${BLOG_URL}/${frontmatter.slug}`,
-    ...(frontmatter.coverImage && { image: frontmatter.coverImage }),
+    dateModified: frontmatter.updated ?? frontmatter.date,
+    author: { '@type': 'Person', name: frontmatter.author },
+    publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    url,
+    image: frontmatter.coverImage ?? ogImageUrl(frontmatter.title, frontmatter.description),
+    keywords: frontmatter.tags.join(', '),
   };
+
+  const headings = extractHeadings(content).filter((h) => h.level === 2);
+  const showToc = headings.length >= 3;
+  const primaryTag = primaryTopic(frontmatter.tags);
+  const initials = frontmatter.author
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        // Escape "<" so content can never close the script tag early.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
-      <div className="container max-w-3xl py-12">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mb-10"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M19 12H5M12 5l-7 7 7 7" />
-          </svg>
-          All posts
-        </Link>
+      <ReadingProgress targetId="article-body" />
 
-        <article>
-          <header className="mb-10">
-            {frontmatter.tags && frontmatter.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {frontmatter.tags.map((tag) => (
-                  <TagChip key={tag} tag={tag} />
-                ))}
+      <div className="container max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_250px]">
+          <div className="min-w-0 max-w-3xl">
+            <article>
+              <header className="mb-10">
+                <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <Link href="/" className="hover:text-foreground transition-colors">
+                    Blog
+                  </Link>
+                  {primaryTag && (
+                    <>
+                      <span aria-hidden="true">/</span>
+                      <Link href={`/tags/${primaryTag}`} className="font-medium text-primary hover:underline underline-offset-4 dark:text-link">
+                        {tagLabel(primaryTag)}
+                      </Link>
+                    </>
+                  )}
+                </nav>
+
+                <h1 className="mt-5 font-serif text-4xl font-medium leading-[1.12] tracking-tight text-foreground sm:text-5xl">
+                  {frontmatter.title}
+                </h1>
+
+                <p className="mt-5 text-lg leading-relaxed text-muted-foreground sm:text-xl">{frontmatter.description}</p>
+
+                <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-y border-border py-4">
+                  <div className="flex items-center gap-3">
+                    <span
+                      aria-hidden="true"
+                      className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground"
+                    >
+                      {initials}
+                    </span>
+                    <div className="text-sm">
+                      <p className="font-medium text-foreground">{frontmatter.author}</p>
+                      <p className="text-muted-foreground">
+                        <time dateTime={frontmatter.date}>{formatDate(frontmatter.date)}</time>
+                        {frontmatter.updated && frontmatter.updated !== frontmatter.date && (
+                          <>
+                            {' · Updated '}
+                            <time dateTime={frontmatter.updated}>{formatDate(frontmatter.updated)}</time>
+                          </>
+                        )}
+                        {' · '}
+                        {readingTime}
+                      </p>
+                    </div>
+                  </div>
+                  <ShareButtons url={url} title={frontmatter.title} />
+                </div>
+              </header>
+
+              {frontmatter.coverImage && (
+                <div className="mb-10 overflow-hidden rounded-2xl border border-border">
+                  <Image
+                    src={frontmatter.coverImage}
+                    alt={frontmatter.title}
+                    width={1200}
+                    height={630}
+                    sizes="(min-width: 1024px) 768px, 100vw"
+                    className="h-auto w-full"
+                    priority
+                  />
+                </div>
+              )}
+
+              {showToc && <MobileTableOfContents headings={headings} />}
+
+              <div id="article-body" className="prose prose-neutral max-w-none dark:prose-invert">
+                {mdxContent}
               </div>
-            )}
+            </article>
 
-            <h1 className="text-3xl font-bold tracking-tight leading-tight text-foreground sm:text-4xl">
-              {frontmatter.title}
-            </h1>
-
-            {frontmatter.description && (
-              <p className="mt-3 text-lg text-muted-foreground leading-relaxed">
-                {frontmatter.description}
-              </p>
-            )}
-
-            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground border-t border-border pt-5">
-              <span className="font-medium text-foreground">{frontmatter.author}</span>
-              <time dateTime={frontmatter.date}>{formatDate(frontmatter.date)}</time>
-              <span>{readingTime}</span>
-            </div>
-          </header>
-
-          {frontmatter.coverImage && (
-            <div className="mb-10 overflow-hidden rounded-lg border border-border">
-              <Image
-                src={frontmatter.coverImage}
-                alt={frontmatter.title}
-                width={800}
-                height={450}
-                className="w-full h-auto"
-                priority
-              />
-            </div>
-          )}
-
-          <div className="prose prose-neutral dark:prose-invert max-w-none">
-            {mdxContent}
+            <footer className="mt-14 space-y-6 border-t border-border pt-8">
+              {frontmatter.tags.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="mr-1 text-sm text-muted-foreground">Topics</span>
+                  {frontmatter.tags.map((tag) => (
+                    <TagChip key={tag} tag={tag} />
+                  ))}
+                </div>
+              )}
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <p className="text-sm text-muted-foreground">Found this useful? Share it with a trading friend.</p>
+                <ShareButtons url={url} title={frontmatter.title} />
+              </div>
+              <div className="lg:hidden">
+                <CtaCard />
+              </div>
+            </footer>
           </div>
-        </article>
 
-        <SuggestedPosts
-          currentSlug={frontmatter.slug}
-          currentTags={frontmatter.tags ?? []}
-          allPosts={allPosts}
-        />
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 space-y-8">
+              {showToc && <TableOfContents headings={headings} />}
+              <CtaCard />
+            </div>
+          </aside>
+        </div>
 
-        <footer className="mt-10 pt-8 border-t border-border">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M19 12H5M12 5l-7 7 7 7" />
-            </svg>
-            Back to all posts
-          </Link>
-        </footer>
+        <SuggestedPosts posts={getRelatedPosts(post)} />
       </div>
     </>
   );

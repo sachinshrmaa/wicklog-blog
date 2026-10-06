@@ -2,12 +2,13 @@
 title: "How to Connect Zerodha Kite to WickLog"
 description: "Import your Zerodha trades into WickLog in one click via secure, read-only Kite OAuth. Full setup guide, troubleshooting, and FAQ inside."
 date: "2026-06-11"
+updated: "2026-10-06"
 slug: "connect-zerodha-kite-wicklog"
-tags: ["Zerodha", "Guide"]
+tags: ["zerodha", "guide"]
 author: "Sachin Sharma"
 ---
 
-> **TL;DR:** Connect your Zerodha Kite account to WickLog in 3 steps using a secure, read-only OAuth login — no credentials are stored. Once connected, import your trades for any timeframe in one click, and they'll flow straight into your Dashboard, Journals, and Ticker AI.
+> **TL;DR:** Connect your Zerodha Kite account to WickLog in 4 steps using a secure, read-only OAuth login — no credentials are stored. Once connected, import your trades for any timeframe in one click, and they'll flow straight into your Dashboard, Journals, and Ticker AI.
 
 If you're logging trades manually from your Zerodha console, connecting Kite to WickLog turns that into a one-click import. This guide walks through the full setup — connecting your account, importing trades, and where those trades show up once they're in.
 
@@ -22,21 +23,21 @@ If you're logging trades manually from your Zerodha console, connecting Kite to 
 ### Step 1: Go to the Connect Demat screen
 From your WickLog dashboard, navigate to the **Connect Demat** screen. This is where all supported broker connections live.
 
-![WickLog Dashboard](/blog/images/dashboard-connect-demat.png)
+![The Connect Demat screen in WickLog](/blog/images/dashboard-connect-demat.png)
 
 ### Step 2: Connect your Zerodha Kite account
 Click **Connect** on the Zerodha Kite card. This takes you to Zerodha's own official Kite login page — not a WickLog-branded screen — where you'll enter your Kite credentials and TOTP directly with Zerodha. WickLog never sees or stores this login information; it only receives **read access to your tradebook** through Kite's OAuth flow. On success, Kite redirects you back to the WickLog Trades screen.
 
-![WickLog Connect Demat](/blog/images/connect-demat-kite.png)
+![Connecting the Zerodha Kite card](/blog/images/connect-demat-kite.png)
 
 ### Step 3: Import your trades
 On the Trades screen, click **Import from Zerodha Kite** in the top-right corner. 
 
-![WickLog Trades ](/blog/images/import-kite-trades.png)
+![The Import from Zerodha Kite button on the Trades screen](/blog/images/import-kite-trades.png)
 
-A popup will ask you to select the timeframe you want to import — this could be your current month or your full trade history, depending on what you need.
+An **Import Options** popup asks what to bring in: pick a **Trade Type** (all, open or closed trades) and a **From/To** date range, then click **Import Trades**.
 
-![WickLog Trades ](/blog/images/import-trades-modal.png)
+![The Import Options popup with trade type and date range](/blog/images/import-trades-modal.png)
 
 ### Step 4: Confirm your trades have landed
 Once the import finishes, your trades appear on the WickLog Trades screen. From there, they automatically feed into your **Dashboard** (performance stats), your **Journals** (so you can write notes and link trades to entries), and **Ticker AI** (so you can ask questions about your own trading data).
@@ -59,15 +60,17 @@ Unlike a typical "connect once and forget it" integration, your Kite session wit
 No. The Kite connection is strictly read-only — WickLog can fetch your tradebook but cannot place, modify, or cancel orders on your behalf.
 
 **Why do I have to reconnect Kite so often?**
-Sessions expire by design. It's a deliberate security trade-off: a short-lived, read-only session reduces the window in which your account data could be exposed, compared to a permanent stored connection.
+Zerodha expires every Kite Connect session daily (around 6 AM IST), for every app, not just WickLog. Sessions expire by design. It's a deliberate security trade-off: a short-lived, read-only session reduces the window in which your account data could be exposed, compared to a permanent stored connection.
 
 **Can I import old trades, not just recent ones?**
-Yes. The import popup lets you choose the timeframe, so you can pull in your full trade history or just a specific period.
+Yes. Set the From/To dates in the import popup to cover the period you want. For history older than what Kite returns, upload your tradebook file from Zerodha Console instead.
 
 **Is Zerodha Kite import available on the free plan?**
-This guide assumes a WickLog Pro account, since Kite import currently requires Pro.
+The free plan covers manual journaling (50 trades and 50 journal entries a month), Zerodha and Dhan tradebook file imports, and every analytics widget. One-click Kite sync is a Pro feature (₹349/month or ₹2,250/year).
 
 
 ## Try It
 
-Connect your Zerodha account and see your full trade history in WickLog in under two minutes — [connect Kite now](https://www.wicklog.in/).
+Connect your Zerodha account and see your full trade history in WickLog in under two minutes — [connect Kite now](https://wicklog.in/auth).
+
+Using another broker? See the guides for [Dhan](/connect-dhan-wicklog), [Groww](/groww-trading-journal-auto-import) and [Angel One](/angel-one-trading-journal-smartapi).

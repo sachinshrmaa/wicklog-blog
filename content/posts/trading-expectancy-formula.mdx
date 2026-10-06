@@ -50,7 +50,7 @@ Expectancy = 960 − 540
 Expectancy = ₹420 per trade
 ```
 
-This trader wins less than half the time but has positive expectancy of ₹420/trade. Over 100 trades, that's a theoretical ₹42,000 edge — before brokerage, STT, and slippage eat into it. [NEEDS SOURCE: average STT + brokerage drag per F&O round trip on Zerodha/Groww/Dhan for realistic net expectancy]
+This trader wins less than half the time but has positive expectancy of ₹420/trade. Over 100 trades, that's a theoretical ₹42,000 edge — before brokerage, STT, and slippage eat into it. At current rates a 2-lot Nifty option round trip costs about ₹86 in charges on a ₹20-per-order broker ([here's the breakdown](/stt-hike-2026-fno-traders-cost)), so net expectancy here is closer to ₹334 per trade, before slippage.
 
 ### Why High Win Rate Can Still Mean Negative Expectancy
 
@@ -75,7 +75,7 @@ To get a statistically meaningful expectancy number, you need at least 30-50 tra
 
 This is the exact friction WickLog was built around. One-click imports from Zerodha Kite, Groww, and Dhan pull your trade history in directly — no manual CSV cleanup — and the built-in **Expectancy Calculator** runs this formula automatically against your logged trades, broken down by strategy tag, instrument, or time of day.
 
-[SCREENSHOT: WickLog Expectancy Calculator showing win%, avg win, avg loss, and calculated expectancy per trade]
+{/* TODO screenshot: WickLog Expectancy Calculator showing win%, avg win, avg loss, and calculated expectancy per trade */}
 
 You can also ask **Ticker AI**, WickLog's conversational trading assistant, a direct question like *"What's my expectancy on BankNifty scalps this month vs last month?"* and get an answer pulled straight from your logged trade data — instead of rebuilding a pivot table every time.
 

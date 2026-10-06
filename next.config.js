@@ -1,3 +1,5 @@
+const postRedirects = require('./redirects');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   basePath: '/blog',
@@ -7,13 +9,14 @@ const nextConfig = {
   // Without this, _next/static asset requests will 404 in the multi-zone setup.
   assetPrefix: process.env.NEXT_PUBLIC_ASSET_PREFIX || '',
 
+  // All post images live in /public/images. If a post ever needs a remote image,
+  // add its specific host here — a "**" wildcard turns the image optimizer into an open proxy.
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
+    remotePatterns: [],
+  },
+
+  async redirects() {
+    return postRedirects.map((r) => ({ ...r, permanent: true }));
   },
 };
 

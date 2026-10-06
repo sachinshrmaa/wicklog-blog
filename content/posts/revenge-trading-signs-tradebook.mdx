@@ -17,7 +17,7 @@ Every trader knows this story. The problem is that it doesn't feel like revenge 
 
 ## The Root Problem: Losses Hurt More Than Gains Feel Good
 
-**Revenge trading comes from loss aversion: a loss feels roughly twice as painful as an equal gain feels good, so traders take extra risk to erase it quickly.** This tendency is well documented in behavioural finance research. [NEEDS SOURCE: Kahneman & Tversky, prospect theory, for the ~2x loss-aversion estimate]
+**Revenge trading comes from loss aversion: a loss feels roughly twice as painful as an equal gain feels good, so traders take extra risk to erase it quickly.** This is loss aversion, first described by Daniel Kahneman and Amos Tversky in prospect theory; their 1992 follow-up estimated that losses weigh about 2.25 times as much as equal gains.
 
 In F&O, the setup for revenge is unusually good:
 
@@ -75,7 +75,7 @@ If you tag trades by setup, count the untagged or `no-setup` trades. Revenge tra
 | Stop after 3 consecutive losses | Three in a row usually means the market isn't offering your setup today |
 | No same-symbol re-entry for 15 minutes | Kills the instant flip-and-chase |
 
-Write these rules into your trading plan and keep them where you'll see them during the day. Some brokers, including Zerodha, offer a kill switch that disables trading in a segment for the rest of the day, which makes a daily limit enforceable rather than optional. [NEEDS SOURCE: confirm which brokers offer a kill switch and how it works]
+Write these rules into your trading plan and keep them where you'll see them during the day. Some brokers let you lock yourself out: Zerodha's [kill switch](https://support.zerodha.com/category/console/segments/killswitch/articles/what-is-the-kill-switch) disables a segment such as F&O, and it can only be re-enabled after 12 hours. Dhan offers a similar option under Trader's Controls. Either one makes a daily limit enforceable rather than optional.
 
 ## How to Find Revenge Trades in WickLog
 
@@ -87,7 +87,7 @@ Write these rules into your trading plan and keep them where you'll see them dur
 4. **Daily journal.** Read the entry from each outlier day. You've usually already written down what happened.
 5. **Ticker AI (Pro).** Ask, for example: "Compare my win rate and net P&L for trades entered within 30 minutes of a losing trade vs all other trades in the last 90 days." Ticker AI, WickLog's conversational trading assistant, answers from your own trades.
 
-[SCREENSHOT: P&L calendar with three outlier red days highlighted and their trade counts]
+{/* TODO screenshot: P&L calendar with three outlier red days highlighted and their trade counts */}
 
 Then check again in a month. If the outlier red days disappear, the rules are working.
 

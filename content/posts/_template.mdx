@@ -1,10 +1,28 @@
 ---
-title: "Your Post Title"
-description: " "
+title: "Your Post Title (aim for ≤70 characters)"
+description: "One or two sentences shown in the post list and used as the meta description. Keep it under 160 characters."
 date: "YYYY-MM-DD"
-slug: "your-post-slug"
-tags: ["tag-one", "tag-two"]
+# updated: "YYYY-MM-DD"      ← set when you materially revise a published post
+slug: "your-post-slug"       # lowercase-kebab-case; also name this file your-post-slug.mdx
+tags: ["trading-journal", "risk-management"]   # reuse existing tags where possible
 author: "Sachin Sharma"
+# coverImage: "/blog/images/your-cover.png"    ← optional, 1200×630
+# draft: true                ← hides the post from production builds
 ---
 
-post content here
+Opening paragraph — hook the reader.
+
+## Section Heading
+
+Images live in /public/images and are referenced with the /blog prefix:
+
+![Alt text, also shown as the caption](/blog/images/your-image.png)
+
+Link to other posts by slug: [trading expectancy](/trading-expectancy-formula)
+
+Need a screenshot you don't have yet? Leave a hidden TODO (readers never see it;
+`npm run check:content -- --todo` lists them):
+
+{/* TODO screenshot: what the image should show */}
+
+Write `<`, `>` and `{` inside backticks (`<`) or they'll break the MDX build.

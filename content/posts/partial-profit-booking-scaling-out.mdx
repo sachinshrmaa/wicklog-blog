@@ -2,6 +2,7 @@
 title: "Partial Profit Booking: The Math of Scaling Out in F&O"
 description: "Does partial profit booking help F&O traders? The math of scaling out of Nifty option lots, when it beats a full exit, and what it costs in charges."
 date: "2026-10-05"
+updated: "2026-10-06"
 slug: "partial-profit-booking-scaling-out"
 tags: ["partial-profit-booking", "risk-management", "fno-trading", "nifty", "trading-journal"]
 author: "Sachin Sharma"
@@ -55,6 +56,30 @@ How Plan B adds up:
 - If your trades usually go cleanly to target or straight to stop (paths 1 and 3), scaling out just shrinks your winners.
 - If you occasionally catch big trend moves (path 4), the trailed portion captures them; a fixed target never does.
 
+### Ten trades, three exit plans
+
+The four paths above show single trades. Over a run of trades, what matters is how often each path happens. Here are 10 trades with risk of 1R, a first target at 2R and a runner target at 5R:
+
+- **4 trades** stop out before the first target
+- **3 trades** touch the first target, then reverse back to the stop
+- **3 trades** run to the 5R target
+
+| Plan | 4 stop-outs | 3 "touch and reverse" | 3 runners | Total | Per trade | Losing trades |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Exit 100% at 2R | −4R | +6R | +6R | **+8R** | +0.80R | 4 |
+| Hold 100% for 5R | −4R | −3R | +15R | **+8R** | +0.80R | 7 |
+| Book 50% at 2R, runner to 5R, breakeven stop | −4R | +3R | +10.5R | **+9.5R** | +0.95R | 4 |
+
+Holding everything makes the same money as exiting at target, but with seven losing trades instead of four: longer losing streaks and a far bumpier equity curve. Change the mix and the winner changes:
+
+| What your trades usually do after the first target | Exit 100% at 2R | Hold 100% for 5R | Scale out 50% |
+| :--- | ---: | ---: | ---: |
+| Rarely extend (0 runners, 6 reversals) | **+0.80R** | −1.00R | +0.20R |
+| Mixed (3 runners, 3 reversals) | +0.80R | +0.80R | **+0.95R** |
+| Often trend (5 runners, 1 reversal) | +0.80R | **+2.00R** | +1.45R |
+
+Scaling out is never the best plan at the extremes, and never the worst. It's a hedge for when you don't yet know which row describes your trading.
+
 ### Be honest about what's doing the work
 
 **Much of Plan B's protection comes from moving the stop to entry after the first booking, not from the partial exit itself.** You could move the stop to breakeven on a full position too. Test the two decisions separately: the breakeven stop and the partial booking each have their own effect on your win rate and average win.
@@ -79,7 +104,7 @@ How Plan B adds up:
 
 Broker-synced and tradebook-imported trades are matched first-in, first-out, so a scale-out shows up as one trade with partial bookings, not as three separate trades that inflate your trade count.
 
-[SCREENSHOT: A Nifty option trade with two partial bookings showing exited vs total quantity, realised and unrealised P&L]
+{/* TODO screenshot: A Nifty option trade with two partial bookings showing exited vs total quantity, realised and unrealised P&L */}
 
 ## Key Takeaways
 
@@ -98,6 +123,10 @@ It depends on how your trades behave. Partial booking helps when many trades mov
 ### How do I record partial profit booking in a trading journal?
 
 Record the total quantity and the quantity exited at each booking, with the price and date of each. WickLog does this automatically for broker-synced and tradebook-imported trades, tracks realised and unrealised P&L separately, and assigns each booked portion to the period it was realised in.
+
+### Where should I move my stop after booking partial profit?
+
+The most common choice is breakeven (your entry price), which guarantees the rest of the trade can't turn into a loss. Moving it into profit locks in more but gets stopped out more often by normal pullbacks. Pick one rule and apply it every time, so your journal can tell you whether it works.
 
 ### Does scaling out increase charges?
 
