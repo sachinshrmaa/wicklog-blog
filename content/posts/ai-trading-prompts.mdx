@@ -1,0 +1,158 @@
+---
+title: "AI Trading Prompts: 5 Templates to Find Your Leaks"
+description: "Use 5 copy-ready AI prompts to find the trading leaks draining your P&L. Built for Nifty and BankNifty F&O traders analysing Kite, Groww or Dhan trades."
+date: "2026-10-09"
+slug: "ai-trading-prompts"
+tags: ["ai-trading-prompts", "trading-journal", "indian-stock-market", "risk-management", "zerodha"]
+author: "Priyanshu Verma"
+---
+
+**TL;DR:** A trading leak is a repeatable behaviour that quietly costs you money, such as revenge trades, late-day entries or oversized lots after a loss. Five specific questions, asked of your imported trade history, expose most of them: time of day, post-loss behaviour, sizing, holding time and charges. Vague prompts get vague answers, so name the metric, the window and the rupee outcome.
+
+You ask an AI, "How can I improve my trading?" and get a polite list: manage risk, stay disciplined, review your trades. None of it tells you that your 1:45 PM entries have lost ₹38,000 this quarter. The advice is generic because the question was. The data to answer a sharper question was sitting in your broker's trade file the whole time.
+
+## The Root Problem
+
+Most traders never find their leaks because they ask broad questions of a memory instead of specific questions of their data. A leak is a pattern, and patterns only show up when you slice hundreds of trades by one variable at a time.
+
+Three things get in the way:
+
+1. **Memory is selective.** You remember the big win on expiry day and the one painful loss. You forget the 40 small, avoidable losses between them.
+2. **Prompts are vague.** "Analyse my trading" gives the AI nothing to compute. It falls back on generic advice.
+3. **Data is scattered.** Contract notes, P&L statements and screenshots in four different formats are hard to question in plain language.
+
+A good prompt names four things:
+
+| Ingredient | Weak prompt | Sharp prompt |
+|---|---|---|
+| **Metric** | "How am I doing?" | "What is my total P&L and win rate?" |
+| **Slice** | "Look at my trades" | "Split by entry time: before 10:30 AM vs after 1:30 PM" |
+| **Window** | (none) | "Over the last 60 trading days" |
+| **Output** | "Give me tips" | "Show ₹ impact and trade count for each slice" |
+
+[NEEDS SOURCE: SEBI study on the share of individual F&O traders who lose money, and over what period]
+
+## The Breakdown
+
+Each of the five templates below targets one leak, tells you what the answer means, and shows what to do next. They are written for Ticker AI, WickLog's conversational trading assistant, which answers plain-language questions from your imported trades. They also work in any AI tool if you paste in your trade data, though WickLog saves you the pasting.
+
+Before you start, import your Zerodha Kite, Groww or Dhan trade CSV into WickLog. Use at least 30 trading days, and ideally 60 or more, so each slice has enough trades to mean something. Time-based prompts only work if your broker's export includes execution timestamps, so check the columns first.
+
+[SCREENSHOT: WickLog one-click CSV import screen with a Zerodha Kite file selected]
+
+### Template 1: The Time-of-Day Leak
+
+Prompt: *"Split my trades by entry time into 9:15–10:30 AM, 10:30 AM–1:30 PM, and 1:30–3:30 PM. For each window, show trade count, win rate, total P&L in ₹ and profit factor, over the last 60 days."*
+
+This prompt finds the hours where you give money back. Many traders find that one window carries all their profit and another carries all their loss. The 9:15 opening volatility and the last-hour expiry scramble are common culprits.
+
+| What the answer shows | What it likely means | Rule to test |
+|---|---|---|
+| One window deeply negative | You trade it without a setup | No entries in that window for 2 weeks |
+| Most trades in your worst window | Boredom or recovery trading | Cap entries per window |
+| Best window has few trades | You under-trade your edge | Plan more trades there, not more overall |
+
+### Template 2: The Post-Loss Behaviour Leak
+
+Prompt: *"Compare my trades opened within 15 minutes of a losing trade against all other trades. Show count, average lot size, win rate and total P&L in ₹ for each group."*
+
+This is the revenge-trading detector. If trades taken right after a loss are larger, more frequent and less profitable, you have found the leak that causes most blow-up days.
+
+Illustrative result:
+
+| Group | Trades | Avg lots | Win rate | Total P&L |
+|---|---|---|---|---|
+| Opened 15+ min after a loss, or after a win | 210 | 1.4 | 46% | +₹29,000 |
+| Opened within 15 min of a loss | 95 | 2.3 | 31% | −₹41,500 |
+
+The numbers are hypothetical, but this shape is common. If your own result looks like this, a rule such as "no new entry for 30 minutes after a stop-loss, and size never increases after a loss" is worth testing. Pair it with a daily max loss to cap the damage.
+
+### Template 3: The Position Sizing Leak
+
+Prompt: *"Group my trades by number of lots. For each group show trade count, win rate, average win, average loss and total P&L. Then tell me whether my larger trades perform better or worse than my smaller ones."*
+
+Sizing leaks appear when your biggest trades are your worst, which usually means size follows emotion rather than conviction or setup quality. Traders often size up after a win (overconfidence) or after a loss (the urge to recover).
+
+Check the answer against your plan. If your rules say 1 lot per trade, any 3-lot trade is a rule break, and the P&L on those trades is the price tag. WickLog's Position Size calculator helps you set a fixed lot count from your capital and per-trade risk, so the number is decided before 9:15 AM instead of mid-trade.
+
+### Template 4: The Holding-Time Leak
+
+Prompt: *"Compare the average holding time of my winning trades against my losing trades. Then show total P&L for trades held under 5 minutes, 5 to 30 minutes, and over 30 minutes."*
+
+If your losers are held far longer than your winners, you are cutting profits early and hoping on losses, which is the classic pattern behind a high win rate and a negative P&L. Long-held losers are also where expiry-day theta does its damage on long options.
+
+| Pattern | What it suggests |
+|---|---|
+| Winners held 4 minutes, losers held 25 | You book gains fast and hold losers hoping for recovery |
+| Very short trades lose consistently | Scalping into costs and spread |
+| Longest trades are the best | Your edge needs time, so stop exiting early |
+
+This prompt needs entry and exit timestamps in your export. Verify they are present before relying on the answer.
+
+### Template 5: The Cost Leak
+
+Prompt: *"Show my gross P&L, total charges and net P&L for the last 60 days. What percentage of my gross profit went to charges? Which instrument and which weekday generated the most charges per ₹ of gross profit?"*
+
+If charges consume a large share of your gross profit, your edge per trade is too thin for your trading frequency. Brokerage, STT, exchange charges, GST and stamp duty are charged on every round trip, whether the trade wins or loses. [NEEDS SOURCE: current STT, exchange transaction charge and stamp duty rates for NSE index options]
+
+Whether charges appear in WickLog's analysis depends on what your broker's CSV contains, so check the export columns first. If charges are not in the file, you can still estimate them from your broker's charge calculator and compare against gross P&L manually.
+
+| Result | Interpretation |
+|---|---|
+| Charges under 10% of gross profit | Cost is not your main leak |
+| Charges 25% or more of gross profit | Overtrading, so cut low-conviction trades |
+| Net negative while gross is positive | Charges are your entire problem |
+
+The 10% and 25% thresholds are rough guides, not standards.
+
+[SCREENSHOT: Ticker AI answering a question about gross P&L versus total charges over the last 60 days]
+
+### What to Do With the Answers
+
+An answer only matters if it becomes a rule you can check. Take the one leak with the largest ₹ impact, write one rule against it, and test it for two weeks before touching the next one.
+
+1. **Rank by rupees.** Fix the biggest leak first, not the most interesting one.
+2. **Write the rule with a trigger.** "No entries after 1:30 PM" can be checked. "Be careful late in the day" cannot.
+3. **Re-run the same prompt in 2 weeks.** If the number does not move, the rule is not working or you are not following it.
+4. **Check sample size.** A slice with fewer than 20 to 30 trades is a hint, not a verdict.
+
+A comparison of the two ways to run this exercise:
+
+| | Manual Excel analysis | WickLog with Ticker AI |
+|---|---|---|
+| Getting the data in | Copy and clean broker files | One-click CSV import |
+| Slicing by time, size or instrument | Pivot tables and formulas | Plain-language questions |
+| Repeating monthly | Rebuild or maintain sheets | Re-ask the same prompts |
+| Time per review | 1 to 2 hours | Minutes |
+
+One honest limitation: WickLog works on imported trades after the session. It does not place, block or monitor orders live, so it will show you the leak but cannot stop you in the moment. And an AI answer is only as good as the data you give it, so spot-check a few numbers against your broker statement before acting on them.
+
+## Key Takeaways
+
+- A trading leak is a repeatable behaviour with a rupee cost, and you find it by slicing your trades one variable at a time.
+- Sharp prompts name the metric, the slice, the window and the output you want.
+- Start with five leaks: time of day, post-loss behaviour, position size, holding time and charges.
+- Fix the leak with the largest ₹ impact first, using one checkable rule, and re-run the prompt after two weeks.
+- Verify that your CSV includes timestamps and charges before trusting time-based or cost-based answers.
+
+## Frequently Asked Questions
+
+### Can AI really find my trading mistakes?
+
+Yes, if you give it your actual trade data and ask specific questions. AI is good at slicing hundreds of trades by time, size and outcome faster than a spreadsheet, but it cannot see what you were feeling or planning. Treat its answers as evidence to investigate and check key numbers against your broker statement.
+
+### What data do I need to run these prompts?
+
+You need your trade history from Zerodha Kite, Groww or Dhan, ideally 30 to 60 trading days or more. Time-based and holding-time prompts need execution timestamps in the export, and cost prompts need charges. Check your CSV columns before you start, since what is included depends on the broker and the report you download.
+
+### How does Ticker AI help identify trading mistakes?
+
+Ticker AI answers plain-language questions about your imported trades, such as how you trade after a loss or which time window loses you money. It works from your own data, so the answers are specific to you rather than generic advice. It works on imported trades after the session and does not monitor or block live orders.
+
+---
+
+## Find Your Biggest Trading Leak
+
+Your last 60 days of trades already show which habit costs you the most, whether it is late entries, post-loss size jumps or charges. Import your broker CSV, ask these five questions, and turn the biggest leak into a rule.
+
+[Find Your Biggest Trading Leak Free →](https://wicklog.in)
