@@ -1,0 +1,75 @@
+---
+title: "Profit Factor vs Win Rate: The Metric That Matters"
+description: "Learn why profit factor beats win rate for judging a strategy. A practical guide for Nifty and BankNifty F&O traders to measure real edge from their trades."
+date: "2026-10-09"
+slug: "profit-factor-vs-win-rate"
+tags: ["profit-factor", "trading-journal", "indian-stock-market", "options-trading", "risk-management"]
+author: "Priyanshu Verma"
+---
+
+**TL;DR:** Profit factor is gross profit divided by gross loss. A value above 1 means winners outweigh losers in rupees, which is what pays you. Win rate counts how often you win and ignores how much. A 70% win rate can lose money, and a 35% win rate can be profitable. Track both, but judge the strategy on profit factor.
+
+You are right on 7 out of 10 Bank Nifty trades, and your account is still going nowhere. Six small winners of ₹800 each get erased by one ₹9,000 loss where you moved the stop "just this once." The win rate looks great on paper. The P&L does not.
+
+## The Root Problem
+
+Win rate misleads because it counts trades, while your account balance counts rupees. Two strategies with the same win rate can have opposite outcomes once the size of wins and losses is included.
+
+Three habits keep traders anchored to win rate:
+
+1. **Being right feels good.** A green trade gives an instant reward, so frequency of wins feels like skill.
+2. **Small wins are easy to lock in.** Booking profit early raises win rate and shrinks average win, while losers get held and grow.
+3. **Broker apps emphasise P&L and positions, not distribution.** You see today's number, not the shape of your wins and losses over 200 trades.
+
+Here is the same account judged two ways:
+
+| | Trader A | Trader B |
+|---|---|---|
+| Trades | 100 | 100 |
+| Win rate | 70% | 40% |
+| Average win | ₹800 | ₹2,500 |
+| Average loss | ₹2,400 | ₹1,000 |
+| Gross profit | ₹56,000 | ₹1,00,000 |
+| Gross loss | ₹72,000 | ₹60,000 |
+| **Net P&L (before costs)** | **−₹16,000** | **+₹40,000** |
+| **Profit factor** | **0.78** | **1.67** |
+
+Trader A wins far more often and loses money. Trader B is wrong 60% of the time and is clearly profitable. The numbers are hypothetical, but the pattern shows up constantly in retail F&O: high win rate, small wins, occasional large loss.
+
+Costs make this worse for the high-win-rate, small-win style. Brokerage, STT, exchange charges and GST are charged on every round trip, and they take a larger share of an ₹800 winner than of a ₹2,500 one. [NEEDS SOURCE: current STT and exchange charge rates for NSE index options]
+
+## The Breakdown
+
+Profit factor, expectancy and payoff ratio each describe a different side of your edge. The sections below define them, show how to calculate them, and explain how to interpret them honestly.
+
+### What Profit Factor Is and How to Calculate It
+
+Profit factor equals total gross profit divided by total gross loss over a set of trades. It tells you how many rupees you earn for every rupee you lose.
+
+Worked example from 20 hypothetical Nifty options trades:
+
+| Item | Value |
+|---|---|
+| Winning trades | 9 |
+| Total profit on winners | ₹31,500 |
+| Losing trades | 11 |
+| Total loss on losers | ₹22,000 |
+| **Profit factor** | 31,500 ÷ 22,000 = **1.43** |
+| Win rate | 9 ÷ 20 = 45% |
+
+A 45% win rate with a profit factor of 1.43 is a healthy profile. Here is a rough reading guide. Treat it as a rule of thumb rather than a standard:
+
+| Profit factor | Rough interpretation |
+|---|---|
+| Below 1.0 | Losing money before costs even matter |
+| 1.0 to 1.3 | Thin edge, easily erased by costs and slippage |
+| 1.3 to 2.0 | Workable edge, if the sample is large enough |
+| Above 2.5 | Verify it. It may be a small sample, a lucky streak or a hidden tail risk |
+
+Always calculate it after charges. A gross profit factor of 1.15 on a high-turnover strategy can drop below 1.0 once STT, brokerage and slippage are subtracted.
+
+[SCREENSHOT: WickLog analytics view showing profit factor, win rate and average win vs. average loss for a 30-day period]
+
+### Win Rate, Payoff Ratio and Expectancy
+
+Expectancy is the average rupee result per trade, and it combines win rate and payoff ratio into one number. Profit factor tells you the ratio, and expectancy tells you the rupees per trade.
