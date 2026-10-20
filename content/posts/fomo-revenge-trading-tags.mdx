@@ -1,0 +1,167 @@
+---
+title: "FOMO and Revenge Trading: How Tagging Saved ₹50,000"
+description: "Tag trades as FOMO or revenge, then use AI to price each mistake in rupees. A tracking system for Nifty and BankNifty F&O traders to cut repeat losses."
+date: "2026-10-20"
+slug: "fomo-revenge-trading-tags"
+tags: ["trading-psychology", "trading-journal", "indian-stock-market", "options-trading", "risk-management"]
+author: "Priyanshu Verma"
+---
+
+{/* EDITORIAL NOTE 1: The title is written in the first person ("saved me ₹50,000"). All figures below are a hypothetical worked example, not a real result. If Sachin is telling a true story, replace the example tables with his actual numbers before publishing. If not, change the title to a non-testimonial form. */}
+{/* EDITORIAL NOTE 2: Confirm whether WickLog has an in-app tagging or notes feature. This post does not claim one. It treats tags as something the trader keeps in a notebook or spreadsheet, and uses Ticker AI to check behavioural patterns in imported trades. */}
+
+**TL;DR:** FOMO and revenge tags are two labels you attach to trades that broke your plan: FOMO for chasing a move, revenge for trading to recover a loss. Once tagged, each label has a rupee cost you can total. In the worked example below, those two tags account for ₹65,810 of losses in a quarter.
+
+You close a Bank Nifty trade at a ₹2,400 loss at 10:05 AM. By 10:12 you are short again at double the lots, and at 10:40 you are long because "it's going without me now." Neither trade was in your plan. Neither shows up in your broker's P&L as anything but a normal trade. That is why the same two mistakes keep coming back: nothing labels them.
+
+## The Root Problem
+
+Most traders keep paying for FOMO and revenge trades because the broker statement treats them like any other trade, so the cost never gets attributed to the behaviour that caused it. Without a label, a ₹1,400 revenge loss and a ₹1,400 planned stop-loss look identical.
+
+Three things keep the cost hidden:
+
+1. **P&L is organised by symbol and date, not by reason.** You can see what you lost on Bank Nifty, but not what you lost on trades you shouldn't have taken.
+2. **The two behaviours feel justified in the moment.** FOMO feels like "momentum." Revenge feels like "getting back to even." Neither feels like a mistake until the loss is booked.
+3. **Memory sorts the story by pain, not by frequency.** You remember the one big revenge loss and forget the 30 small FOMO entries that cost more in total.
+
+Here is how the two behaviours differ:
+
+| | FOMO trade | Revenge trade |
+|---|---|---|
+| Trigger | Price is moving and you are not in it | You just took a loss |
+| Typical timing | Mid-move, after a strong candle | Within minutes of a stop-loss hit |
+| Typical entry quality | Late, at a poor price | Immediate, with no setup |
+| Typical size | Normal or slightly larger | Larger than the trade that lost |
+| Typical result | Many small losses | Fewer, larger losses |
+
+[NEEDS SOURCE: SEBI study on the share of individual F&O traders who lose money, and any evidence on behavioural causes]
+
+## The Breakdown
+
+Tracking works when you define each tag in advance, apply it after the session, and total the rupee cost by tag. The sections below cover the definitions, the routine, the worked ₹50,000 example and the rules that follow from it.
+
+### Define the Tags Before You Use Them
+
+A tag is only useful if its definition is objective enough that you would label the same trade the same way twice. Write the criteria down before the session, not after seeing the loss.
+
+| Tag | Objective test (all must be true) |
+|---|---|
+| **FOMO** | Entry was not a setup in your written plan, **and** price had already moved sharply before you entered, **and** the reason you gave yourself was about not missing the move |
+| **Revenge** | Entry was within 15 minutes of a losing trade, **and** size was equal to or larger than that losing trade, **and** it was not a setup in your plan |
+| **Planned** | The setup, entry and stop-loss were all in your plan before the trade |
+
+The 15-minute window is a starting point, so adjust it to your style. Keep a **Planned** tag as the control group. Without it you can't tell whether your tagged trades are worse than your normal ones.
+
+Be strict. If a trade matches a setup in your plan, tag it Planned even if you were nervous. The point is to isolate trades that broke the plan, not to punish yourself.
+
+### The Weekly Tagging Routine
+
+The most reliable routine is to tag trades after the 3:30 PM close from the actual trade list, not during the session and not from memory. Tagging in the middle of a drawdown is exactly when your judgement is worst.
+
+1. **Export the day's trades.** Download the trade CSV from Zerodha Kite, Groww or Dhan.
+2. **Import it into WickLog.** One-click CSV import gives you the day's trade list and P&L, so you are not reconstructing it from memory.
+3. **Walk the trades in order.** For each trade, apply Planned, FOMO or Revenge using the tests above.
+4. **Record the tag in your own log.** A spreadsheet or notebook works: date, time, symbol, lots, P&L, tag.
+5. **Total by tag every weekend.** Count trades, total ₹ and average ₹ per tag.
+
+[SCREENSHOT: WickLog trade list for one session, showing entry times and P&L per trade, ready to be tagged]
+
+Keep the log somewhere you will actually open. WickLog supplies the trade data and analytics. The tag column is yours.
+
+### The Worked Example: Where ₹50,000 Comes From
+
+When you total losses by tag, the cost of behaviour usually dwarfs the cost of normal losing trades. This is a hypothetical ₹5,00,000 account over one quarter (about 60 trading days), before charges.
+
+| Tag | Trades | Avg P&L per trade | Total P&L |
+|---|---|---|---|
+| Planned | 260 | +₹158 | +₹41,000 |
+| FOMO | 58 | −₹520 | −₹30,160 |
+| Revenge | 31 | −₹1,150 | −₹35,650 |
+| **All trades** | **349** | | **−₹24,810** |
+
+The planned trades made money. The account lost ₹24,810 because 89 tagged trades, about a quarter of all trades, cost ₹65,810.
+
+Now suppose you write one rule per tag and cut each behaviour by about 75%:
+
+| | Before rules | After rules (75% fewer tagged trades) |
+|---|---|---|
+| Planned P&L | +₹41,000 | +₹41,000 |
+| FOMO + Revenge P&L | −₹65,810 | −₹16,453 |
+| **Quarter net (before charges)** | **−₹24,810** | **+₹24,547** |
+| **Improvement** | | **≈ ₹49,357, call it ₹50,000** |
+
+Treat these numbers as an illustration of the mechanism, not a forecast. The pattern is the useful part: the planned trades never changed, and nearly all the improvement came from taking fewer trades you never planned. Charges make the true gap larger, because every avoided trade also avoids brokerage, STT and slippage. [NEEDS SOURCE: current STT and exchange charge rates for NSE index options]
+
+Use WickLog's Expectancy calculator to confirm the same story at the trade level. Enter the win rate and average win and loss for each tag separately, and you will see why Planned has positive expectancy and the other two don't.
+
+### Using Ticker AI to Check Your Tags
+
+Ticker AI, WickLog's conversational trading assistant, can't read your tag column, but it can check the behaviours the tags describe, using the timestamps and sizes in your imported trades. That gives you a second opinion on your own labelling.
+
+With your Zerodha Kite, Groww or Dhan trades imported, try:
+
+- "Show trades opened within 15 minutes of a losing trade. Give count, average lots and total P&L in ₹."
+- "On trades opened within 15 minutes of a loss, was the lot size larger than the losing trade before it? How often?"
+- "What is my win rate and total P&L on trades opened in the first 15 minutes after 9:15 AM?"
+- "Which five days had the most trades, and what was my net P&L on each?"
+
+[SCREENSHOT: Ticker AI answering a question about trades opened within 15 minutes of a loss]
+
+If Ticker AI finds 40 trades opened right after a loss and you only tagged 25 as Revenge, you are under-labelling, and the gap is worth examining honestly.
+
+Some limits to keep in mind:
+
+- FOMO is harder to detect from data than revenge. Your CSV shows your entry time and price, but not what the chart did before you entered or what you were thinking. The tag has to come from you.
+- Time-based questions need execution timestamps in your export. Check your CSV columns first.
+- WickLog works on imported trades after the session. It does not place, block or monitor orders live, so it can show the pattern but can't stop the trade.
+
+| | Tags in a spreadsheet only | Tags plus WickLog data |
+|---|---|---|
+| Trade data entry | Typed by hand | One-click CSV import |
+| Total ₹ by tag | Pivot tables | Your tag log plus automated analytics |
+| Checking your own honesty | Not possible | Ask Ticker AI to count post-loss trades |
+| Time per weekly review | 45 to 90 minutes | 15 to 30 minutes |
+
+### Turn Each Tag into One Rule
+
+Each tag should produce exactly one checkable rule, because a rule you can't verify is a wish. Write the rule against the biggest rupee number first.
+
+| Tag | Rule | How you verify it |
+|---|---|---|
+| Revenge | After any stop-loss, no new entry for 30 minutes, and lot size never increases the same day | Ask Ticker AI for trades within 30 minutes of a loss. Count should fall toward zero. |
+| FOMO | No entry unless the setup is in the written plan, and if price has moved more than your set threshold without you, you skip it | Count FOMO tags per week. Compare with the previous week. |
+| Both | Daily trade cap and a daily max loss in ₹, set before 9:15 AM | Check how many days you broke either limit |
+
+Pair the rules with WickLog's Position Size calculator, so lot count is decided by risk per trade and not by how you feel after a loss.
+
+Review after four weeks. If a tag's total cost has not fallen, either the rule is too vague or you are not following it. Either way, the tag total tells you which.
+
+## Key Takeaways
+
+- A FOMO or revenge tag turns a vague regret into a rupee total you can act on.
+- Define each tag with objective tests before the session, and tag after the 3:30 PM close from the actual trade list.
+- Keep a Planned tag as a control so you can compare behavioural trades against your normal ones.
+- In the worked example, 89 tagged trades cost ₹65,810 in a quarter. A 75% reduction is worth about ₹50,000. The figures are hypothetical, so run the same math on your own data.
+- Use Ticker AI to check the behaviours your tags describe, and write one verifiable rule per tag.
+
+## Frequently Asked Questions
+
+### What is the difference between FOMO trading and revenge trading?
+
+FOMO trading is entering because price is moving and you don't want to miss it, while revenge trading is entering because you just lost and want to recover. FOMO is triggered by someone else's profit, usually a move you missed. Revenge is triggered by your own loss, usually within minutes of a stop-loss hit, and often with larger size.
+
+### How do I track FOMO and revenge trades?
+
+Define each tag with an objective test, then label every trade after the session using your actual trade list. Record date, time, symbol, lots, P&L and tag in a spreadsheet or notebook, and total the ₹ cost by tag each week. Keep a Planned tag as a comparison group so you can see how much worse the tagged trades are.
+
+### How does Ticker AI help identify trading mistakes?
+
+Ticker AI answers plain-language questions about your imported Zerodha Kite, Groww or Dhan trades, such as how many trades you opened within 15 minutes of a loss and what they cost in total. It works from your own data, so you can check whether your tags match the pattern in your timestamps and sizes. It works on imported trades after the session and does not monitor or block live orders.
+
+---
+
+## Put a Rupee Figure on Your Worst Habits
+
+Your last 60 days of trades already show how many entries came right after a loss and what they cost. Import your broker CSV, tag the trades you regret, and see which habit is worth fixing first.
+
+[Find What FOMO and Revenge Cost You Free →](https://wicklog.in)

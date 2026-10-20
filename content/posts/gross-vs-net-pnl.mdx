@@ -1,0 +1,145 @@
+---
+title: "Gross vs Net P&L: The Hidden Cost of Overtrading"
+description: "See how brokerage, STT and charges turn a profitable-looking month into a loss. A reality check for Nifty and BankNifty F&O traders who trade too often."
+date: "2026-10-20"
+slug: "gross-vs-net-pnl"
+tags: ["net-pnl", "trading-journal", "indian-stock-market", "options-trading", "risk-management"]
+author: "Priyanshu Verma"
+---
+
+**TL;DR:** Gross P&L is what your trades earned before charges. Net P&L is what stays after brokerage, STT, exchange fees, GST, stamp duty and slippage. Overtrading widens the gap because every round trip pays costs, win or lose. A strategy with a thin edge per trade can show a gross profit and still lose money net.
+
+Your Kite P&L shows +₹18,000 for the month, and you feel good about it. Then you open the charges tab. Brokerage, STT, exchange fees and GST add up to ₹21,000, and your real result is −₹3,000. You didn't have a profitable month. You had a profitable-looking one, paid for by trading 40 times more than the plan called for.
+
+## The Root Problem
+
+Overtrading hurts because costs are charged per trade, not per outcome, so the more you trade, the more you pay regardless of whether you are right. Gross P&L hides this because it only shows what the market paid you.
+
+Three things keep the gap invisible:
+
+1. **Gross P&L is the headline number.** Broker dashboards and screenshots lead with the P&L figure, and charges sit one tab away.
+2. **Each trade's cost feels trivial.** ₹120 on a trade is easy to ignore. ₹120 across 250 trades is ₹30,000.
+3. **Slippage never appears anywhere.** It is not on the contract note. It shows up only as a worse fill price than you expected.
+
+Here is how the same month looks through two lenses. The figures are hypothetical, and the cost per round trip is a placeholder to show the mechanics. Replace it with your broker's current numbers before publishing.
+
+| | Disciplined month | Overtrading month |
+|---|---|---|
+| Trades (round trips) | 60 | 250 |
+| Gross P&L | ₹22,000 | ₹27,000 |
+| Charges per round trip (brokerage, STT, fees, GST, stamp duty) | ₹120 | ₹120 |
+| Total charges | ₹7,200 | ₹30,000 |
+| Estimated slippage (₹60 per round trip) | ₹3,600 | ₹15,000 |
+| **Net P&L** | **₹11,200** | **−₹18,000** |
+
+The overtrading month earned ₹5,000 more gross and finished ₹29,200 behind net. The extra 190 trades added ₹22,800 in charges and slippage, and they added only ₹5,000 of gross profit. This is the hidden ₹30,000: not one catastrophic loss, but the steady drip of costs on trades that had no edge.
+
+[NEEDS SOURCE: SEBI study on the share of individual F&O traders who lose money and the share of losses attributable to transaction costs]
+
+## The Breakdown
+
+Costs decide the outcome when the edge per trade is small compared with the friction per trade. The sections below break down where the money goes, how to find your breakeven, and how to measure your own gap.
+
+### Where the Money Goes on an F&O Trade
+
+An options round trip pays several separate layers of cost, and most of them apply to both winning and losing trades. Rates change, so always check your broker's current charge calculator and the exchange circulars.
+
+| Cost layer | When it applies | Note |
+|---|---|---|
+| Brokerage | Per executed order | Flat per order at most discount brokers |
+| STT | Sell side on options, charged on premium | Revised in past Union Budgets, so verify the current rate |
+| Exchange transaction charges | Both sides, on turnover | Varies by segment |
+| SEBI turnover fee | Both sides | Small but not zero |
+| GST | On brokerage and exchange charges | Applied on fees, not on trade value |
+| Stamp duty | Buy side | Check the current rate |
+| Slippage | Every market or stop order | Hidden in your fill price |
+
+[NEEDS SOURCE: current STT, exchange transaction charge, SEBI turnover fee and stamp duty rates for NSE index options]
+
+Two features of this structure matter for overtraders. First, STT on options is charged on premium, so selling a premium of ₹150 and one of ₹15 are taxed very differently, which means cheap far-out-of-the-money scalps can carry a heavy cost relative to their profit. Second, fixed per-order brokerage hurts small trades more, because the same ₹20 takes a bigger bite from a ₹300 profit than from a ₹3,000 one.
+
+[SCREENSHOT: Kite or broker charges breakdown for a single day showing brokerage, STT, exchange charges, GST and stamp duty]
+
+### The Breakeven Edge per Trade
+
+Your strategy survives only if the average gross profit per trade is greater than the average cost per trade, which makes cost per round trip your hurdle rate. It is the minimum edge you must clear before earning a rupee.
+
+Take a strategy with a ₹180 average gross profit per trade and ₹150 of charges plus slippage per round trip:
+
+| Trades per month | Gross P&L | Total friction | Net P&L |
+|---|---|---|---|
+| 40 | ₹7,200 | ₹6,000 | ₹1,200 |
+| 100 | ₹18,000 | ₹15,000 | ₹3,000 |
+| 250 | ₹45,000 | ₹37,500 | ₹7,500 |
+
+Here, more trades scale the profit, but only because the edge per trade is positive after friction (₹30 net per trade). If slippage rises to ₹200 instead of ₹60 during volatile sessions, the same strategy goes negative. Edge that survives costs scales with trade count. Edge that doesn't, shrinks the account faster the more you trade.
+
+That is why overtrading is dangerous even when each trade looks reasonable. Low-conviction trades have a lower average gross, but they pay the same friction. A simple test is to ask whether your average gross per trade is at least 2x your average cost per trade. If it is not, you have little room for error.
+
+Use WickLog's Expectancy calculator to enter your win rate, average win and average loss, then subtract your per-trade friction from the result to see what remains.
+
+### Measuring Your Own Gross-to-Net Gap
+
+Your real gap comes from your executed trades, not from an estimate. Import your trade history and compare gross against net by month, by instrument and by weekday.
+
+With your Zerodha Kite, Groww or Dhan CSV imported into WickLog, use Ticker AI, WickLog's conversational trading assistant, to ask:
+
+- "What was my gross P&L, total charges and net P&L over the last 60 days?"
+- "What percentage of my gross profit went to charges?"
+- "On days I took more than 10 trades, what was my average net P&L versus days with 10 or fewer?"
+- "Which weekday has the highest charges relative to gross profit?"
+
+[SCREENSHOT: Ticker AI answering a question about gross P&L versus total charges over the last 60 days]
+
+Two caveats apply. Whether charges appear in the analysis depends on what your broker's CSV contains, so check the export columns first. If charges are missing, estimate them using your broker's charge calculator. And slippage never appears in any export, so you can only infer it by comparing your fills with the prices you intended.
+
+WickLog works on imported trades after the session. It does not place, block or monitor orders live, so it shows you the gap but cannot stop you from widening it.
+
+Here is how the two approaches compare:
+
+| | Reading your broker's P&L tab | Gross vs net review in WickLog |
+|---|---|---|
+| Headline number | Gross P&L | Gross and net side by side |
+| Splitting by trade count per day | Manual | Ask Ticker AI |
+| Spotting overtrading days | Memory | Compare net P&L on high-count vs low-count days |
+| Time per review | 30 to 60 minutes in Excel | A few minutes |
+
+### Cutting the Cost Without Cutting the Edge
+
+The goal is fewer low-conviction trades, not fewer trades for their own sake. Cut the trades whose gross edge can't clear the friction.
+
+1. **Rank your setups by net profit per trade.** Drop or reduce the ones near zero or negative.
+2. **Set a daily trade cap.** Pick a number from your own history, such as the trade count above which your net P&L turns negative.
+3. **Avoid low-premium scalps where costs dominate.** If a ₹40 target on a ₹20 premium option can't clear friction, skip it.
+4. **Size trades so the profit target is large relative to cost.** Use WickLog's Position Size and Risk-Reward calculators to check that a trade's reward is meaningfully bigger than its costs before you enter.
+5. **Review monthly.** Compare net P&L on trade-heavy weeks with trade-light weeks. If the light weeks win, your cap is too high.
+
+## Key Takeaways
+
+- Gross P&L shows what the market paid you. Net P&L shows what you kept after charges and slippage.
+- Costs are charged per trade, so overtrading raises them even when your strategy is unchanged.
+- Your edge per trade must exceed your friction per trade. Check whether average gross is at least about 2x average cost.
+- A month can look green gross and be red net. Always read both numbers.
+- Import your real trades and compare net P&L on high-trade-count days with low-trade-count days to find your own cap.
+
+## Frequently Asked Questions
+
+### What is the difference between gross P&L and net P&L in trading?
+
+Gross P&L is your profit or loss from trades before any costs, and net P&L is what remains after brokerage, STT, exchange charges, GST, stamp duty and other fees. For active F&O traders the gap can be large, and slippage widens it further. Judge your performance on net P&L.
+
+### How much do brokerage and STT cost on Nifty options trades?
+
+It depends on your broker's flat fee, the premium traded and the current statutory rates, so there is no single figure. Use your broker's brokerage calculator for an exact number per trade, and check current STT and exchange rates before relying on any estimate. Costs are paid on every round trip, so frequent trading multiplies them.
+
+### How can I see my net P&L from Zerodha, Groww or Dhan trades?
+
+Import your trade CSV into WickLog and compare gross and net results over any date range. Ticker AI lets you ask plain-language questions such as total charges against gross P&L, or net P&L on high-trade-count days. Charges show up in the analysis only if your broker's export includes them, so check the CSV columns first.
+
+---
+
+## Find Out What Overtrading Costs You
+
+Your last 60 days of trades already show whether your edge survives the charges. Import your broker CSV and compare gross against net, then set a daily trade cap from your own numbers.
+
+[See Your Gross vs Net P&L Free →](https://wicklog.in)
